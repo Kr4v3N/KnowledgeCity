@@ -24,6 +24,6 @@ urlpatterns = [
 ]
 
 # Customizing admin texts
-admin.site.site_header = 'Administration de mon site'
-admin.site.index_title = 'Bienvenue à toi Administrateur'
+admin.site.site_header = "Panneau d'administration"
+admin.site.index_title = 'Bienvenue administrateur'
 admin.site.site_title = 'Panneau de configuration'
