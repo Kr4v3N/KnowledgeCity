@@ -6,9 +6,13 @@ from .models import Main
 
 def home(request):
 
-    return render(request, 'home.html')
+    site = Main.objects.get(pk=3)
+
+    return render(request, 'home.html', {'site': site})
 
 
 def about(request):
 
-    return render(request, 'front/about.html')
+    site = Main.objects.get(pk=3)
+
+    return render(request, 'front/about.html', {'site': site})

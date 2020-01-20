@@ -4,7 +4,13 @@
 
 <html lang="fr">
 <head>
-	<title>KnowledgeCity - {%  block title %}{% endblock %}</title>
+
+	{% block title %}
+
+		Please override this block!
+
+	{% endblock %}}
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -39,7 +45,7 @@
 					<div class="align-self-stretch size-w-0 pos-relative m-r-30">
 						<div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">
 							<span class="text-uppercase cl0 p-r-8">
-								Trending Now:
+								Au goût du jour:
 							</span>
 
 							<span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
@@ -63,30 +69,30 @@
 						<div class="left-topbar">
 							<span class="left-topbar-item flex-wr-s-c">
 								<span>
-									New York, NY
+									Lyon, France
 								</span>
 
 								<img class="m-b-1 m-rl-8" src="{% static 'front/images/icons/icon-night.png' %}" alt="IMG">
 
 								<span>
-									HI 58° LO 56°
+									Latitude: 45.75 Longitude: 4.85
 								</span>
 							</span>
 
-							<a href="#" class="left-topbar-item">
-								About
+							<a href="/about" class="left-topbar-item">
+								À propos
 							</a>
 
 							<a href="#" class="left-topbar-item">
-								Contact
+								Nous contacter
 							</a>
 
 							<a href="#" class="left-topbar-item">
-								Sing up
+								S'inscrire
 							</a>
 
 							<a href="#" class="left-topbar-item">
-								Log in
+								S'identifier
 							</a>
 
 							<a href="#" class="left-topbar-item"></a>
@@ -121,7 +127,7 @@
 			<div class="wrap-header-mobile">
 				<!-- Logo moblie -->
 				<div class="logo-mobile">
-					<a href="index.html"><img src="{% static '/front/images/icons/logo-01.png' %}" alt="IMG-LOGO"></a>
+					<a href="/"><img src="{% static '/front/images/icons/logo-01.png' %}" alt="IMG-LOGO"></a>
 				</div>
 
 				<!-- Button show menu -->
@@ -151,7 +157,7 @@
 
 					<li class="left-topbar">
 						<a href="#" class="left-topbar-item">
-							About
+							À propos
 						</a>
 
 						<a href="#" class="left-topbar-item">
@@ -192,9 +198,9 @@
 
 				<ul class="main-menu-m">
 					<li>
-						<a href="index.html">Accueil</a>
+						<a href="/">Accueil</a>
 						<ul class="sub-menu-m">
-							<li><a href="index.html">Homepage v1</a></li>
+							<li><a href="/">Homepage v1</a></li>
 							<li><a href="home-02.html">Homepage v2</a></li>
 							<li><a href="home-03.html">Homepage v3</a></li>
 						</ul>
@@ -238,7 +244,7 @@
 							<li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
 							<li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
 							<li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
-							<li><a href="about.html">About Us</a></li>
+							<li><a href="about.html">À propos</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
 						</ul>
 
@@ -253,7 +259,7 @@
 			<div class="wrap-logo no-banner container">
 				<!-- Logo desktop -->
 				<div class="logo">
-					<a href="index.html"><img src="{% static 'front/images/icons/logo-01.png' %}" alt="LOGO"></a>
+					<a href="/"><img src="{% static 'front/images/icons/logo-01.png' %}" alt="LOGO"></a>
 				</div>
 			</div>
 
@@ -262,15 +268,15 @@
 				<div class="main-nav">
 					<!-- Menu desktop -->
 					<nav class="menu-desktop">
-						<a class="logo-stick" href="index.html">
+						<a class="logo-stick" href="/">
 							<img src="{% static 'front/images/icons/logo-01.png' %}" alt="LOGO">
 						</a>
 
 						<ul class="main-menu justify-content-center">
 							<li class="main-menu-active">
-								<a href="index.html">Accueil</a>
+								<a href="/">Accueil</a>
 								<ul class="sub-menu">
-									<li><a href="index.html">Homepage v1</a></li>
+									<li><a href="/">Homepage v1</a></li>
 									<li><a href="home-02.html">Homepage v2</a></li>
 									<li><a href="home-03.html">Homepage v3</a></li>
 								</ul>
@@ -2287,7 +2293,7 @@
 									<li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
 									<li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
 									<li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
-									<li><a href="about.html">About Us</a></li>
+									<li><a href="about.html">À propos</a></li>
 									<li><a href="contact.html">Contact Us</a></li>
 								</ul>
 							</li>
@@ -2300,7 +2306,7 @@
 
     {% block content %}
 
-    Please override this block!
+    	Please override this block!
 
     {% endblock %}
 
@@ -2312,14 +2318,14 @@
 				<div class="row">
 					<div class="col-lg-4 p-b-20">
 						<div class="size-h-3 flex-s-c">
-							<a href="index.html">
+							<a href="/">
 								<img class="max-s-full" src="{% static 'front/images/icons/logo-02.png' %}" alt="LOGO">
 							</a>
 						</div>
 
 						<div>
 							<p class="f1-s-1 cl11 p-b-16">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget elit efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at, facilisis ut turpis. Vestibulum dolor metus, tincidunt eget odio
+								{{ site.about }}
 							</p>
 
 							<p class="f1-s-1 cl11 p-b-16">
