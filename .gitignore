@@ -138,5 +138,4 @@ log/**
 !**/migrations/__init__.py
 __ pycache __
 .DS_Store
-static
 /.idea/

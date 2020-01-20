@@ -6,7 +6,6 @@ from news.models import News
 # Create your views here.
 
 def home(request):
-
     site = Main.objects.get(pk=3)
     news = News.objects.all()
 
@@ -14,7 +13,11 @@ def home(request):
 
 
 def about(request):
-
     site = Main.objects.get(pk=3)
 
     return render(request, 'front/about.html', {'site': site})
+
+
+def panel(request):
+
+    return render(request, 'back/admin_home.html')
