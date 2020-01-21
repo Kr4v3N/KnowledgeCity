@@ -139,3 +139,4 @@ log/**
 __ pycache __
 .DS_Store
 /.idea/
+/media/
