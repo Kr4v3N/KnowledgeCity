@@ -5,8 +5,8 @@ from django.db import models
 
 class News(models.Model):
     name = models.CharField(max_length=50)
-    short_text = models.TextField()
-    body_text = models.TextField()
+    short_txt = models.TextField()
+    body_txt = models.TextField()
     date = models.CharField(max_length=12)
     pic = models.TextField()
     writer = models.CharField(max_length=50)

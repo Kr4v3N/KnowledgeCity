@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import News
 from main.models import Main
 
@@ -24,13 +24,25 @@ def news_add(request):
         newstitle = request.POST.get('newstitle')
         newscategory = request.POST.get('newscategory')
         newstxtshort = request.POST.get('newstxtshort')
-        newstext = request.POST.get('newstext')
+        newstxt = request.POST.get('newstxt')
 
-        if newstitle == "" or newstext == "" \
+        if newstitle == "" or newstxt == "" \
                 or newstxtshort == "" \
                 or newscategory == "" \
                 or newstitle == "":
             error = "Tous les champs sont requis"
             return render(request, 'back/error.html', {'error': error})
+
+        b = News(name=newstitle,
+                 short_txt=newstxtshort,
+                 body_txt=newstxt,
+                 date="2020",
+                 pic="-",
+                 writer="-",
+                 category_name="-",
+                 category_id=0,
+                 show=0, )
+        b.save()
+        return redirect('news_list')
 
     return render(request, 'back/news_add.html')
