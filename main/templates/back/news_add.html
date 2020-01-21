@@ -33,14 +33,14 @@
                                 <div class="block">
 
                                     <!-- Basic Form Elements Content -->
-                                    <form action="page_forms_general.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-
+                                    <form action="{% url 'news_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">                                        {% csrf_token %}
+                                        {% csrf_token %}
                                          <div class="form-group">
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" placeholder="Titre de la news">
+                                                <input type="text" id="newstitle" name="newstitle" class="form-control" placeholder="Titre de la news">
                                             </div>
                                             <div class="col-md-6">
-                                                <select id="example-chosen" name="example-chosen" class="select-chosen" data-placeholder="Choisissez une catégorie..." style="width: 250px;">
+                                                <select id="newscategory" name="newscategory" class="select-chosen" data-placeholder="Choisissez une catégorie..." style="width: 250px;">
                                                         <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                                                         <option value="Internet">Internet</option>
                                                         <option value="Cybersecurity">Cybersecurity</option>
@@ -50,12 +50,12 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <textarea type="text" name="" id="" cols="30" rows="5" class="form-control" placeholder="Short text "></textarea>
+                                                <textarea type="text" id="newstxtshort" name="newstxtshort" cols="30" rows="5" class="form-control" placeholder="Short text "></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <textarea type="text" name="" id="" cols="30" rows="10" class="form-control" placeholder="Body text "></textarea>
+                                                <textarea type="text" id="newstext" name="newstext" cols="30" rows="10" class="form-control" placeholder="Body text "></textarea>
                                             </div>
                                         </div>
 

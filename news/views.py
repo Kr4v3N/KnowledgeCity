@@ -20,5 +20,17 @@ def news_list(request):
 
 
 def news_add(request):
+    if request.method == 'POST':
+        newstitle = request.POST.get('newstitle')
+        newscategory = request.POST.get('newscategory')
+        newstxtshort = request.POST.get('newstxtshort')
+        newstext = request.POST.get('newstext')
+
+        if newstitle == "" or newstext == "" \
+                or newstxtshort == "" \
+                or newscategory == "" \
+                or newstitle == "":
+            error = "Tous les champs sont requis"
+            return render(request, 'back/error.html', {'error': error})
 
     return render(request, 'back/news_add.html')
