@@ -14,4 +14,11 @@ def news_detail(request, pk):
 
 
 def news_list(request):
-    return render(request, 'back/news_list.html')
+    news = News.objects.all()
+
+    return render(request, 'back/news_list.html', {'news': news})
+
+
+def news_add(request):
+
+    return render(request, 'back/news_add.html')

@@ -27,9 +27,11 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
+
                     <tr>
                         <th class="text-center">ID</th>
                         <th class="text-center">Image</th>
+                        <th>titre</th>
                         <th>Date</th>
                         <th>Categorie</th>
                         <th>auteur</th>
@@ -38,13 +40,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for new in news %}
                     <tr>
-                        <td class="text-center">1</td>
+                        <td class="text-center">{{ new.pk }}</td>
                         <td class="text-center"><img src="{% static 'back/img/placeholders/avatars/avatar15.jpg' %}" alt="avatar" class="img-circle"></td>
-                        <td>10/05/2019</td>
-                        <td>admin</td>
-                        <td>sport</td>
-                        <td>100</td>
+                        <td>{{ new.name }}</td>
+                        <td>{{ new.date }}</td>
+                        <td>-</td>
+                        <td>{{ new.writer }}</td>
+                        <td>-</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
@@ -52,6 +56,7 @@
                             </div>
                         </td>
                     </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
