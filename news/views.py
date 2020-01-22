@@ -21,7 +21,6 @@ def news_list(request):
 
 
 def news_add(request):
-
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscategory = request.POST.get('newscategory')
@@ -41,18 +40,29 @@ def news_add(request):
             filename = fileSystem.save(myfile.name, myfile)
             url = fileSystem.url(filename)
 
-            add = News(name=newstitle,
-                       short_txt=newstxtshort,
-                       body_txt=newstxt,
-                       date="2020",
-                       pic_name=filename,
-                       pic_url=url,
-                       writer="-",
-                       category_name="-",
-                       category_id=0,
-                       show=0, )
-            add.save()
-            return redirect('news_list')
+            if str(myfile.content_type).startswith('image'):
+
+                if myfile.size < 5000000:
+
+                    add = News(name=newstitle,
+                               short_txt=newstxtshort,
+                               body_txt=newstxt,
+                               date="2020",
+                               pic_name=filename,
+                               pic_url=url,
+                               writer="-",
+                               category_name="-",
+                               category_id=0,
+                               show=0, )
+                    add.save()
+                    return redirect('news_list')
+                else:
+                    error = "Votre image ne doit pas dépasser 5 MB"
+                    return render(request, 'back/error.html', {'error': error})
+
+            else:
+                error = "Le format de votre fichier n'est pas supporté"
+                return render(request, 'back/error.html', {'error': error})
 
         except:
 
