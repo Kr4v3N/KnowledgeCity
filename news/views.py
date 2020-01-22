@@ -87,8 +87,16 @@ def news_add(request):
 
 
 def news_delete(request, pk):
+    try:
 
-    b = News.objects.filter(pk=pk)
-    b.delete()
+        b = News.objects.get(pk=pk)
+
+        fileSystem = FileSystemStorage()
+        fileSystem.delete(b.pic_name)
+        b.delete()
+
+    except:
+        error = "Quelque chose c'est mal passée"
+        return render(request, 'back/error.html', {'error': error})
 
     return redirect('news_list')

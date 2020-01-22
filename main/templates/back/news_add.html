@@ -33,7 +33,8 @@
                                 <div class="block">
 
                                     <!-- Basic Form Elements Content -->
-                                    <form action="{% url 'news_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">                                        {% csrf_token %}
+                                    <form action="{% url 'news_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                                        {% csrf_token %}
                                         {% csrf_token %}
                                          <div class="form-group">
                                             <div class="col-md-6">
