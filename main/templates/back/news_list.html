@@ -32,7 +32,7 @@
                         <th class="text-center">ID</th>
                         <th class="text-center">Image</th>
                         <th>titre</th>
-                        <th>Date</th>
+                        <th>Date & heure</th>
                         <th>Categorie</th>
                         <th>auteur</th>
                         <th>Views</th>
@@ -45,14 +45,14 @@
                         <td class="text-center">{{ new.pk }}</td>
                         <td class="text-center"><img style="display: inline-block; width: 50px; height: 50px" src="{{ new.pic_url }}" alt="avatar" class="img-circle"></td>
                         <td>{{ new.name }}</td>
-                        <td>{{ new.date }}</td>
+                        <td>{{ new.date }} | {{ new.time }}</td>
                         <td>{{ new.category_name}}</td>
                         <td>{{ new.writer }}</td>
                         <td>{{ new.show}}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'news_delete' pk=new.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

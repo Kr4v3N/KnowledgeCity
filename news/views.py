@@ -1,3 +1,4 @@
+from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
 from .models import News
 from main.models import Main
@@ -21,6 +22,19 @@ def news_list(request):
 
 
 def news_add(request):
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+
+    if len(str(day)) == 1:
+        day = "0" + str(day)
+    if len(str(month)) == 1:
+        month = "0" + str(month)
+
+    today = str(day) + '/' + str(month) + '/' + str(year)
+    time = str(now.hour) + ":" + str(now.minute)
+
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscategory = request.POST.get('newscategory')
@@ -47,13 +61,14 @@ def news_add(request):
                     add = News(name=newstitle,
                                short_txt=newstxtshort,
                                body_txt=newstxt,
-                               date="2020",
+                               date=today,
                                pic_name=filename,
                                pic_url=url,
                                writer="-",
                                category_name="-",
                                category_id=0,
-                               show=0, )
+                               show=0,
+                               time=time)
                     add.save()
                     return redirect('news_list')
                 else:
@@ -65,8 +80,15 @@ def news_add(request):
                 return render(request, 'back/error.html', {'error': error})
 
         except:
-
             error = "Vous devez téléverser une image"
             return render(request, 'back/error.html', {'error': error})
 
     return render(request, 'back/news_add.html')
+
+
+def news_delete(request, pk):
+
+    b = News.objects.filter(pk=pk)
+    b.delete()
+
+    return redirect('news_list')
