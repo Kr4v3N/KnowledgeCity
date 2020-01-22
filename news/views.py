@@ -21,6 +21,7 @@ def news_list(request):
 
 
 def news_add(request):
+
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscategory = request.POST.get('newscategory')
@@ -34,22 +35,28 @@ def news_add(request):
             error = "Tous les champs sont requis"
             return render(request, 'back/error.html', {'error': error})
 
-        myfile = request.FILES['myfile']
-        fileSystem = FileSystemStorage()
-        filename = fileSystem.save(myfile.name, myfile)
-        url = fileSystem.url(filename)
+        try:
+            myfile = request.FILES['myfile']
+            fileSystem = FileSystemStorage()
+            filename = fileSystem.save(myfile.name, myfile)
+            url = fileSystem.url(filename)
 
-        add = News(name=newstitle,
-                   short_txt=newstxtshort,
-                   body_txt=newstxt,
-                   date="2020",
-                   pic_name=filename,
-                   pic_url=url,
-                   writer="-",
-                   category_name="-",
-                   category_id=0,
-                   show=0, )
-        add.save()
-        return redirect('news_list')
+            add = News(name=newstitle,
+                       short_txt=newstxtshort,
+                       body_txt=newstxt,
+                       date="2020",
+                       pic_name=filename,
+                       pic_url=url,
+                       writer="-",
+                       category_name="-",
+                       category_id=0,
+                       show=0, )
+            add.save()
+            return redirect('news_list')
+
+        except:
+
+            error = "Vous devez téléverser une image"
+            return render(request, 'back/error.html', {'error': error})
 
     return render(request, 'back/news_add.html')
