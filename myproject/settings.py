@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'maintenance_mode',
     'main',
     'news',
 ]
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'maintenance_mode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -65,12 +67,46 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'maintenance_mode.context_processors.maintenance_mode',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
+
+# Maintenance
+# if True the maintenance-mode will be activated
+MAINTENANCE_MODE = None
+
+# by default, to get/set the state value a local file backend is used
+# if you want to use the db or cache, you can create a custom backend
+# custom backends must extend 'maintenance_mode.backends.AbstractStateBackend' class
+# and implement get_value(self) and set_value(self, val) methods
+MAINTENANCE_MODE_STATE_BACKEND = 'maintenance_mode.backends.LocalFileBackend'
+
+# by default, a file named "maintenance_mode_state.txt" will be created in the settings.py directory
+# you can customize the state file path in case the default one is not writable
+MAINTENANCE_MODE_STATE_FILE_PATH = 'maintenance_mode_state.txt'
+
+# if True admin site will not be affected by the maintenance-mode page
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = False
+
+# if True anonymous users will not see the maintenance-mode page
+MAINTENANCE_MODE_IGNORE_ANONYMOUS_USER = False
+
+# if True authenticated users will not see the maintenance-mode page
+MAINTENANCE_MODE_IGNORE_AUTHENTICATED_USER = False
+
+# if True the staff will not see the maintenance-mode page
+MAINTENANCE_MODE_IGNORE_STAFF = False
+
+# if True the superuser will not see the maintenance-mode page
+MAINTENANCE_MODE_IGNORE_SUPERUSER = False
+
+# list of ip-addresses that will not be affected by the maintenance-mode
+# ip-addresses will be used to compile regular expressions objects
+MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ()
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
