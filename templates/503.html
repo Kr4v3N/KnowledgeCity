@@ -4,7 +4,7 @@
 
 <html lang="fr">
 <head>
-	<title>Coming Soon </title>
+	<title> Bientôt accessible </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -15,8 +15,6 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'maintenance/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'maintenance/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'maintenance/vendor/select2/select2.min.css' %}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'maintenance/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'maintenance/css/main.css' %}">
@@ -33,32 +31,32 @@
 
 	<div class="size1 overlay1">
 		<!--  -->
-		<div class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
+		<div  id="demo" class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
 			<h3 class="l1-txt1 txt-center p-b-25">
-				Bientôt disponible
+				Bientôt accessible
 			</h3>
             <p class="m2-txt1 txt-center p-b-48">
-                Mon site est actuellement en cours de construction.
+                Le site est actuellement en cours de construction.
             </p>
 
 			<div class="flex-w flex-c-m cd100 p-b-33">
 				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
-					<span class="l2-txt1 p-b-9 days">35</span>
+					<span class="l2-txt1 p-b-9" id="days"></span>
 					<span class="s2-txt1">Jours</span>
 				</div>
 
 				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
-					<span class="l2-txt1 p-b-9 hours">17</span>
+					<span class="l2-txt1 p-b-9" id="hours"></span>
 					<span class="s2-txt1">Heures</span>
 				</div>
 
 				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
-					<span class="l2-txt1 p-b-9 minutes">50</span>
+					<span class="l2-txt1 p-b-9" id="minutes"></span>
 					<span class="s2-txt1">Minutes</span>
 				</div>
 
 				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
-					<span class="l2-txt1 p-b-9 seconds">39</span>
+					<span class="l2-txt1 p-b-9" id="seconds"></span>
 					<span class="s2-txt1">Secondes</span>
 				</div>
 			</div>
@@ -69,37 +67,13 @@
 	</div>
 
 
-
-
-
 <!--===============================================================================================-->
 	<script src="{% static 'maintenance/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'maintenance/vendor/bootstrap/js/popper.js' %}"></script>
 	<script src="{% static 'maintenance/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'maintenance/vendor/select2/select2.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'maintenance/vendor/countdowntime/moment.min.js' %}"></script>
-	<script src="{% static 'maintenance/vendor/countdowntime/moment-timezone.min.js' %}"></script>
-	<script src="{% static 'maintenance/vendor/countdowntime/moment-timezone-with-data.min.js' %}"></script>
-	<script src="{% static 'maintenance/vendor/countdowntime/countdowntime.js' %}"></script>
-	<script>
-		$('.cd100').countdown100({
-			/*Set Endtime here*/
-			/*Endtime must be > current time*/
-			endtimeYear: 0,
-			endtimeMonth: 0,
-			endtimeDate: 58,
-			endtimeHours: 17,
-			endtimeMinutes: 31,
-			endtimeSeconds: 54,
-			timeZone: ""
-			// ex:  timeZone: "America/New_York"
-			//go to " http://momentjs.com/timezone/ " to get timezone
-		});
-	</script>
-<!--===============================================================================================-->
+	<script src="{% static 'maintenance/vendor/countdowntime/countdowntime1.js' %}"></script>
 	<script src="{% static 'maintenance/vendor/tilt/tilt.jquery.min.js' %}"></script>
 	<script >
 		$('.js-tilt').tilt({
@@ -107,7 +81,9 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="{% static 'maintenance/js/main.js' %}"></script>
+	<script src="{% static 'maintenance/js/slider.js' %}"></script>
 
 </body>
 </html>
+
+
