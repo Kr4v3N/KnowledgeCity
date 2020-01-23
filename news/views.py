@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .models import News
 from main.models import Main
 from django.core.files.storage import FileSystemStorage
-
+import datetime
 
 # Create your views here.
 
@@ -22,18 +22,26 @@ def news_list(request):
 
 
 def news_add(request):
+
     now = datetime.datetime.now()
+
     year = now.year
     month = now.month
     day = now.day
+    hour = now.hour
+    minute = now.minute
 
-    if len(str(day)) == 1:
-        day = "0" + str(day)
     if len(str(month)) == 1:
-        month = "0" + str(month)
+        month = '0' + str(month)
+    if len(str(day)) == 1:
+        day = '0' + str(day)
+    if len(str(hour)) == 1:
+        hour = '0' + str(hour)
+    if len(str(minute)) == 1:
+        minute = '0' + str(minute)
 
     today = str(day) + '/' + str(month) + '/' + str(year)
-    time = str(now.hour) + ":" + str(now.minute)
+    time = str(hour) + '/' + str(minute)
 
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
@@ -49,12 +57,13 @@ def news_add(request):
             return render(request, 'back/error.html', {'error': error})
 
         try:
-            myfile = request.FILES['myfile']
-            fileSystem = FileSystemStorage()
-            filename = fileSystem.save(myfile.name, myfile)
-            url = fileSystem.url(filename)
 
-            if str(myfile.content_type).startswith('image'):
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            url = fs.url(filename)
+
+            if str(myfile.content_type).startswith("image"):
 
                 if myfile.size < 5000000:
 
@@ -68,18 +77,28 @@ def news_add(request):
                                category_name="-",
                                category_id=0,
                                show=0,
-                               time=time)
+                               time=time, )
                     add.save()
                     return redirect('news_list')
+
                 else:
-                    error = "Votre image ne doit pas dépasser 5 MB"
+
+                    fs = FileSystemStorage()
+                    fs.delete(filename)
+
+                    error = "L'image ne doit pas dépasser 5 MB"
                     return render(request, 'back/error.html', {'error': error})
 
             else:
+
+                fs = FileSystemStorage()
+                fs.delete(filename)
+
                 error = "Le format de votre fichier n'est pas supporté"
                 return render(request, 'back/error.html', {'error': error})
 
         except:
+
             error = "Vous devez téléverser une image"
             return render(request, 'back/error.html', {'error': error})
 
@@ -91,8 +110,8 @@ def news_delete(request, pk):
 
         b = News.objects.get(pk=pk)
 
-        fileSystem = FileSystemStorage()
-        fileSystem.delete(b.pic_name)
+        fs = FileSystemStorage()
+        fs.delete(b.pic_name)
         b.delete()
 
     except:
