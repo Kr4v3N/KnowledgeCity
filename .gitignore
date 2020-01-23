@@ -140,4 +140,4 @@ __ pycache __
 .DS_Store
 /.idea/
 /media/
-/node_modules/
+/node_modules/*
