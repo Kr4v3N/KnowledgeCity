@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'maintenance_mode',
     'main',
     'news',
+    'category',
 ]
 
 MIDDLEWARE = [

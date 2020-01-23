@@ -1,0 +1,35 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section text-center">
+            <h1>
+                <i class="fa fa-table"></i>Il y a une erreur dans le formulaire :<br>
+                <small style="color: orangered;">{{ error }} !</small>
+            </h1>
+        </div>
+        <div class="header-section text-center">
+            <a href="/panel/category/add" class="btn btn-info btn-md"><span class="glyphicon glyphicon-chevron-left"> Retour</span></a>
+
+        </div>
+    </div>
+
+    <!-- END Datatables Header -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+
+{% endblock %}
