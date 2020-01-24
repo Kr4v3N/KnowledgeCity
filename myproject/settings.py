@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'news',
     'category',
+    'subcategory',
 ]
 
 MIDDLEWARE = [

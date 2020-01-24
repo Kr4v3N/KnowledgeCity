@@ -5,6 +5,7 @@ from main.models import Main
 from django.core.files.storage import FileSystemStorage
 import datetime
 
+
 # Create your views here.
 
 
@@ -22,7 +23,6 @@ def news_list(request):
 
 
 def news_add(request):
-
     now = datetime.datetime.now()
 
     year = now.year
@@ -115,6 +115,7 @@ def news_delete(request, pk):
         b.delete()
 
     except:
+
         error = "Quelque chose c'est mal passée"
         return render(request, 'back/error.html', {'error': error})
 
