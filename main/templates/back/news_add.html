@@ -41,7 +41,13 @@
                                                 <input type="text" id="newstitle" name="newstitle" class="form-control" placeholder="Titre de la news">
                                             </div>
                                             <div class="col-md-6">
+                                                <select id="newscategory" name="newscategory" class="select-chosen" data-placeholder="Choisissez une catégorie..." style="width: 250px;">
 
+                                                    {% for cat in category %}
+                                                        <option value="{{ cat.pk }}">{{ cat.category_name }} | {{ cat.name }}</option>
+                                                    {% endfor %}
+
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">

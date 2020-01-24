@@ -4,7 +4,7 @@ from .models import News
 from main.models import Main
 from django.core.files.storage import FileSystemStorage
 import datetime
-
+from subcategory.models import SubCategory
 
 # Create your views here.
 
@@ -43,11 +43,14 @@ def news_add(request):
     today = str(day) + '/' + str(month) + '/' + str(year)
     time = str(hour) + '/' + str(minute)
 
+    cat = SubCategory.objects.all()
+
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscategory = request.POST.get('newscategory')
         newstxtshort = request.POST.get('newstxtshort')
         newstxt = request.POST.get('newstxt')
+        newsid = request.POST.get('newscategory')
 
         if newstitle == "" or newstxt == "" \
                 or newstxtshort == "" \
@@ -67,6 +70,8 @@ def news_add(request):
 
                 if myfile.size < 5000000:
 
+                    newsname = SubCategory.objects.get(pk=newsid).name
+
                     add = News(name=newstitle,
                                short_txt=newstxtshort,
                                body_txt=newstxt,
@@ -74,8 +79,8 @@ def news_add(request):
                                pic_name=filename,
                                pic_url=url,
                                writer="-",
-                               category_name="-",
-                               category_id=0,
+                               category_name=newsname,
+                               category_id=newsid,
                                show=0,
                                time=time, )
                     add.save()
@@ -102,7 +107,7 @@ def news_add(request):
             error = "Vous devez téléverser une image"
             return render(request, 'back/error.html', {'error': error})
 
-    return render(request, 'back/news_add.html')
+    return render(request, 'back/news_add.html', {'category': cat})
 
 
 def news_delete(request, pk):
