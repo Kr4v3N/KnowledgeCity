@@ -1,1 +1,71 @@
-<h1> I am Subcategory list </h1>
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des sous-catégories<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Sous-catégorie</li>
+        <li><a href="/panel/subcategory/list">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des sous-catégories :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                <thead>
+
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Catégorie(s)</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for subcat in subcategory %}
+                    <tr>
+                        <td class="text-center">{{ subcat.pk }}</td>
+                        <td class="text-center">{{ subcat.name }}</td>
+                        <td class="text-center">{{ subcat.category_name }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href="" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+
+{% endblock %}

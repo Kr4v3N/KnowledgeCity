@@ -10,11 +10,6 @@ def category_list(request):
     return render(request, 'back/category_list.html', {'category': cat})
 
 
-def error(args):
-
-    pass
-
-
 def category_add(request):
 
     if request.method == 'POST':
