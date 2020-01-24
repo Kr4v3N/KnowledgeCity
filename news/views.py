@@ -1,10 +1,12 @@
 from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
+
 from .models import News
 from main.models import Main
 from django.core.files.storage import FileSystemStorage
 import datetime
 from subcategory.models import SubCategory
+
 
 # Create your views here.
 
@@ -125,3 +127,15 @@ def news_delete(request, pk):
         return render(request, 'back/error.html', {'error': error})
 
     return redirect('news_list')
+
+
+def news_edit(request, pk):
+
+    news = News.objects.get(pk=pk)
+    cat = SubCategory.objects.all()
+
+    return render(request, 'back/news_edit.html', {
+        'pk': pk,
+        'news': news,
+        'category': cat
+    })
