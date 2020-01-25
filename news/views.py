@@ -131,8 +131,88 @@ def news_delete(request, pk):
 
 def news_edit(request, pk):
 
+    if len(News.objects.filter(pk=pk)) == 0:
+
+        error = "News non trouvée"
+        return render(request, 'back/error.html', {'error': error})
+
+
     news = News.objects.get(pk=pk)
     cat = SubCategory.objects.all()
+
+    if request.method == 'POST':
+        newstitle = request.POST.get('newstitle')
+        newscategory = request.POST.get('newscategory')
+        newstxtshort = request.POST.get('newstxtshort')
+        newstxt = request.POST.get('newstxt')
+        newsid = request.POST.get('newscategory')
+
+        if newstitle == "" or newstxt == "" \
+                or newstxtshort == "" \
+                or newscategory == "" \
+                or newstitle == "":
+            error = "Tous les champs sont requis"
+            return render(request, 'back/error.html', {'error': error})
+
+        try:
+
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            url = fs.url(filename)
+
+            if str(myfile.content_type).startswith("image"):
+
+                if myfile.size < 5000000:
+
+                    newsname = SubCategory.objects.get(pk=newsid).name
+
+                    b = News.objects.get(pk=pk)
+
+                    fss = FileSystemStorage()
+                    fss.delete(b.pic_name)
+
+                    b.name = newstitle
+                    b.short_txt = newstxtshort
+                    b.body_txt = newstxt
+                    b.pic_name = filename
+                    b.pic_url = url
+                    b.category_name = newsname
+                    b.category_id = newsid
+                    b.save()
+
+                    return redirect('news_list')
+
+                else:
+
+                    fs = FileSystemStorage()
+                    fs.delete(filename)
+
+                    error = "L'image ne doit pas dépasser 5 MB"
+                    return render(request, 'back/error.html', {'error': error})
+
+            else:
+
+                fs = FileSystemStorage()
+                fs.delete(filename)
+
+                error = "Le format de votre fichier n'est pas supporté"
+                return render(request, 'back/error.html', {'error': error})
+
+        except:
+
+            newsname = SubCategory.objects.get(pk=newsid).name
+
+            add = News.objects.get(pk=pk)
+
+            add.name = newstitle
+            add.short_txt = newstxtshort
+            add.body_txt = newstxt
+            add.category_name = newsname
+            add.category_id = newsid
+            add.save()
+
+            return redirect('news_list')
 
     return render(request, 'back/news_edit.html', {
         'pk': pk,
