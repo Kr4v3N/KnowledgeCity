@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
 
@@ -58,8 +59,8 @@ def news_add(request):
                 or newstxtshort == "" \
                 or newscategory == "" \
                 or newstitle == "":
-            error = "Tous les champs sont requis"
-            return render(request, 'back/error.html', {'error': error})
+            messages.warning(request,"Tous les champs sont requis")
+            return redirect('news_add')
 
         try:
 
@@ -86,6 +87,7 @@ def news_add(request):
                                show=0,
                                time=time, )
                     add.save()
+                    messages.success(request, "Votre article a été ajouté avec succé")
                     return redirect('news_list')
 
                 else:
@@ -93,21 +95,21 @@ def news_add(request):
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
-                    error = "L'image ne doit pas dépasser 5 MB"
-                    return render(request, 'back/error.html', {'error': error})
+                    messages.warning(request, "L'image ne doit pas dépasser 5 MB")
+                    return redirect('news_add')
 
             else:
 
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
-                error = "Le format de votre fichier n'est pas supporté"
-                return render(request, 'back/error.html', {'error': error})
+                messages.warning(request, "Le format de votre fichier n'est pas supporté")
+                return redirect('news_add')
 
         except:
 
-            error = "Vous devez téléverser une image"
-            return render(request, 'back/error.html', {'error': error})
+            messages.warning(request, "Vous devez téléverser une image")
+            return redirect('news_add')
 
     return render(request, 'back/news_add.html', {'category': cat})
 
@@ -121,21 +123,19 @@ def news_delete(request, pk):
         fs.delete(b.pic_name)
         b.delete()
 
+        messages.success(request, "L'articles  a bien été supprimé")
+        return redirect('news_list')
+
     except:
 
-        error = "Quelque chose c'est mal passée"
-        return render(request, 'back/error.html', {'error': error})
-
-    return redirect('news_list')
+        messages.warning(request, "Quelque chose c'est mal passée")
+        return redirect('news_list')
 
 
 def news_edit(request, pk):
-
     if len(News.objects.filter(pk=pk)) == 0:
-
-        error = "News non trouvée"
-        return render(request, 'back/error.html', {'error': error})
-
+        messages.warning(request, "News non trouvée")
+        return redirect('news_list')
 
     news = News.objects.get(pk=pk)
     cat = SubCategory.objects.all()
@@ -151,8 +151,8 @@ def news_edit(request, pk):
                 or newstxtshort == "" \
                 or newscategory == "" \
                 or newstitle == "":
-            error = "Tous les champs sont requis"
-            return render(request, 'back/error.html', {'error': error})
+            messages.warning(request, "Tous les champs sont requis")
+            return redirect('news_edit', pk=pk)
 
         try:
 
@@ -181,23 +181,24 @@ def news_edit(request, pk):
                     b.category_id = newsid
                     b.save()
 
-                    return redirect('news_list')
+                    # messages.success(request, "Bravo, botre articles à bien été modifié")
+                    # return redirect('news_list')
 
                 else:
 
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
-                    error = "L'image ne doit pas dépasser 5 MB"
-                    return render(request, 'back/error.html', {'error': error})
+                    messages.warning(request, "L'image ne doit pas dépasser 5 MB")
+                    return redirect('news_edit', pk=pk)
 
             else:
 
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
-                error = "Le format de votre fichier n'est pas supporté"
-                return render(request, 'back/error.html', {'error': error})
+                messages.warning(request, "Le format de votre fichier n'est pas supporté")
+                return redirect('news_edit', pk=pk)
 
         except:
 
@@ -212,6 +213,7 @@ def news_edit(request, pk):
             add.category_id = newsid
             add.save()
 
+            messages.success(request, "Votre article à bien été modifié")
             return redirect('news_list')
 
     return render(request, 'back/news_edit.html', {

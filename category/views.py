@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import Category
 
@@ -16,18 +17,19 @@ def category_add(request):
         name = request.POST.get('name')
 
         if name == "":
-            error = "Vous devez ajouter une catégorie"
-            return render(request, 'back/error_category.html', {'error': error})
+            messages.warning(request, "Vous devez ajouter une catégorie")
+            return redirect('category_add')
 
         if len(Category.objects.filter(name=name)) != 0:
 
-            error = "Cette catégorie existe déjà"
-            return render(request, 'back/error_category.html', {'error': error})
+            messages.warning(request, "Cette catégorie existe déjà")
+            return redirect('category_add')
 
         else:
             
             b = Category(name=name)
             b.save()
+            messages.success(request, "La catégorie a bien été ajoutée")
             return redirect('category_list')
 
     return render(request, 'back/category_add.html')

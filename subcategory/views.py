@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import SubCategory
 from category.models import Category
@@ -22,18 +23,18 @@ def subcategory_add(request):
         catid = request.POST.get('category')
 
         if name == "":
-            error = "Vous devez ajouter une sous-catégorie"
-            return render(request, 'back/error_subcategory.html', {'error': error})
+            messages.warning(request, "Vous devez ajouter une sous-catégorie")
+            return redirect('subcategory_add')
 
         if len(SubCategory.objects.filter(name=name)) != 0:
-
-            error = "Cette sous-catégorie existe déjà"
-            return render(request, 'back/error_subcategory.html', {'error': error})
+            messages.warning(request, "Cette sous-catégorie existe déjà")
+            return redirect('subcategory_add')
 
         catname = Category.objects.get(pk=catid).name
 
         b = SubCategory(name=name, category_name=catname, category_id=catid)
         b.save()
+        messages.success(request, "La sous catégorie a bien été ajoutée")
         return redirect('subcategory_list')
 
     return render(request, 'back/subcategory_add.html', {'category': cat})
