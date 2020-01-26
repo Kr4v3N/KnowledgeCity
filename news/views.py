@@ -10,8 +10,6 @@ from subcategory.models import SubCategory
 
 
 # Create your views here.
-
-
 def news_detail(request, pk):
     site = Main.objects.get(pk=3)
     news = News.objects.filter(pk=pk)
@@ -23,7 +21,6 @@ def news_list(request):
     news = News.objects.all()
 
     return render(request, 'back/news_list.html', {'news': news})
-
 
 def news_add(request):
     now = datetime.datetime.now()
@@ -59,7 +56,7 @@ def news_add(request):
                 or newstxtshort == "" \
                 or newscategory == "" \
                 or newstitle == "":
-            messages.warning(request,"Tous les champs sont requis")
+            messages.warning(request, "Tous les champs sont requis")
             return redirect('news_add')
 
         try:
@@ -112,7 +109,6 @@ def news_add(request):
             return redirect('news_add')
 
     return render(request, 'back/news_add.html', {'category': cat})
-
 
 def news_delete(request, pk):
     try:
@@ -180,20 +176,15 @@ def news_edit(request, pk):
                     b.category_name = newsname
                     b.category_id = newsid
                     b.save()
-
-                    # messages.success(request, "Bravo, botre articles à bien été modifié")
+                    # messages.success(request, "Bravo, votre articles à bien été modifié")
                     # return redirect('news_list')
-
                 else:
-
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
                     messages.warning(request, "L'image ne doit pas dépasser 5 MB")
                     return redirect('news_edit', pk=pk)
-
             else:
-
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
@@ -201,7 +192,6 @@ def news_edit(request, pk):
                 return redirect('news_edit', pk=pk)
 
         except:
-
             newsname = SubCategory.objects.get(pk=newsid).name
 
             add = News.objects.get(pk=pk)
@@ -212,7 +202,6 @@ def news_edit(request, pk):
             add.category_name = newsname
             add.category_id = newsid
             add.save()
-
             messages.success(request, "Votre article à bien été modifié")
             return redirect('news_list')
 
