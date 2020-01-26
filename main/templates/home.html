@@ -86,23 +86,23 @@
 
 							<div class="row p-t-35">
 								<div class="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {% for new in news %}
-                                        {% if newscat.pk ==  new.ocategory_id %}
+                                    {% for ab in news %}
+                                        {% if newscat.pk ==  ab.ocategory_id %}
 									<!-- Item post -->
 									<div class="flex-wr-sb-s m-b-30">
-										<a href="{% url 'news_detail' pk=new.pk %}" class="size-w-1 wrap-pic-w hov1 trans-03">
-											<img src="{{ new.pic_url }}" alt="IMG">
+										<a href="{% url 'news_detail' pk=ab.pk %}" class="size-w-1 wrap-pic-w hov1 trans-03">
+											<img src="{{ ab.pic_url }}" alt="IMG">
 										</a>
 
 										<div class="size-w-2">
 											<h5 class="p-b-5">
-												<a href="{% url 'news_detail' pk=new.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-													{{ new.name }}
+												<a href="{% url 'news_detail' pk=ab.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+													{{ ab.name }}
 												</a>
 											</h5>
 											<span class="cl8">
 												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-													{{ new.category_name}}
+													{{ ab.category_name}}
 												</a>
 
 												<span class="f1-s-3 m-rl-3">
@@ -110,7 +110,7 @@
 												</span>
 
 												<span class="f1-s-3">
-													{{ new.date}} | {{  new.time }}
+													{{ ab.date}} | {{  ab.time }}
 												</span>
 											</span>
 										</div>
