@@ -7,20 +7,29 @@ from main.models import Main
 from django.core.files.storage import FileSystemStorage
 import datetime
 from subcategory.models import SubCategory
+from category.models import Category
 
 
 # Create your views here.
 def news_detail(request, pk):
     site = Main.objects.get(pk=3)
     news = News.objects.filter(pk=pk)
+    category = Category.objects.all()
 
-    return render(request, 'front/news_detail.html', {'news': news, 'site': site})
+    context = {
+        'news': news,
+        'site': site,
+        'category': category
+    }
+
+    return render(request, 'front/news_detail.html', context)
 
 
 def news_list(request):
     news = News.objects.all()
 
     return render(request, 'back/news_list.html', {'news': news})
+
 
 def news_add(request):
     now = datetime.datetime.now()
@@ -71,6 +80,7 @@ def news_add(request):
                 if myfile.size < 5000000:
 
                     newsname = SubCategory.objects.get(pk=newsid).name
+                    ocategory_id = SubCategory.objects.get(pk=newsid).category_id
 
                     add = News(name=newstitle,
                                short_txt=newstxtshort,
@@ -82,8 +92,15 @@ def news_add(request):
                                category_name=newsname,
                                category_id=newsid,
                                show=0,
-                               time=time, )
+                               time=time,
+                               ocategory_id=ocategory_id)
                     add.save()
+
+                    count = len(News.objects.filter(ocategory_id=ocategory_id))
+                    b = Category.objects.get(pk=ocategory_id)
+                    b.count = count
+                    b.save()
+
                     messages.success(request, "Votre article a été ajouté avec succé")
                     return redirect('news_list')
 
@@ -110,18 +127,23 @@ def news_add(request):
 
     return render(request, 'back/news_add.html', {'category': cat})
 
+
 def news_delete(request, pk):
     try:
 
         b = News.objects.get(pk=pk)
-
         fs = FileSystemStorage()
         fs.delete(b.pic_name)
+        ocategory_id = News.objects.get(pk=pk).ocategory_id
+
         b.delete()
 
+        count = len(News.objects.filter(ocategory_id=ocategory_id))
+        m = Category.objects.get(pk=ocategory_id)
+        m.count = count
+        m.save()
         messages.success(request, "L'articles  a bien été supprimé")
         return redirect('news_list')
-
     except:
 
         messages.warning(request, "Quelque chose c'est mal passée")
@@ -205,8 +227,9 @@ def news_edit(request, pk):
             messages.success(request, "Votre article à bien été modifié")
             return redirect('news_list')
 
-    return render(request, 'back/news_edit.html', {
+    context = {
         'pk': pk,
         'news': news,
         'category': cat
-    })
+    }
+    return render(request, 'back/news_edit.html', context)
