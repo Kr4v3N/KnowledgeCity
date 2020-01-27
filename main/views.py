@@ -8,7 +8,6 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
-
     site = Main.objects.get(pk=3)
     news = News.objects.all().order_by('-pk')
     allNews = News.objects.all()
@@ -26,7 +25,6 @@ def home(request):
 
 
 def about(request):
-
     site = Main.objects.get(pk=3)
     allNews = News.objects.all()
     category = Category.objects.all()
@@ -40,7 +38,6 @@ def about(request):
 
 
 def panel(request):
-
     # TODO Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -50,7 +47,6 @@ def panel(request):
 
 
 def user_login(request):
-
     if request.method == 'POST':
         user_txt = request.POST.get('username')
         pass_txt = request.POST.get('password')
@@ -66,7 +62,22 @@ def user_login(request):
 
 
 def user_logout(request):
-
     logout(request)
 
     return redirect('login')
+
+
+def site_settings(request):
+
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
+
+    site = Main.objects.get(pk=3)
+
+    context = {
+        'site': site
+    }
+
+    return render(request, 'back/settings.html', context)
