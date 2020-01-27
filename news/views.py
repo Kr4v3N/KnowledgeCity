@@ -198,8 +198,9 @@ def news_edit(request, pk):
                     b.category_name = newsname
                     b.category_id = newsid
                     b.save()
-                    # messages.success(request, "Bravo, votre articles à bien été modifié")
-                    # return redirect('news_list')
+
+                    messages.success(request, "Bravo, votre articles à bien été modifié")
+                    return redirect('news_list')
                 else:
                     fs = FileSystemStorage()
                     fs.delete(filename)
@@ -232,4 +233,5 @@ def news_edit(request, pk):
         'news': news,
         'category': cat
     }
+
     return render(request, 'back/news_edit.html', context)
