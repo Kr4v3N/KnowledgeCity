@@ -52,14 +52,21 @@ def panel(request):
 def user_login(request):
 
     if request.method == 'POST':
-        usertxt = request.POST.get('username')
-        passtxt = request.POST.get('password')
+        user_txt = request.POST.get('username')
+        pass_txt = request.POST.get('password')
 
-        if usertxt != "" and passtxt != "":
-            user = authenticate(username=usertxt, password=passtxt)
+        if user_txt != "" and pass_txt != "":
+            user = authenticate(username=user_txt, password=pass_txt)
 
             if user is not None:
                 login(request, user)
                 return redirect('panel')
 
     return render(request, 'front/login.html')
+
+
+def user_logout(request):
+
+    logout(request)
+
+    return redirect('login')
