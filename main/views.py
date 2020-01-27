@@ -11,11 +11,13 @@ def home(request):
     news = News.objects.all().order_by('-pk')
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
+    lastnews = News.objects.all().order_by('-pk')[:3]
 
     return render(request, 'home.html', {'site': site,
                                          'news': news,
                                          'category': category,
-                                         'subcat': subcat
+                                         'subcat': subcat,
+                                         'lastnews': lastnews
                                          })
 
 

@@ -299,19 +299,19 @@
 												{% if hh.ocategory_id == gg.pk %}
 													<div class="col-3">
 													<!-- Item post -->
-													<div><a href="#" class="wrap-pic-w hov1 trans-03">
+													<div><a href="{% url 'news_detail' pk=hh.pk %}" class="wrap-pic-w hov1 trans-03">
 														<img src="{{ hh.pic_url }}" alt="IMG">
 														</a>
 
 														<div class="p-t-10">
 															<h5 class="p-b-5">
-																<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
+																<a href="{% url 'news_detail' pk=hh.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 																	{{ hh.name }}
 																</a>
 															</h5>
 
 															<span class="cl8">
-																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+																<a href="{% url 'news_detail' pk=hh.pk %}" class="f1-s-6 cl8 hov-cl10 trans-03">
 																	{{ hh.category_name }}
 																</a>
 
@@ -340,7 +340,7 @@
 												<div class="col-3">
 												<!-- Item post -->
 												<div>
-													<a href="#" class="wrap-pic-w hov1 trans-03">
+													<a href="{% url 'news_detail' pk=mm.pk %}" class="wrap-pic-w hov1 trans-03">
 														<img src="{{ mm.pic_url }}" alt="IMG">
 													</a>
 													<div class="p-t-10">
@@ -350,7 +350,7 @@
 															</a>
 														</h5>
 														<span class="cl8">
-															<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+															<a href="{% url 'news_detail' pk=mm.pk %}" class="f1-s-6 cl8 hov-cl10 trans-03">
 																{{ mm.category_name }}
 															</a>
 															<span class="f1-s-3 m-rl-3">
