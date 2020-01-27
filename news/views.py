@@ -1,13 +1,13 @@
 from django.contrib import messages
-from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
+from django.db.models.functions import datetime
+from django.core.files.storage import FileSystemStorage
 
+import datetime
 from .models import News
 from main.models import Main
-from django.core.files.storage import FileSystemStorage
-import datetime
-from subcategory.models import SubCategory
 from category.models import Category
+from subcategory.models import SubCategory
 
 
 # Create your views here.
@@ -15,11 +15,15 @@ def news_detail(request, pk):
     site = Main.objects.get(pk=3)
     news = News.objects.filter(pk=pk)
     category = Category.objects.all()
+    subcat = SubCategory.objects.all()
+    allNews = News.objects.all()
 
     context = {
         'news': news,
+        'allNews': allNews,
         'site': site,
-        'category': category
+        'category': category,
+        'subcat': subcat
     }
 
     return render(request, 'front/news_detail.html', context)
@@ -32,8 +36,12 @@ def news_list(request):
 
 
 def news_add(request):
-    now = datetime.datetime.now()
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
 
+    now = datetime.datetime.now()
     year = now.year
     month = now.month
     day = now.day
@@ -129,6 +137,12 @@ def news_add(request):
 
 
 def news_delete(request, pk):
+
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
+
     try:
 
         b = News.objects.get(pk=pk)
@@ -151,6 +165,11 @@ def news_delete(request, pk):
 
 
 def news_edit(request, pk):
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
+
     if len(News.objects.filter(pk=pk)) == 0:
         messages.warning(request, "News non trouvée")
         return redirect('news_list')

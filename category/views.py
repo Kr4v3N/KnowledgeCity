@@ -7,11 +7,22 @@ from .models import Category
 
 def category_list(request):
 
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
+
     cat = Category.objects.all()
+
     return render(request, 'back/category_list.html', {'category': cat})
 
 
 def category_add(request):
+
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
 
     if request.method == 'POST':
         name = request.POST.get('name')

@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% if user.is_authenticated %}
+
 <!--[if IE 9]>         <html class="no-js lt-ie10" lang="fr"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
     <head>
@@ -294,3 +296,9 @@
 
     </body>
 </html>
+
+{% else %}
+
+<h1>Please Login</h1>
+
+{% endif %}

@@ -295,7 +295,7 @@
 										<div class="tab-pane show active" id="news-0" role="tabpanel">
 											<div class="row">
 
-												{% for hh in news %}
+												{% for hh in allNews %}
 												{% if hh.ocategory_id == gg.pk %}
 													<div class="col-3">
 													<!-- Item post -->
@@ -335,7 +335,7 @@
 										<div class="tab-pane" id="{{ subcat2.pk }}" role="tabpanel">
 											<div class="row">
 
-												{% for mm in news %}
+												{% for mm in allNews %}
 												{% if mm.category_id == subcat2.pk %}
 												<div class="col-3">
 												<!-- Item post -->

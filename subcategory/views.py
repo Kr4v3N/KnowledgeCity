@@ -8,12 +8,22 @@ from category.models import Category
 
 def subcategory_list(request):
 
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
+
     subcat = SubCategory.objects.all()
 
     return render(request, 'back/subcategory_list.html', {'subcategory': subcat})
 
 
 def subcategory_add(request):
+
+    # TODO Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # TODO Login chek end
 
     cat = Category.objects.all()
 
