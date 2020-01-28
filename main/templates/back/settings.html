@@ -40,14 +40,14 @@
                                 <div class="block">
 
                                     <!-- Basic Form Elements Content -->
-                                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                                    <form action="{% url 'site_settings' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                                         {% csrf_token %}
                                          <div class="form-group">
                                             <div class="col-md-6">
                                                 <input type="text" id="name" name="name" value="{{ site.name }}" class="form-control" placeholder="Nom du site">
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" id="phone" name="phone" value="{{ site.phone }}" class="form-control" placeholder="Numéro de télèphone">
+                                                <input type="text" id="phone" name="phone" value="{{ site.phone }}" class="form-control" placeholder="Numéro de téléphone">
                                             </div>
                                         </div>
 
@@ -88,8 +88,13 @@
                                         </script>
 
                                         <div class="form-group">
-                                        <div class="col-md-6">
-                                                <input type="file" id="myfile" name="myfile" class="form-control">
+
+                                            <div class="col-md-6">
+                                                    <input type="file" id="myfile" name="myfile" class="form-control">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <img style="display: inline-block; width: 200px; height: 200px" src="{{ site.pic_url }}" alt="">
                                             </div>
                                         </div>
 
