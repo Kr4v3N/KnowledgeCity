@@ -16,6 +16,7 @@ def news_detail(request, pk):
     news = News.objects.filter(pk=pk)
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
+    lastnews = News.objects.all().order_by('-pk')[:3]
     allNews = News.objects.all()
 
     context = {
@@ -23,7 +24,8 @@ def news_detail(request, pk):
         'allNews': allNews,
         'site': site,
         'category': category,
-        'subcat': subcat
+        'subcat': subcat,
+        'lastnews': lastnews
     }
 
     return render(request, 'front/news_detail.html', context)

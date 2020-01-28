@@ -49,7 +49,6 @@ def panel(request):
 
 
 def user_login(request):
-
     if request.method == 'POST':
         user_txt = request.POST.get('username')
         pass_txt = request.POST.get('password')
@@ -71,7 +70,6 @@ def user_logout(request):
 
 
 def site_settings(request):
-
     # TODO Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -96,7 +94,6 @@ def site_settings(request):
         if name == "" or phone == "" or about == "":
             messages.warning(request, "Tous les champs doivent être renseignés")
             return redirect('site_settings')
-
         try:
 
             myfile = request.FILES['myfile']
@@ -104,32 +101,43 @@ def site_settings(request):
             filename = fs.save(myfile.name, myfile)
             url = fs.url(filename)
 
-            b = Main.objects.get(pk=3)
-
-            b.name = name
-            b.phone = phone
-            b.facebook = facebook
-            b.twitter = twitter
-            b.linkedin = linkedin
-            b.youtube = youtube
-            b.link = link
-            b.pic_url = url
-            b.pic_name = filename
-            b.save()
+            pic_url = url
+            pic_name = filename
 
         except:
 
-            add = Main.objects.get(pk=3)
+            pic_url = "-"
+            pic_name = "-"
 
-            add.name = name
-            add.phone = phone
-            add.facebook = facebook
-            add.twitter = twitter
-            add.linkedin = linkedin
-            add.youtube = youtube
-            add.link = link
-            add.about = about
-            add.save()
+        try:
+
+            myfile2 = request.FILES['myfile2']
+            fs2 = FileSystemStorage()
+            filename2 = fs2.save(myfile2.name, myfile2)
+            url2 = fs2.url(filename2)
+
+            pic_url_footer = url2
+            pic_name_footer = filename2
+
+        except:
+
+            pic_url_footer = "-"
+            pic_name_footer = "-"
+
+        b = Main.objects.get(pk=3)
+
+        b.name = name
+        b.phone = phone
+        b.facebook = facebook
+        b.twitter = twitter
+        b.linkedin = linkedin
+        b.youtube = youtube
+        b.link = link
+        if pic_url != "-": b.pic_url = pic_url
+        if pic_name != "-": b.pic_name = pic_name
+        if pic_url_footer != "-": b.pic_url_footer = pic_url_footer
+        if pic_name_footer != "-": b.pic_name_footer = pic_name_footer
+        b.save()
 
     site = Main.objects.get(pk=3)
 

@@ -126,9 +126,9 @@
 
 			<!-- Header Mobile -->
 			<div class="wrap-header-mobile">
-				<!-- Logo moblie -->
+				<!-- Logo mobile -->
 				<div class="logo-mobile">
-					<a href="/"><img src="{% static '/front/images/icons/logo-01.png' %}" alt="IMG-LOGO"></a>
+					<a href="/"><img src="{{ site.pic_url }}" alt="IMG-LOGO"></a>
 				</div>
 
 				<!-- Button show menu -->
@@ -144,15 +144,9 @@
 				<ul class="topbar-mobile">
 					<li class="left-topbar">
 						<span class="left-topbar-item flex-wr-s-c">
-							<span>
-								Lyon, France
-							</span>
 
-							<img class="m-b-1 m-rl-8" src="{% static 'front/images/icons/icon-night.png' %}" alt="IMG">
+							<img class="m-b-1 m-rl-8" src="{{ site.pic_url_footer }}" alt="IMG">
 
-							<span>
-								Latitude: 45.75 Longitude: 4.85
-							</span>
 						</span>
 					</li>
 
@@ -270,7 +264,7 @@
 					<!-- Menu desktop -->
 					<nav class="menu-desktop">
 						<a class="logo-stick" href="/">
-							<img src="{% static 'front/images/icons/logo-01.png' %}" alt="LOGO">
+							<img src="{{ site.pic_url }}" alt="LOGO">
 						</a>
 
 						<ul class="main-menu justify-content-center">
@@ -396,7 +390,7 @@
 					<div class="col-lg-4 p-b-20">
 						<div class="size-h-3 flex-s-c">
 							<a href="/">
-								<img class="max-s-full" src="{{ site.pic_url }}" alt="LOGO">
+								<img class="max-s-full" src="{{ site.pic_url_footer }}" alt="LOGO">
 							</a>
 						</div>
 
