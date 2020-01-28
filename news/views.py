@@ -18,6 +18,15 @@ def news_detail(request, pk):
     subcat = SubCategory.objects.all()
     lastnews = News.objects.all().order_by('-pk')[:3]
     allNews = News.objects.all()
+    popularynews = News.objects.all().order_by('-show')
+
+    try:
+        mynews = News.objects.get(pk=pk)
+        mynews.show = mynews.show + 1
+        mynews.save()
+
+    except:
+        print("Can't add show")
 
     context = {
         'news': news,
@@ -25,7 +34,8 @@ def news_detail(request, pk):
         'site': site,
         'category': category,
         'subcat': subcat,
-        'lastnews': lastnews
+        'lastnews': lastnews,
+        'popularynews': popularynews
     }
 
     return render(request, 'front/news_detail.html', context)
@@ -139,7 +149,6 @@ def news_add(request):
 
 
 def news_delete(request, pk):
-
     # TODO Login check start
     if not request.user.is_authenticated:
         return redirect('login')

@@ -10,23 +10,28 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
+
     site = Main.objects.get(pk=3)
     news = News.objects.all().order_by('-pk')
     allNews = News.objects.all()
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
     lastnews = News.objects.all().order_by('-pk')[:3]
+    popularynews = News.objects.all().order_by('-show')
 
     return render(request, 'home.html', {'site': site,
                                          'news': news,
                                          'allNews': allNews,
                                          'category': category,
                                          'subcat': subcat,
-                                         'lastnews': lastnews
+                                         'lastnews': lastnews,
+                                         'popularynews': popularynews
+
                                          })
 
 
 def about(request):
+
     site = Main.objects.get(pk=3)
     allNews = News.objects.all()
     category = Category.objects.all()
@@ -40,6 +45,7 @@ def about(request):
 
 
 def panel(request):
+
     # TODO Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -49,6 +55,7 @@ def panel(request):
 
 
 def user_login(request):
+
     if request.method == 'POST':
         user_txt = request.POST.get('username')
         pass_txt = request.POST.get('password')
@@ -64,12 +71,14 @@ def user_login(request):
 
 
 def user_logout(request):
+
     logout(request)
 
     return redirect('login')
 
 
 def site_settings(request):
+
     # TODO Login check start
     if not request.user.is_authenticated:
         return redirect('login')
