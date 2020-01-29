@@ -55,10 +55,11 @@ def news_list(request):
 
 
 def news_add(request):
-    # TODO Login check start
+
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     now = datetime.datetime.now()
     year = now.year
@@ -158,10 +159,10 @@ def news_add(request):
 
 
 def news_delete(request, pk):
-    # TODO Login check start
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     try:
 
@@ -185,10 +186,11 @@ def news_delete(request, pk):
 
 
 def news_edit(request, pk):
-    # TODO Login check start
+
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     if len(News.objects.filter(pk=pk)) == 0:
         messages.warning(request, "News non trouvée")

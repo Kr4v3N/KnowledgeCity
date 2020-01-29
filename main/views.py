@@ -50,10 +50,10 @@ def about(request):
 
 
 def panel(request):
-    # TODO Login check start
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     return render(request, 'back/admin_home.html')
 
@@ -80,10 +80,10 @@ def user_logout(request):
 
 
 def site_settings(request):
-    # TODO Login check start
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -152,3 +152,31 @@ def site_settings(request):
     site = Main.objects.get(pk=3)
 
     return render(request, 'back/settings.html', {'site': site})
+
+
+def about_settings(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    if request.method == 'POST':
+        txt = request.POST.get('txt')
+        if txt == "":
+            messages.warning(request, "Tous les champs doivent être renseignés")
+            return redirect('about_settings')
+
+        b = Main.objects.get(pk=3)
+        b.about_page = txt
+        b.save()
+        messages.success(request, "Votre page à bien été modifié")
+        return redirect('about_settings')
+
+    about_page = Main.objects.get(pk=3).about_page
+
+    context = {
+        'about_page': about_page
+    }
+
+    return render(request, 'back/about_setting.html', context)
