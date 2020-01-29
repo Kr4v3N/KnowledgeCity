@@ -37,11 +37,14 @@ def about(request):
     allNews = News.objects.all()
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
+    popularynews_footer = News.objects.all().order_by('-show')[:4]
+
 
     return render(request, 'front/about.html', {'site': site,
                                                 'category': category,
                                                 'subcat': subcat,
                                                 'allNews': allNews,
+                                                'popularynews_footer': popularynews_footer
                                                 })
 
 

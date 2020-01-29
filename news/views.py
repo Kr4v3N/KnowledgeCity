@@ -21,6 +21,10 @@ def news_detail(request, pk):
     popularynews = News.objects.all().order_by('-show')
     popularynews_footer = News.objects.all().order_by('-show')[:4]
 
+    tagname = News.objects.get(pk=pk).tag
+    tag = tagname.split(',')
+
+
     try:
         mynews = News.objects.get(pk=pk)
         mynews.show = mynews.show + 1
@@ -37,7 +41,8 @@ def news_detail(request, pk):
         'subcat': subcat,
         'lastnews': lastnews,
         'popularynews': popularynews,
-        'popularynews_footer': popularynews_footer
+        'popularynews_footer': popularynews_footer,
+        'tag': tag
     }
 
     return render(request, 'front/news_detail.html', context)
@@ -82,6 +87,7 @@ def news_add(request):
         newstxtshort = request.POST.get('newstxtshort')
         newstxt = request.POST.get('newstxt')
         newsid = request.POST.get('newscategory')
+        tag = request.POST.get('tag')
 
         if newstitle == "" or newstxt == "" \
                 or newstxtshort == "" \
@@ -115,7 +121,8 @@ def news_add(request):
                                category_id=newsid,
                                show=0,
                                time=time,
-                               ocategory_id=ocategory_id)
+                               ocategory_id=ocategory_id,
+                               tag=tag)
                     add.save()
 
                     count = len(News.objects.filter(ocategory_id=ocategory_id))
@@ -196,6 +203,7 @@ def news_edit(request, pk):
         newstxtshort = request.POST.get('newstxtshort')
         newstxt = request.POST.get('newstxt')
         newsid = request.POST.get('newscategory')
+        tag = request.POST.get('tag')
 
         if newstitle == "" or newstxt == "" \
                 or newstxtshort == "" \
@@ -229,6 +237,7 @@ def news_edit(request, pk):
                     b.pic_url = url
                     b.category_name = newsname
                     b.category_id = newsid
+                    b.tag = tag
                     b.save()
 
                     messages.success(request, "Bravo, votre articles à bien été modifié")
@@ -256,6 +265,7 @@ def news_edit(request, pk):
             add.body_txt = newstxt
             add.category_name = newsname
             add.category_id = newsid
+            add.tag = tag
             add.save()
             messages.success(request, "Votre article à bien été modifié")
             return redirect('news_list')
@@ -263,7 +273,7 @@ def news_edit(request, pk):
     context = {
         'pk': pk,
         'news': news,
-        'category': cat
+        'category': cat,
     }
 
     return render(request, 'back/news_edit.html', context)

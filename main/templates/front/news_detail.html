@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">
+				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Rechercher">
 				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
 					<i class="zmdi zmdi-search"></i>
 				</button>
@@ -54,7 +54,7 @@
 							<div class="flex-wr-s-s p-b-40">
 								<span class="f1-s-3 cl8 m-r-15">
 									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										par {{ new.writer }}
+										par {{ new.writer }} root
 									</a>
 
 									<span class="m-rl-3">-</span>
@@ -69,7 +69,7 @@
 								</span>
 
 								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-									0 Comment
+									0 Commentaire(s)
 								</a>
 							</div>
 
@@ -89,20 +89,19 @@
 								</span>
 
 								<div class="flex-wr-s-s size-w-0">
+                                    {%  for tagname in tag %}
 									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Streetstyle
+										{{ tagname }}
 									</a>
+                                        {%  endfor %}
 
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Crafts
-									</a>
 								</div>
 							</div>
 
 							<!-- Share -->
 							<div class="flex-s-s">
 								<span class="f1-s-12 cl5 p-t-1 m-r-15">
-									Share:
+									Partager:
 								</span>
 
 								<div class="flex-wr-s-s size-w-0">
@@ -140,13 +139,13 @@
 							</p>
 
 							<form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..."></textarea>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom*">
 
 								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Site web">
 
 								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
 									Soumettre votre commentaire
@@ -341,38 +340,13 @@
 							</div>
 
 							<div class="flex-wr-s-s m-rl--5">
+                                {% for tagname in tag  %}
 								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
+									{{ tagname }}
 								</a>
+                                {%  endfor %}
 
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Crafts
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Magazine
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									News
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Blogs
-								</a>
-							</div>
+                            </div>
 						</div>
 					</div>
 				</div>
