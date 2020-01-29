@@ -300,33 +300,33 @@
 							<ul class="p-t-35">
                                 {%  for pop in popularynews %}
                                     {% if pop.ocategory_id == new.ocategory_id %}
-								<li class="flex-wr-sb-s p-b-30">
-									<a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ pop.pic_url }}" alt="IMG">
-									</a>
+                                        <li class="flex-wr-sb-s p-b-30">
+                                            <a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                                <img src="{{ pop.pic_url }}" alt="IMG">
+                                            </a>
 
-									<div class="size-w-11">
-										<h6 class="p-b-4">
-											<a href="{% url 'news_detail' pk=pop.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-												{{ pop.name }}
-											</a>
-										</h6>
+                                            <div class="size-w-11">
+                                                <h6 class="p-b-4">
+                                                    <a href="{% url 'news_detail' pk=pop.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                        {{ pop.name }}
+                                                    </a>
+                                                </h6>
 
-										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												{{ pop.category_name }}
-											</a>
+                                                <span class="cl8 txt-center p-b-24">
+                                                    <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+                                                        {{ pop.category_name }}
+                                                    </a>
 
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
+                                                    <span class="f1-s-3 m-rl-3">
+                                                        -
+                                                    </span>
 
-											<span class="f1-s-3">
-												{{ pop.date }}
-											</span>
-										</span>
-									</div>
-								</li>
+                                                    <span class="f1-s-3">
+                                                        {{ pop.date }}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
                                     {% endif %}
                                 {% endfor %}
 							</ul>

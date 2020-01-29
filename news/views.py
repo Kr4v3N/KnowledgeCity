@@ -19,6 +19,7 @@ def news_detail(request, pk):
     lastnews = News.objects.all().order_by('-pk')[:3]
     allNews = News.objects.all()
     popularynews = News.objects.all().order_by('-show')
+    popularynews_footer = News.objects.all().order_by('-show')[:4]
 
     try:
         mynews = News.objects.get(pk=pk)
@@ -35,7 +36,8 @@ def news_detail(request, pk):
         'category': category,
         'subcat': subcat,
         'lastnews': lastnews,
-        'popularynews': popularynews
+        'popularynews': popularynews,
+        'popularynews_footer': popularynews_footer
     }
 
     return render(request, 'front/news_detail.html', context)

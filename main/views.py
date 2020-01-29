@@ -18,6 +18,7 @@ def home(request):
     subcat = SubCategory.objects.all()
     lastnews = News.objects.all().order_by('-pk')[:3]
     popularynews = News.objects.all().order_by('-show')
+    popularynews_footer = News.objects.all().order_by('-show')[:4]
 
     return render(request, 'home.html', {'site': site,
                                          'news': news,
@@ -25,8 +26,8 @@ def home(request):
                                          'category': category,
                                          'subcat': subcat,
                                          'lastnews': lastnews,
-                                         'popularynews': popularynews
-
+                                         'popularynews': popularynews,
+                                         'popularynews_footer': popularynews_footer
                                          })
 
 
