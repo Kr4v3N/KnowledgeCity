@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import ContactForm
@@ -10,13 +11,25 @@ from subcategory.models import SubCategory
 
 
 def contact_add(request):
-    site = Main.objects.get(pk=3)
-    allNews = News.objects.all()
-    category = Category.objects.all()
-    subcat = SubCategory.objects.all()
-    lastnews = News.objects.all().order_by('-pk')[:3]
-    popularynews = News.objects.all().order_by('-show')[:4]
-    popularynews_footer = News.objects.all().order_by('-show')[:4]
+
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+    hour = now.hour
+    minute = now.minute
+
+    if len(str(month)) == 1:
+        month = '0' + str(month)
+    if len(str(day)) == 1:
+        day = '0' + str(day)
+    if len(str(hour)) == 1:
+        hour = '0' + str(hour)
+    if len(str(minute)) == 1:
+        minute = '0' + str(minute)
+
+    today = str(day) + '/' + str(month) + '/' + str(year)
+    time = str(hour) + 'H' + str(minute)
 
     if request.method == 'POST':
 
@@ -34,11 +47,19 @@ def contact_add(request):
             messages.error(request, 'Entrez une adresse mail valide')
             return redirect('contact_add')
 
-        b = ContactForm(name=name, email=email, msg=msg)
+        b = ContactForm(name=name, email=email, msg=msg, date=today, time=time)
         b.save()
 
         messages.success(request, 'Votre message a été envoyée avec succès')
         return redirect('home')
+
+    site = Main.objects.get(pk=3)
+    allNews = News.objects.all()
+    category = Category.objects.all()
+    subcat = SubCategory.objects.all()
+    lastnews = News.objects.all().order_by('-pk')[:3]
+    popularynews = News.objects.all().order_by('-show')[:4]
+    popularynews_footer = News.objects.all().order_by('-show')[:4]
 
     context = {
         'site': site,
@@ -47,8 +68,7 @@ def contact_add(request):
         'allNews': allNews,
         'popularynews_footer': popularynews_footer,
         'lastnews': lastnews,
-        'popularynews': popularynews
-
+        'popularynews': popularynews,
     }
 
     return render(request, 'front/contact.html', context)

@@ -12,6 +12,7 @@ from subcategory.models import SubCategory
 
 # Create your views here.
 def news_detail(request, pk):
+
     site = Main.objects.get(pk=3)
     news = News.objects.filter(pk=pk)
     category = Category.objects.all()
@@ -49,6 +50,7 @@ def news_detail(request, pk):
 
 
 def news_list(request):
+
     news = News.objects.all()
 
     return render(request, 'back/news_list.html', {'news': news})
@@ -78,7 +80,7 @@ def news_add(request):
         minute = '0' + str(minute)
 
     today = str(day) + '/' + str(month) + '/' + str(year)
-    time = str(hour) + '/' + str(minute)
+    time = str(hour) + 'H' + str(minute)
 
     cat = SubCategory.objects.all()
 
@@ -94,7 +96,7 @@ def news_add(request):
                 or newstxtshort == "" \
                 or newscategory == "" \
                 or newstitle == "":
-            messages.warning(request, "Tous les champs sont requis")
+            messages.error(request, "Tous les champs sont requis")
             return redirect('news_add')
 
         try:
@@ -139,7 +141,7 @@ def news_add(request):
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
-                    messages.warning(request, "L'image ne doit pas dépasser 5 MB")
+                    messages.error(request, "L'image ne doit pas dépasser 5 MB")
                     return redirect('news_add')
 
             else:
@@ -147,18 +149,19 @@ def news_add(request):
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
-                messages.warning(request, "Le format de votre fichier n'est pas supporté")
+                messages.error(request, "Le format de votre fichier n'est pas supporté")
                 return redirect('news_add')
 
         except:
 
-            messages.warning(request, "Vous devez téléverser une image")
+            messages.error(request, "Vous devez téléverser une image")
             return redirect('news_add')
 
     return render(request, 'back/news_add.html', {'category': cat})
 
 
 def news_delete(request, pk):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

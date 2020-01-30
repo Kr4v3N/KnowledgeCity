@@ -33,6 +33,7 @@
 
                     <tr>
                         <th>Identifiants</th>
+                        <th>Date</th>
                         <th>Noms</th>
                         <th>Adresses</th>
                         <th>Messages</th>
@@ -43,12 +44,13 @@
                 {% for msg in msg %}
                     <tr>
                         <td>{{ msg.pk }}</td>
+                        <td>{{ msg.date }} à {{ msg.time }}</td>
                         <td>{{ msg.name }}</td>
                         <td>{{ msg.email }}</td>
                         <td>{{ msg.msg }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="#" data-toggle="tooltip" title="answer" class="btn btn-xs btn-default">Réponse</a>
+                                <a href="#" data-toggle="tooltip" title="answer" class="btn btn-xs btn-default">Répondre</a>
                                 <a href="{%  url 'contact_delete' pk=msg.pk %}" data-confirm="Etes-vous certain de vouloir supprimer le massage ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
