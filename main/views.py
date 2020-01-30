@@ -155,7 +155,6 @@ def site_settings(request):
 
 
 def about_settings(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -180,3 +179,26 @@ def about_settings(request):
     }
 
     return render(request, 'back/about_setting.html', context)
+
+
+def contact(request):
+
+    site = Main.objects.get(pk=3)
+    allNews = News.objects.all()
+    category = Category.objects.all()
+    subcat = SubCategory.objects.all()
+    lastnews = News.objects.all().order_by('-pk')[:3]
+    popularynews = News.objects.all().order_by('-show')[:4]
+    popularynews_footer = News.objects.all().order_by('-show')[:4]
+
+    context = {
+        'site': site,
+        'allNews': allNews,
+        'category': category,
+        'lastnews': lastnews,
+        'subcat': subcat,
+        'popularynews': popularynews,
+        'popularynews_footer': popularynews_footer
+    }
+
+    return render(request, 'front/contact.html', context)

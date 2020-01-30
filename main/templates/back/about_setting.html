@@ -3,8 +3,7 @@
 {% load static %}
 
 {%  block head %}
-{#        <script src="{% static '/ckeditor/ckeditor.js' %}" ></script>#}
-          <script src="http://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
+        <script src="{% static '/ckeditor/ckeditor.js' %}" ></script>
 {%  endblock %}
 
 {% block content %}
@@ -40,14 +39,6 @@
                                     <!-- Basic Form Elements Content -->
                                     <form action="{%  url 'about_settings' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                                         {% csrf_token %}
-                                        {% csrf_token %}
-                                         <div class="form-group">
-                                            <div class="col-md-6">
-                                                <label for="">Titre :</label>
-                                                <input type="text" id="newstitle" value="{{ news.name }}" name="newstitle" class="form-control" placeholder="Titre de la news">
-                                            </div>
-                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <textarea type="text" id="txt" name="txt" cols="30" rows="50" class="form-control" placeholder="Body text ">{{ about_page }}</textarea>
