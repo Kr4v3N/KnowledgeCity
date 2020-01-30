@@ -298,21 +298,19 @@
         <!-- For more info please have a look at https://developers.google.com/maps/documentation/javascript/get-api-key#key -->
         <script src="https://maps.googleapis.com/maps/api/js?key="></script>
         <script src="{% static 'back/js/helpers/gmaps.min.js' %}"></script>
+        <script src="{% static 'back/js/confirm_delete.js' %}"></script>
+
         <script>
         setTimeout(function(){
-            $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+            $(".alert").fadeTo(1000, 0).slideUp(1500, function(){
             $(this).remove();
                 });
             }, 3000)
         </script>
-
         {% block javascript %}
-
         <!-- Load and execute javascript code used only in this page -->
         <script src="{% static 'back/js/pages/index.js' %}"></script>
         <script>$(function(){ Index.init(); });</script>
-
-
         {% endblock %}
 
     </body>

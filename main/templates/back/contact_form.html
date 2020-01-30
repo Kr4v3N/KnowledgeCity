@@ -48,8 +48,8 @@
                         <td>{{ msg.msg }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'news_edit' pk=msg.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="{% url 'news_delete' pk=msg.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="#" data-toggle="tooltip" title="answer" class="btn btn-xs btn-default">Réponse</a>
+                                <a href="{%  url 'contact_delete' pk=msg.pk %}" data-confirm="Etes-vous certain de vouloir supprimer le massage ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

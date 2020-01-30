@@ -10,7 +10,6 @@ from subcategory.models import SubCategory
 
 
 def contact_add(request):
-
     site = Main.objects.get(pk=3)
     allNews = News.objects.all()
     category = Category.objects.all()
@@ -38,7 +37,7 @@ def contact_add(request):
         b = ContactForm(name=name, email=email, msg=msg)
         b.save()
 
-        messages.success(request, 'Votre message a été transmit avec succée')
+        messages.success(request, 'Votre message a été envoyée avec succès')
         return redirect('home')
 
     context = {
@@ -65,3 +64,17 @@ def contact_show(request):
     msg = ContactForm.objects.all()
 
     return render(request, 'back/contact_form.html', {'msg': msg})
+
+
+def contact_delete(request, pk):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    b = ContactForm.objects.filter(pk=pk)
+    b.delete()
+    messages.success(request, ' Le message a été supprimé avec succès')
+
+    return redirect('contact_show')

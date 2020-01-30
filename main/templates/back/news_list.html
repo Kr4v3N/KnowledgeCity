@@ -52,7 +52,7 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'news_edit' pk=new.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="{% url 'news_delete' pk=new.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'news_delete' pk=new.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
