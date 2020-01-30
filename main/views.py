@@ -50,6 +50,7 @@ def about(request):
 
 
 def panel(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

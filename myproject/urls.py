@@ -10,6 +10,8 @@ urlpatterns = [
     path('', include('news.urls')),
     path('', include('category.urls')),
     path('', include('subcategory.urls')),
+    path('', include('contact_form.urls')),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
@@ -19,6 +21,7 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 admin.site.site_header = "Panneau d'administration"
 admin.site.index_title = 'Bienvenue administrateur'
 admin.site.site_title = 'Panneau de configuration'
+
 
 
 

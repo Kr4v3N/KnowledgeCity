@@ -375,6 +375,8 @@
 		</div>
 	</header>
 
+	{% include 'back/messages.html' %}
+
     {% block content %}
 
     	Please override this block!
@@ -528,6 +530,14 @@
 	<script src="{% static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'front/js/main.js' %}"></script>
+	        <script>
+        setTimeout(function(){
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+            $(this).remove();
+                });
+            }, 5000)
+        </script>
+
 
 </body>
 </html>
