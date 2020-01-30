@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'category',
     'subcategory',
     'contact_form',
+    'trending',
 ]
 
 MIDDLEWARE = [

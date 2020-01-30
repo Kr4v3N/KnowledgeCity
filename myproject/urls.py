@@ -11,7 +11,7 @@ urlpatterns = [
     path('', include('category.urls')),
     path('', include('subcategory.urls')),
     path('', include('contact_form.urls')),
-
+    path('', include('trending.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

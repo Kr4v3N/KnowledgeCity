@@ -4,6 +4,8 @@ from django.db.models.functions import datetime
 from django.core.files.storage import FileSystemStorage
 
 import datetime
+
+from trending.models import Trending
 from .models import News
 from main.models import Main
 from category.models import Category
@@ -21,6 +23,7 @@ def news_detail(request, pk):
     allNews = News.objects.all()
     popularynews = News.objects.all().order_by('-show')
     popularynews_footer = News.objects.all().order_by('-show')[:4]
+    trending = Trending.objects.all().order_by('-pk')[:5]
 
     tagname = News.objects.get(pk=pk).tag
     tag = tagname.split(',')
@@ -43,7 +46,8 @@ def news_detail(request, pk):
         'lastnews': lastnews,
         'popularynews': popularynews,
         'popularynews_footer': popularynews_footer,
-        'tag': tag
+        'tag': tag,
+        'trending': trending
     }
 
     return render(request, 'front/news_detail.html', context)

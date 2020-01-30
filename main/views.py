@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
 from category.models import Category
+from trending.models import Trending
 from .models import Main
 from news.models import News
 from subcategory.models import SubCategory
@@ -18,6 +19,7 @@ def home(request):
     lastnews = News.objects.all().order_by('-pk')[:3]
     popularynews = News.objects.all().order_by('-show')
     popularynews_footer = News.objects.all().order_by('-show')[:4]
+    trending = Trending.objects.all().order_by('-pk')[:5]
 
     return render(request, 'home.html', {'site': site,
                                          'news': news,
@@ -26,7 +28,8 @@ def home(request):
                                          'subcat': subcat,
                                          'lastnews': lastnews,
                                          'popularynews': popularynews,
-                                         'popularynews_footer': popularynews_footer
+                                         'popularynews_footer': popularynews_footer,
+                                         'trending': trending
                                          })
 
 
@@ -38,6 +41,7 @@ def about(request):
     lastnews = News.objects.all().order_by('-pk')[:3]
     popularynews = News.objects.all().order_by('-show')[:4]
     popularynews_footer = News.objects.all().order_by('-show')[:4]
+    trending = Trending.objects.all().order_by('-pk')[:5]
 
     return render(request, 'front/about.html', {'site': site,
                                                 'category': category,
@@ -45,7 +49,8 @@ def about(request):
                                                 'allNews': allNews,
                                                 'popularynews_footer': popularynews_footer,
                                                 'lastnews': lastnews,
-                                                'popularynews': popularynews
+                                                'popularynews': popularynews,
+                                                'trending': trending
                                                 })
 
 
@@ -104,7 +109,7 @@ def site_settings(request):
         if link == "": link == "#"
 
         if name == "" or phone == "" or about == "":
-            messages.warning(request, "Tous les champs doivent être renseignés")
+            messages.error(request, "Tous les champs doivent être renseignés")
             return redirect('site_settings')
         try:
 
@@ -166,7 +171,7 @@ def about_settings(request):
     if request.method == 'POST':
         txt = request.POST.get('txt')
         if txt == "":
-            messages.warning(request, "Tous les champs doivent être renseignés")
+            messages.error(request, "Tous les champs doivent être renseignés")
             return redirect('about_settings')
 
         b = Main.objects.get(pk=3)
@@ -193,6 +198,7 @@ def contact(request):
     lastnews = News.objects.all().order_by('-pk')[:3]
     popularynews = News.objects.all().order_by('-show')[:4]
     popularynews_footer = News.objects.all().order_by('-show')[:4]
+    trending = Trending.objects.all().order_by('-pk')[:5]
 
     context = {
         'site': site,
@@ -201,7 +207,8 @@ def contact(request):
         'lastnews': lastnews,
         'subcat': subcat,
         'popularynews': popularynews,
-        'popularynews_footer': popularynews_footer
+        'popularynews_footer': popularynews_footer,
+        'trending': trending
     }
 
     return render(request, 'front/contact.html', context)
