@@ -81,6 +81,7 @@ def user_logout(request):
 
 
 def site_settings(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -156,6 +157,7 @@ def site_settings(request):
 
 
 def about_settings(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

@@ -53,3 +53,15 @@ def contact_add(request):
     }
 
     return render(request, 'front/contact.html', context)
+
+
+def contact_show(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    msg = ContactForm.objects.all()
+
+    return render(request, 'back/contact_form.html', {'msg': msg})
