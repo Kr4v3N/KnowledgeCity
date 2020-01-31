@@ -11,7 +11,6 @@ from subcategory.models import SubCategory
 
 
 def contact_add(request):
-
     now = datetime.datetime.now()
     year = now.year
     month = now.month
@@ -75,7 +74,6 @@ def contact_add(request):
 
 
 def contact_show(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -87,7 +85,6 @@ def contact_show(request):
 
 
 def contact_delete(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -98,3 +95,12 @@ def contact_delete(request, pk):
     messages.success(request, ' Le message a été supprimé avec succès')
 
     return redirect('contact_show')
+
+
+def change_pass(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    return render(request, 'back/change_pass.html')

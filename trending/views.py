@@ -11,6 +11,7 @@ from django.shortcuts import render
 
 
 def trending_add(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

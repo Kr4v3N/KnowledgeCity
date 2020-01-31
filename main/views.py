@@ -1,13 +1,14 @@
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-
+from random import randint
 from category.models import Category
 from trending.models import Trending
 from .models import Main
 from news.models import News
 from subcategory.models import SubCategory
 from django.contrib.auth import authenticate, login, logout
+import random
 
 
 def home(request):
@@ -20,6 +21,9 @@ def home(request):
     popularynews = News.objects.all().order_by('-show')
     popularynews_footer = News.objects.all().order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')[:5]
+
+    random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
+    print(random_object)
 
     return render(request, 'home.html', {'site': site,
                                          'news': news,
@@ -55,7 +59,6 @@ def about(request):
 
 
 def panel(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -86,7 +89,6 @@ def user_logout(request):
 
 
 def site_settings(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -162,7 +164,6 @@ def site_settings(request):
 
 
 def about_settings(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -190,7 +191,6 @@ def about_settings(request):
 
 
 def contact(request):
-
     site = Main.objects.get(pk=3)
     allNews = News.objects.all()
     category = Category.objects.all()
