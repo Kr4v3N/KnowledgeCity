@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models.functions import datetime
@@ -97,10 +99,59 @@ def contact_delete(request, pk):
     return redirect('contact_show')
 
 
-def change_pass(request):
+def change_pass(request, user=None):
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
+
+    if request.method == 'POST':
+        old_pass = request.POST.get('old_pass')
+        new_pass = request.POST.get('new_pass')
+        new_pass_confirm = request.POST.get('new_pass_confirm')
+
+        if old_pass == "" or new_pass == "" or new_pass_confirm == "":
+            messages.error(request, 'Tous les champs sont requis')
+            return redirect('change_pass')
+
+        user = authenticate(username=request.user, password=old_pass)
+
+        if user is not None:
+
+            if new_pass != new_pass_confirm:
+                messages.error(request,
+                               "Le champ nouveau mot de passe doit être identique au champ confirmer nouveau mot de passe")
+                return redirect('change_pass')
+
+            if len(new_pass) < 8:
+                messages.error(request, "Votre mot de passe doit comporter plus de 8 caractères")
+                return redirect('change_pass')
+
+            count1 = 0
+            count2 = 0
+            count3 = 0
+
+            for i in new_pass:
+                if '0' < i < '9':
+                    count1 += 1
+                if 'A' < i < 'Z':
+                    count2 += 1
+                if 'a' < i < 'z':
+                    count3 += 1
+            print(count1, count2, count3)
+
+            if count1 >= 1 and count2 >= 1 and count3 >= 1:
+                user = User.objects.get(username=request.user)
+                user.set_password(new_pass)
+                user.save()
+                messages.success(request, 'Votre mot de passe a été modifié avec succès')
+                return redirect('panel')
+            else:
+                messages.error(request, "Votre mot de passe doit comporter au moins 1 chiffre, 1 lettre minuscule et majuscule")
+                return redirect('logout')
+
+        else:
+            messages.error(request, "Votre ancien mot de passe n'est pas valide")
+            return redirect('change_pass')
 
     return render(request, 'back/change_pass.html')
