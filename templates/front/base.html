@@ -83,12 +83,8 @@
 								Nous contacter
 							</a>
 
-							<a href="#" class="left-topbar-item">
-								S'inscrire
-							</a>
-
-							<a href="{% url 'login' %}" class="left-topbar-item">
-								S'identifier
+							<a href="login" class="left-topbar-item">
+								S'inscrire / S'identifier
 							</a>
 
 							<a href="#" class="left-topbar-item"></a>
@@ -154,13 +150,10 @@
 							Nous contacter
 						</a>
 
-						<a href="#" class="left-topbar-item">
-							S'inscrire
+						<a href="login" class="left-topbar-item">
+							S'inscrire / S'identifier
 						</a>
 
-						<a href="" class="left-topbar-item">
-							S'identifier
-						</a>
 					</li>
 
 					<li class="right-topbar">
@@ -525,13 +518,13 @@
 	<script src="{% static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'front/js/main.js' %}"></script>
-	        <script>
+	<script>
         setTimeout(function(){
             $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
             $(this).remove();
                 });
             }, 5000)
-        </script>
+	</script>
 
 
 </body>

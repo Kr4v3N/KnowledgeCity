@@ -11,4 +11,6 @@ urlpatterns = [
     path('panel/setting/', views.site_settings, name='site_settings'),
     path('panel/about/setting/', views.about_settings, name='about_settings'),
     path('contact/', views.contact, name='contact'),
+    path('register/', views.user_register, name='register'),
+
 ]

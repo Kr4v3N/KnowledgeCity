@@ -1,4 +1,9 @@
+import email
+
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
+from django.core.validators import validate_email
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from random import randint
@@ -81,6 +86,54 @@ def user_login(request):
 
     return render(request, 'front/login.html')
 
+
+def user_register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password_verify = request.POST.get('password-verify')
+        # print(username, password, password_verify)
+
+        if len(username) < 2:
+            messages.error(request, "Votre nom d'utilisateur doit comporter au moins 2 caractères")
+            return redirect('register')
+
+        try:
+            validate_email(request.POST.get("email"))
+        except ValidationError:
+            messages.error(request, 'Entrez une adresse mail valide')
+            return redirect('register')
+
+        if password != password_verify:
+            messages.error(request, "Les mots de passe saisis ne sont pas identiques")
+            return redirect('register')
+
+        count4 = 0
+        count5 = 0
+        count6 = 0
+
+        for i in password:
+            if '0' < i < '9':
+                count4 += 1
+            if 'A' < i < 'Z':
+                count5 += 1
+            if 'a' < i < 'z':
+                count6 += 1
+
+        if count4 == 0 or count5 == 0 or count6 == 0:
+            messages.error(request,
+                           "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, des lettres minuscules et majuscules")
+            return redirect('register')
+
+        if len(password) < 8:
+            messages.error(request, "Votre mot de passe doit comporter plus de 8 caractères")
+            return redirect('register')
+
+        if len(User.objects.filter(username=username)) == 0 and len(User.objects.filter(email=email)) == 0:
+            user = User.objects.create_user(username=username, email=email, password=password)
+
+    return render(request, 'front/login.html')
 
 def user_logout(request):
     logout(request)

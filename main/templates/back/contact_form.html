@@ -27,18 +27,25 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
-                 {% if empty %}
-                 {% else %}
-                 {% endif %}
-
+                {% if msg|length <= 1 %}
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Date</th>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Message</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
                     <tr>
                         <th>Identifiants</th>
-                        <th>Date</th>
+                        <th>Dates</th>
                         <th>Noms</th>
                         <th>Adresses</th>
                         <th>Messages</th>
                         <th class="text-center">Actions</th>
                     </tr>
+                {% endif %}
                 </thead>
                 <tbody>
                 {% for msg in msg %}

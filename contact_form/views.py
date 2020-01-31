@@ -42,6 +42,10 @@ def contact_add(request):
             messages.error(request, 'Tous les champs sont requis')
             return redirect('contact_add')
 
+        if len(name) <= 2:
+            messages.error(request, 'Le nom doit comporter plus de 2 caractères')
+            return redirect('contact_add')
+
         try:
             validate_email(request.POST.get("email"))
         except ValidationError:
@@ -138,7 +142,7 @@ def change_pass(request, user=None):
                     count2 += 1
                 if 'a' < i < 'z':
                     count3 += 1
-            print(count1, count2, count3)
+            # print(count1, count2, count3)
 
             if count1 >= 1 and count2 >= 1 and count3 >= 1:
                 user = User.objects.get(username=request.user)
@@ -147,7 +151,7 @@ def change_pass(request, user=None):
                 messages.success(request, 'Votre mot de passe a été modifié avec succès')
                 return redirect('panel')
             else:
-                messages.error(request, "Votre mot de passe doit comporter au moins 1 chiffre, 1 lettre minuscule et majuscule")
+                messages.error(request, "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, des lettres minuscules et majuscules")
                 return redirect('logout')
 
         else:

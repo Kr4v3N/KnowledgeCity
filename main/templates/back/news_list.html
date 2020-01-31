@@ -27,17 +27,29 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
-
+                {% if news|length <= 1 %}
                     <tr>
-                        <th class="text-center">Id</th>
+                        <th class="text-center">Identifiant</th>
                         <th class="text-center">Image</th>
                         <th>Titre</th>
                         <th>Date & Heure</th>
-                        <th>Categorie</th>
+                        <th>Catégorie</th>
                         <th>Auteur</th>
                         <th>Vues</th>
                         <th class="text-center">Actions</th>
                     </tr>
+                {% else %}
+                  <tr>
+                        <th class="text-center">Identifiants</th>
+                        <th class="text-center">Images</th>
+                        <th>Titres</th>
+                        <th>Dates & Heures</th>
+                        <th>Catégories</th>
+                        <th>Auteurs</th>
+                        <th>Vues</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
                 </thead>
                 <tbody>
                 {% for new in news %}
