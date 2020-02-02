@@ -41,6 +41,7 @@ def trending_delete(request, pk):
 
 
 def trending_edit(request, pk):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

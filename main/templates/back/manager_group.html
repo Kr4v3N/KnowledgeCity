@@ -18,6 +18,46 @@
     </ul>
     <!-- END Datatables Header -->
 
+
+        <!-- Datatables Content -->
+    <div class="block full">
+
+        <div class="block-title">
+            <h2><strong>Ajouter un groupe :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'manager_group_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        {% csrf_token %}
+                         <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Groupe :</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom du groupe" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Valider :</label>
+                                <button type="submit" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END Datatables Content -->
+
     <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
@@ -27,14 +67,14 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
-                {% if news|length <= 1 %}
+                {% if group|length <= 1 %}
                     <tr>
                         <th class="text-center">Nom</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
                   <tr>
-                        <th>Noms</th>
+                        <th class="text-center">Noms</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -48,7 +88,7 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="#" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'manager_group_delete' name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer le groupe {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

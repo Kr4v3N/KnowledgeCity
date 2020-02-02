@@ -20,7 +20,6 @@ def manager_list(request):
 
 
 def manager_delete(request, pk):
-
     manager = Manager.objects.get(pk=pk)
 
     b = User.objects.filter(username=manager.user_txt)
@@ -28,12 +27,33 @@ def manager_delete(request, pk):
 
     manager.delete()
 
-    messages.success(request, "L'utilisateur  a bien été supprimé")
+    messages.success(request, "L'utilisateur a bien été supprimé avec succès")
     return redirect('manager_list')
 
 
 def manager_group(request):
-
     group = Group.objects.all()
 
     return render(request, 'back/manager_group.html', {'group': group})
+
+
+def manager_group_add(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+
+        if name != "":
+
+            if len(Group.objects.filter(name=name)) == 0:
+                group = Group(name=name)
+                group.save()
+
+    messages.success(request, "Le groupe a bien été ajouté avec succès")
+    return redirect(manager_group)
+
+
+def manager_group_delete(request, name):
+    b = Group.objects.filter(name=name)
+    b.delete()
+
+    messages.success(request, "Le groupe a bien été supprimé avec succès")
+    return redirect(manager_group)
