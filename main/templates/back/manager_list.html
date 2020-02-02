@@ -32,8 +32,7 @@
                         <th class="text-center">Identifiant</th>
                         <th>Nom</th>
                         <th>email</th>
-                        <th>Pseudonyme</th>
-
+                        <th>Nom d'utilisateur</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
@@ -41,7 +40,7 @@
                         <th class="text-center">Identifiants</th>
                         <th>Noms</th>
                         <th>emails</th>
-                        <th>Pseudonymes</th>
+                        <th>Noms des utilisateurs</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -57,7 +56,7 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="#" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'manager_delete' pk=mn.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ mn.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

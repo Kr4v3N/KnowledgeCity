@@ -14,7 +14,20 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def manager_list(request):
-
     manager = Manager.objects.all()
 
     return render(request, 'back/manager_list.html', {'manager': manager})
+
+
+def manager_delete(request, pk):
+
+    manager = Manager.objects.get(pk=pk)
+
+    b = User.objects.filter(username=manager.user_txt)
+    b.delete()
+
+    manager.delete()
+
+    messages.success(request, "L'utilisateur  a bien été supprimé")
+    return redirect('manager_list')
+
