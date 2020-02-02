@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import validate_email
@@ -31,3 +31,9 @@ def manager_delete(request, pk):
     messages.success(request, "L'utilisateur  a bien été supprimé")
     return redirect('manager_list')
 
+
+def manager_group(request):
+
+    group = Group.objects.all()
+
+    return render(request, 'back/manager_group.html', {'group': group})
