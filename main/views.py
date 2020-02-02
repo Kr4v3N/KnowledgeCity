@@ -1,10 +1,8 @@
-import email
-
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import validate_email
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from random import randint
 from category.models import Category
@@ -13,7 +11,6 @@ from .models import Main
 from news.models import News
 from subcategory.models import SubCategory
 from django.contrib.auth import authenticate, login, logout
-import random
 
 
 def home(request):
@@ -123,7 +120,8 @@ def user_register(request):
 
         if count4 == 0 or count5 == 0 or count6 == 0:
             messages.error(request,
-                           "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, des lettres minuscules et majuscules")
+                           "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, des lettres "
+                           "minuscules et majuscules")
             return redirect('register')
 
         if len(password) < 8:
@@ -134,6 +132,7 @@ def user_register(request):
             user = User.objects.create_user(username=username, email=email, password=password)
 
     return render(request, 'front/login.html')
+
 
 def user_logout(request):
     logout(request)
@@ -167,7 +166,6 @@ def site_settings(request):
             messages.error(request, "Tous les champs doivent être renseignés")
             return redirect('site_settings')
         try:
-
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
@@ -177,12 +175,10 @@ def site_settings(request):
             pic_name = filename
 
         except:
-
             pic_url = "-"
             pic_name = "-"
 
         try:
-
             myfile2 = request.FILES['myfile2']
             fs2 = FileSystemStorage()
             filename2 = fs2.save(myfile2.name, myfile2)
@@ -192,7 +188,6 @@ def site_settings(request):
             pic_name_footer = filename2
 
         except:
-
             pic_url_footer = "-"
             pic_name_footer = "-"
 

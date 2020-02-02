@@ -2,18 +2,19 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db.models.functions import datetime
 from django.core.files.storage import FileSystemStorage
-
-import datetime
-
 from trending.models import Trending
 from .models import News
 from main.models import Main
 from category.models import Category
 from subcategory.models import SubCategory
+import datetime
 
 
-# Create your views here.
 def news_detail(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
 
     site = Main.objects.get(pk=3)
     news = News.objects.filter(pk=pk)
@@ -27,7 +28,6 @@ def news_detail(request, pk):
 
     tagname = News.objects.get(pk=pk).tag
     tag = tagname.split(',')
-
 
     try:
         mynews = News.objects.get(pk=pk)
@@ -54,6 +54,10 @@ def news_detail(request, pk):
 
 
 def news_list(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
 
     news = News.objects.all()
 
@@ -61,7 +65,6 @@ def news_list(request):
 
 
 def news_add(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -96,15 +99,14 @@ def news_add(request):
         newsid = request.POST.get('newscategory')
         tag = request.POST.get('tag')
 
-        if newstitle == "" or newstxt == "" \
+        if newstitle == "" \
+                or newstxt == "" \
                 or newstxtshort == "" \
-                or newscategory == "" \
-                or newstitle == "":
+                or newscategory == "":
             messages.error(request, "Tous les champs sont requis")
             return redirect('news_add')
 
         try:
-
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
@@ -116,40 +118,38 @@ def news_add(request):
 
                     newsname = SubCategory.objects.get(pk=newsid).name
                     ocategory_id = SubCategory.objects.get(pk=newsid).category_id
+                    b = News(name=newstitle,
+                             short_txt=newstxtshort,
+                             body_txt=newstxt,
+                             date=today,
+                             pic_name=filename,
+                             pic_url=url,
+                             writer="-",
+                             category_name=newsname,
+                             category_id=newsid,
+                             show=0,
+                             time=time,
+                             ocategory_id=ocategory_id,
+                             tag=tag,
+                             )
 
-                    add = News(name=newstitle,
-                               short_txt=newstxtshort,
-                               body_txt=newstxt,
-                               date=today,
-                               pic_name=filename,
-                               pic_url=url,
-                               writer="-",
-                               category_name=newsname,
-                               category_id=newsid,
-                               show=0,
-                               time=time,
-                               ocategory_id=ocategory_id,
-                               tag=tag)
-                    add.save()
+                    b.save()
 
                     count = len(News.objects.filter(ocategory_id=ocategory_id))
+
                     b = Category.objects.get(pk=ocategory_id)
                     b.count = count
                     b.save()
 
-                    messages.success(request, "Votre article a été ajouté avec succé")
+                    messages.success(request, "Votre article a été ajouté avec succès")
                     return redirect('news_list')
-
                 else:
-
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
                     messages.error(request, "L'image ne doit pas dépasser 5 MB")
                     return redirect('news_add')
-
             else:
-
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
@@ -157,22 +157,18 @@ def news_add(request):
                 return redirect('news_add')
 
         except:
-
             messages.error(request, "Vous devez téléverser une image")
             return redirect('news_add')
-
     return render(request, 'back/news_add.html', {'category': cat})
 
 
 def news_delete(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
 
     try:
-
         b = News.objects.get(pk=pk)
         fs = FileSystemStorage()
         fs.delete(b.pic_name)
@@ -184,23 +180,23 @@ def news_delete(request, pk):
         m = Category.objects.get(pk=ocategory_id)
         m.count = count
         m.save()
+
         messages.success(request, "L'articles  a bien été supprimé")
         return redirect('news_list')
     except:
 
-        messages.warning(request, "Quelque chose c'est mal passée")
+        messages.error(request, "Quelque chose c'est mal passée")
         return redirect('news_list')
 
 
 def news_edit(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
 
     if len(News.objects.filter(pk=pk)) == 0:
-        messages.warning(request, "News non trouvée")
+        messages.error(request, "Article non trouvée")
         return redirect('news_list')
 
     news = News.objects.get(pk=pk)
@@ -216,13 +212,11 @@ def news_edit(request, pk):
 
         if newstitle == "" or newstxt == "" \
                 or newstxtshort == "" \
-                or newscategory == "" \
-                or newstitle == "":
-            messages.warning(request, "Tous les champs sont requis")
+                or newscategory == "":
+            messages.error(request, "Tous les champs sont requis")
             return redirect('news_edit', pk=pk)
 
         try:
-
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
@@ -248,20 +242,19 @@ def news_edit(request, pk):
                     b.category_id = newsid
                     b.tag = tag
                     b.save()
-
-                    messages.success(request, "Bravo, votre articles à bien été modifié")
-                    return redirect('news_list')
+                    # messages.success(request, "Bravo, votre articles à bien été modifié")
+                    # return redirect('news_list')
                 else:
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
-                    messages.warning(request, "L'image ne doit pas dépasser 5 MB")
+                    messages.error(request, "L'image ne doit pas dépasser 5 MB")
                     return redirect('news_edit', pk=pk)
             else:
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
-                messages.warning(request, "Le format de votre fichier n'est pas supporté")
+                messages.error(request, "Le format de votre fichier n'est pas supporté")
                 return redirect('news_edit', pk=pk)
 
         except:

@@ -4,14 +4,11 @@ from .models import SubCategory
 from category.models import Category
 
 
-# Create your views here.
-
 def subcategory_list(request):
-
-    # TODO Login check start
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     subcat = SubCategory.objects.all()
 
@@ -19,11 +16,10 @@ def subcategory_list(request):
 
 
 def subcategory_add(request):
-
-    # TODO Login check start
+    # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
-    # TODO Login chek end
+    # Login check end
 
     cat = Category.objects.all()
 

@@ -1,17 +1,10 @@
-from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.contrib import messages
-
-from category.models import Category
 from .models import Trending
-from news.models import News
-from subcategory.models import SubCategory
-from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 
 
 def trending_add(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -35,7 +28,6 @@ def trending_add(request):
 
 
 def trending_delete(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -49,7 +41,6 @@ def trending_delete(request, pk):
 
 
 def trending_edit(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

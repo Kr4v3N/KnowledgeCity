@@ -27,16 +27,24 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
-
+                {% if category|length <= 1 %}
                     <tr>
-                        <th class="text-center">Id</th><th>Titre</th>
+                        <th class=>Identifiant</th>
+                        <th>Titre</th>
                         <th class="text-center">Actions</th>
                     </tr>
+                {% else %}
+                    <tr>
+                        <th class=>Identifiants</th>
+                        <th>Titres</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
                 </thead>
                 <tbody>
                 {% for cat in category %}
                     <tr>
-                        <td class="text-center">{{ cat.pk }}</td>
+                        <td>{{ cat.pk }}</td>
                         <td>{{ cat.name }}</td>
                         <td class="text-center">
                             <div class="btn-group">

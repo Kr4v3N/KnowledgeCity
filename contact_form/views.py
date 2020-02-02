@@ -124,7 +124,8 @@ def change_pass(request, user=None):
 
             if new_pass != new_pass_confirm:
                 messages.error(request,
-                               "Le champ nouveau mot de passe doit être identique au champ confirmer nouveau mot de passe")
+                               "Le champ nouveau mot de passe doit être identique au champ confirmer nouveau mot de "
+                               "passe")
                 return redirect('change_pass')
 
             if len(new_pass) < 8:
@@ -151,7 +152,8 @@ def change_pass(request, user=None):
                 messages.success(request, 'Votre mot de passe a été modifié avec succès')
                 return redirect('panel')
             else:
-                messages.error(request, "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, des lettres minuscules et majuscules")
+                messages.error(request, "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, "
+                                        "des lettres minuscules et majuscules")
                 return redirect('logout')
 
         else:

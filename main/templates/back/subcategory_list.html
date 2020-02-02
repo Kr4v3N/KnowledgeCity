@@ -28,22 +28,30 @@
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
 
                 <thead>
-
+                {% if subcategory|length <= 1 %}
                     <tr>
-                        <th class="text-center">Id</th>
-                        <th class="text-center">Nom</th>
-                        <th class="text-center">Catégorie(s)</th>
-                        <th class="text-center">Actions</th>
+                        <th>Identifiant</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Actions</th>
                     </tr>
+                {% else %}
+                    <tr>
+                        <th>Identifiants</th>
+                        <th>Noms</th>
+                        <th>Catégories</th>
+                        <th>Actions</th>
+                    </tr>
+                {% endif %}
                 </thead>
 
                 <tbody>
                 {% for subcat in subcategory %}
                     <tr>
-                        <td class="text-center">{{ subcat.pk }}</td>
-                        <td class="text-center">{{ subcat.name }}</td>
-                        <td class="text-center">{{ subcat.category_name }}</td>
-                        <td class="text-center">
+                        <td class="">{{ subcat.pk }}</td>
+                        <td class="">{{ subcat.name }}</td>
+                        <td class="">{{ subcat.category_name }}</td>
+                        <td class="">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
                                 <a href="" data-confirm="Etes-vous certain de vouloir supprimer la sous categorie {{ subcat.category_name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
