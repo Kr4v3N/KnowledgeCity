@@ -15,4 +15,6 @@ from django.contrib.auth import authenticate, login, logout
 
 def manager_list(request):
 
-    return render(request, 'back/manager_list.html')
+    manager = Manager.objects.all()
+
+    return render(request, 'back/manager_list.html', {'manager': manager})

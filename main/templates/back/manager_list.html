@@ -1,1 +1,82 @@
-<h1>Manager list</h1>
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste d'utilisateurs<br><small>Vous pouvez ajouter, modifier et supprimer de utilisateurs !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Articles</li>
+        <li><a href="/panel/manager/list">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste d'utilisateurs :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                {% if manager|length <= 1 %}
+                    <tr>
+                        <th class="text-center">Identifiant</th>
+                        <th>Nom</th>
+                        <th>email</th>
+                        <th>Pseudonyme</th>
+
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
+                  <tr>
+                        <th class="text-center">Identifiants</th>
+                        <th>Noms</th>
+                        <th>emails</th>
+                        <th>Pseudonymes</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% for mn in manager %}
+                    <tr>
+                        <td class="text-center">{{ mn.pk }}</td>
+                        <td>{{ mn.name }}</td>
+                        <td>{{ mn.email }}</td>
+                        <td>{{ mn.user_txt}}</td>
+
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href="#" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+
+{% endblock %}

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from random import randint
 from category.models import Category
+from manager.models import Manager
 from trending.models import Trending
 from .models import Main
 from news.models import News
@@ -86,13 +87,23 @@ def user_login(request):
 
 def user_register(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        name = request.POST.get('name')
+        uname = request.POST.get('uname')
+        uname = request.POST.get('uname')
         email = request.POST.get('email')
         password = request.POST.get('password')
         password_verify = request.POST.get('password-verify')
         # print(username, password, password_verify)
 
-        if len(username) < 2:
+        if name == "":
+            messages.error(request, "Vous devez saisir un nom")
+            return redirect('register')
+
+        if len(name) < 2:
+            messages.error(request, "Votre nom doit comporter au moins 2 caractères")
+            return redirect('register')
+
+        if len(uname) < 2:
             messages.error(request, "Votre nom d'utilisateur doit comporter au moins 2 caractères")
             return redirect('register')
 
@@ -128,8 +139,11 @@ def user_register(request):
             messages.error(request, "Votre mot de passe doit comporter plus de 8 caractères")
             return redirect('register')
 
-        if len(User.objects.filter(username=username)) == 0 and len(User.objects.filter(email=email)) == 0:
-            user = User.objects.create_user(username=username, email=email, password=password)
+        if len(User.objects.filter(username=uname)) == 0 and len(User.objects.filter(email=email)) == 0:
+
+            user = User.objects.create_user(username=uname, email=email, password=password)
+            b = Manager(name=name, user_txt=uname, email=email)
+            b.save()
 
     return render(request, 'front/login.html')
 
