@@ -55,7 +55,7 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href="{%  url 'users_groups' pk=mn.pk%}" data-toggle="tooltip" title="Groupes" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Groupes</i></a>
                                 <a href="{% url 'manager_delete' pk=mn.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ mn.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>

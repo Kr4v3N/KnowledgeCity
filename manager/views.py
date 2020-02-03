@@ -57,3 +57,16 @@ def manager_group_delete(request, name):
 
     messages.success(request, "Le groupe a bien été supprimé avec succès")
     return redirect(manager_group)
+
+
+def users_groups(request, pk):
+
+    manager = Manager.objects.get(pk=pk)
+
+    user = User.objects.get(username=manager.user_txt)
+
+    group = []
+    for i in user.groups.all():
+        group.append(i.name)
+
+    return render(request, 'back/users_groups.html', {'group': group})

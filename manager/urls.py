@@ -8,5 +8,6 @@ urlpatterns = [
     path('panel/manager/group/add', views.manager_group_add, name='manager_group_add'),
     path('panel/manager/group/del/<str:name>', views.manager_group_delete, name='manager_group_delete'),
     path('panel/manager/del/<int:pk>', views.manager_delete, name='manager_delete'),
+    path('panel/manager/group/show/<int:pk>', views.users_groups, name='users_groups'),
 ]
 
