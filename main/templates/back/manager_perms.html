@@ -37,11 +37,15 @@
                         {% csrf_token %}
                         {% csrf_token %}
                          <div class="form-group">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="" class="text-info">Groupe :</label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la permission" required>
                             </div>
-                            <div class="col-md-6">
+                             <div class="col-md-4">
+                                <label for="" class="text-info">Groupe :</label>
+                                <input type="text" id="cname" name="cname" class="form-control" placeholder="Code name de la permission" required>
+                            </div>
+                            <div class="col-md-4">
                                 <label for="" class="text-info">Valider :</label>
                                 <button type="submit" class="btn btn-sm btn-primary col-md-12"> Ajoutez</button>
                             </div>
@@ -87,12 +91,11 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
                                 <a href="{% url 'manager_perms_del' name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
-                </tbody>sion
+                </tbody>
                 {% endfor %}
             </table>
         </div>

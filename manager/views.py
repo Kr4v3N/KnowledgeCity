@@ -258,10 +258,16 @@ def manager_perms_add(request):
     if request.method == 'POST':
 
         name = request.POST.get('name')
+        cname = request.POST.get('cname')
 
-        content_type = ContentType.objects.get(app_label='main', model='main')
-        permission = Permission.objects.create(codename='test_perms', name='test', content_type=content_type)
+        if len(Permission.objects.filter(codename=cname)) == 0:
 
+            content_type = ContentType.objects.get(app_label='main', model='main')
+            permission = Permission.objects.create(codename=cname, name=name, content_type=content_type)
+
+        else:
+            messages.error(request, "Le code name existe déjà")
+            return redirect('manager_perms')
 
     messages.success(request, "La permission a bien été ajouté avec succès")
     return redirect('manager_perms')
