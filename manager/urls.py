@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
     path('panel/manager/list', views.manager_list, name='manager_list'),
     path('panel/manager/group', views.manager_group, name='manager_group'),
@@ -9,5 +8,7 @@ urlpatterns = [
     path('panel/manager/group/del/<str:name>', views.manager_group_delete, name='manager_group_delete'),
     path('panel/manager/del/<int:pk>', views.manager_delete, name='manager_delete'),
     path('panel/manager/group/show/<int:pk>', views.users_groups, name='users_groups'),
+    path('panel/manager/group/addtogroup/<int:pk>', views.add_users_to_groups, name='add_users_to_groups'),
 ]
+
 

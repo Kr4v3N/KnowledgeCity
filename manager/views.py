@@ -60,13 +60,29 @@ def manager_group_delete(request, name):
 
 
 def users_groups(request, pk):
-
     manager = Manager.objects.get(pk=pk)
 
     user = User.objects.get(username=manager.user_txt)
 
-    group = []
+    ugroup = []
     for i in user.groups.all():
-        group.append(i.name)
+        ugroup.append(i.name)
 
-    return render(request, 'back/users_groups.html', {'group': group})
+    group = Group.objects.all()
+
+    return render(request, 'back/users_groups.html', {'ugroup': ugroup, 'group': group, 'pk': pk})
+
+
+def add_users_to_groups(request, pk):
+
+    if request.method == 'POST':
+
+        gname = request.POST.get('gname')
+
+        group = Group.objects.get(name=gname)
+        manager = Manager.objects.get(pk=pk)
+        user = User.objects.get(username=manager.user_txt)
+        user.groups.add(group)
+
+    messages.success(request, "Le groupe a bien été ajouté à l'utilisateur")
+    return redirect('users_groups', pk=pk)
