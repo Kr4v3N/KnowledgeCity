@@ -271,3 +271,31 @@ def manager_perms_add(request):
 
     messages.success(request, "La permission a bien été ajouté avec succès")
     return redirect('manager_perms')
+
+
+def users_perms(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
+    manager = Manager.objects.get(pk=pk)
+
+    user = User.objects.get(username=manager.user_txt)
+
+    permission = Permission.objects.filter(user=user)
+
+
+    uperms = []
+    for i in permission:
+        uperms.append(i.name)
+
+    return render(request, 'back/users_perms.html', {'uperms': uperms, 'pk': pk})

@@ -13,6 +13,7 @@ urlpatterns = [
     path('panel/manager/perms', views.manager_perms, name='manager_perms'),
     path('panel/manager/perms/del/<str:name>', views.manager_perms_del, name='manager_perms_del'),
     path('panel/manager/perms/add', views.manager_perms_add, name='manager_perms_add'),
+    path('panel/manager/perms/show/<int:pk>', views.users_perms, name='users_perms'),
 ]
 
 

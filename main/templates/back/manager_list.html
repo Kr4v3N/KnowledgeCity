@@ -55,8 +55,9 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{%  url 'users_groups' pk=mn.pk%}" data-toggle="tooltip" title="Groupes" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Groupes</i></a>
+                                <a href="{%  url 'users_groups' pk=mn.pk %}" data-toggle="tooltip" title="Groupes" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Groupes</i></a>
                                 <a href="{% url 'manager_delete' pk=mn.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'utilisateur {{ mn.user_txt }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{%  url 'users_perms' pk=mn.pk %}" data-toggle="tooltip" title="Permissions" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Permissions</i></a>
                             </div>
                         </td>
                     </tr>
