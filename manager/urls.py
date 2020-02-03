@@ -14,6 +14,8 @@ urlpatterns = [
     path('panel/manager/perms/del/<str:name>', views.manager_perms_del, name='manager_perms_del'),
     path('panel/manager/perms/add', views.manager_perms_add, name='manager_perms_add'),
     path('panel/manager/perms/show/<int:pk>', views.users_perms, name='users_perms'),
+    path('panel/manager/group/delperms/<int:pk>/<str:name>', views.users_perms_del, name='users_perms_del'),
+
 ]
 
 
