@@ -198,3 +198,22 @@ def del_users_to_groups(request, pk, name):
 
     messages.success(request, "Le groupe a bien été supprimé avec succès")
     return redirect('users_groups', pk=pk)
+
+
+def manager_perms(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
+    perms = Permission.objects.all()
+
+    return render(request, 'back/manager_perms.html', {'perms': perms})
