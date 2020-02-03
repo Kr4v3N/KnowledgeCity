@@ -23,7 +23,7 @@
     <div class="block full">
 
         <div class="block-title">
-            <h2><strong>Ajouter un groupe à l'utilisateur</strong></h2>
+            <h2><strong>Ajouter un ou des groupes à l'utilisateur</strong></h2>
         </div>
 
         <div class="table-responsive">
@@ -67,7 +67,7 @@
     <div class="block full">
 
         <div class="block-title">
-            <h2><strong>Liste des groupes :</strong></h2>
+            <h2><strong>Liste des groupes de l'utilisateur :</strong></h2>
         </div>
 
         <div class="table-responsive">
@@ -94,8 +94,7 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="#" data-confirm="Etes-vous certain de vouloir supprimer le groupes {{ gr }} à {{ user }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{%  url 'del_users_to_groups' pk=pk name=gr %}" data-confirm="Etes-vous certain de vouloir supprimer le groupes {{ gr }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

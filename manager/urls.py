@@ -9,6 +9,7 @@ urlpatterns = [
     path('panel/manager/del/<int:pk>', views.manager_delete, name='manager_delete'),
     path('panel/manager/group/show/<int:pk>', views.users_groups, name='users_groups'),
     path('panel/manager/group/addtogroup/<int:pk>', views.add_users_to_groups, name='add_users_to_groups'),
+    path('panel/manager/group/delgroup/<int:pk>/<str:name>', views.del_users_to_groups, name='del_users_to_groups'),
 ]
 
 

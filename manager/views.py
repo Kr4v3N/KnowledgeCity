@@ -74,9 +74,7 @@ def users_groups(request, pk):
 
 
 def add_users_to_groups(request, pk):
-
     if request.method == 'POST':
-
         gname = request.POST.get('gname')
 
         group = Group.objects.get(name=gname)
@@ -85,4 +83,14 @@ def add_users_to_groups(request, pk):
         user.groups.add(group)
 
     messages.success(request, "Le groupe a bien été ajouté à l'utilisateur")
+    return redirect('users_groups', pk=pk)
+
+
+def del_users_to_groups(request, pk, name):
+    group = Group.objects.get(name=name)
+    manager = Manager.objects.get(pk=pk)
+    user = User.objects.get(username=manager.user_txt)
+    user.groups.remove(group)
+
+    messages.success(request, "Le groupe a bien été supprimé avec succès")
     return redirect('users_groups', pk=pk)
