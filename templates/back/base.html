@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% load static %}
+{% load extra_auth %}
 
 {% if user.is_authenticated %}
 
@@ -136,6 +137,8 @@
                             </div>
                             <!-- END User Info -->
 
+
+
                             <!-- Sidebar Navigation -->
                             <ul class="sidebar-nav">
 
@@ -143,6 +146,7 @@
                                     <a href="/panel" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tableau de bord</span></a>
                                 </li>
 
+                                {% if request.user|has_group:"masteruser" %}
 
                                 <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
@@ -159,7 +163,9 @@
                                 <li>
                                     <a href="/panel/contact/form"><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Liste des messages</span></a>
                                 </li>
-                                   <li class="sidebar-header">
+
+
+                                <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
                                     <span class="sidebar-header-title">Gestion des permissions</span>
                                 </li>
@@ -174,6 +180,8 @@
                                 <li>
                                     <a href="/panel/manager/list"><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Liste des utilisateurs</span></a>
                                 </li>
+                                {% endif %}
+
 
                                 <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>

@@ -14,12 +14,38 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def manager_list(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     manager = Manager.objects.all()
 
     return render(request, 'back/manager_list.html', {'manager': manager})
 
 
 def manager_delete(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     manager = Manager.objects.get(pk=pk)
 
     b = User.objects.filter(username=manager.user_txt)
@@ -32,12 +58,38 @@ def manager_delete(request, pk):
 
 
 def manager_group(request):
-    group = Group.objects.all()
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
+    group = Group.objects.all().exclude(name="masteruser")
 
     return render(request, 'back/manager_group.html', {'group': group})
 
 
 def manager_group_add(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     if request.method == 'POST':
         name = request.POST.get('name')
 
@@ -52,6 +104,19 @@ def manager_group_add(request):
 
 
 def manager_group_delete(request, name):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     b = Group.objects.filter(name=name)
     b.delete()
 
@@ -60,6 +125,19 @@ def manager_group_delete(request, name):
 
 
 def users_groups(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     manager = Manager.objects.get(pk=pk)
 
     user = User.objects.get(username=manager.user_txt)
@@ -74,6 +152,19 @@ def users_groups(request, pk):
 
 
 def add_users_to_groups(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     if request.method == 'POST':
         gname = request.POST.get('gname')
 
@@ -87,6 +178,19 @@ def add_users_to_groups(request, pk):
 
 
 def del_users_to_groups(request, pk, name):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     group = Group.objects.get(name=name)
     manager = Manager.objects.get(pk=pk)
     user = User.objects.get(username=manager.user_txt)

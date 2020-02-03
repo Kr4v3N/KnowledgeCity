@@ -140,7 +140,6 @@ def user_register(request):
             return redirect('register')
 
         if len(User.objects.filter(username=uname)) == 0 and len(User.objects.filter(email=email)) == 0:
-
             user = User.objects.create_user(username=uname, email=email, password=password)
             b = Manager(name=name, user_txt=uname, email=email)
             b.save()
@@ -159,6 +158,14 @@ def site_settings(request):
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -231,6 +238,14 @@ def about_settings(request):
         return redirect('login')
     # Login check end
 
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
     if request.method == 'POST':
         txt = request.POST.get('txt')
         if txt == "":
@@ -274,3 +289,63 @@ def contact(request):
     }
 
     return render(request, 'front/contact.html', context)
+
+
+def change_pass(request, user=None):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    if request.method == 'POST':
+        old_pass = request.POST.get('old_pass')
+        new_pass = request.POST.get('new_pass')
+        new_pass_confirm = request.POST.get('new_pass_confirm')
+
+        if old_pass == "" or new_pass == "" or new_pass_confirm == "":
+            messages.error(request, 'Tous les champs sont requis')
+            return redirect('change_pass')
+
+        user = authenticate(username=request.user, password=old_pass)
+
+        if user is not None:
+
+            if new_pass != new_pass_confirm:
+                messages.error(request,
+                               "Le champ nouveau mot de passe doit être identique au champ confirmer nouveau mot de "
+                               "passe")
+                return redirect('change_pass')
+
+            if len(new_pass) < 8:
+                messages.error(request, "Votre mot de passe doit comporter plus de 8 caractères")
+                return redirect('change_pass')
+
+            count1 = 0
+            count2 = 0
+            count3 = 0
+
+            for i in new_pass:
+                if '0' < i < '9':
+                    count1 += 1
+                if 'A' < i < 'Z':
+                    count2 += 1
+                if 'a' < i < 'z':
+                    count3 += 1
+            # print(count1, count2, count3)
+
+            if count1 >= 1 and count2 >= 1 and count3 >= 1:
+                user = User.objects.get(username=request.user)
+                user.set_password(new_pass)
+                user.save()
+                messages.success(request, 'Votre mot de passe a été modifié avec succès')
+                return redirect('panel')
+            else:
+                messages.error(request, "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, "
+                                        "des lettres minuscules et majuscules")
+                return redirect('logout')
+
+        else:
+            messages.error(request, "Votre ancien mot de passe n'est pas valide")
+            return redirect('change_pass')
+
+    return render(request, 'back/change_pass.html')
