@@ -297,7 +297,9 @@ def users_perms(request, pk):
     for i in permission:
         uperms.append(i.name)
 
-    return render(request, 'back/users_perms.html', {'uperms': uperms, 'pk': pk})
+    perms = Permission.objects.all()
+
+    return render(request, 'back/users_perms.html', {'uperms': uperms, 'pk': pk, 'perms': perms})
 
 
 def users_perms_del(request, pk, name):
@@ -322,3 +324,32 @@ def users_perms_del(request, pk, name):
 
     messages.success(request, "La permission de l'utilisateur a bien été supprimé avec succès")
     return redirect('users_perms', pk=pk)
+
+
+def users_perms_add(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès interdit")
+        return redirect('panel')
+
+    if request.method == 'POST':
+
+        pname = request.POST.get('pname')
+
+        manager = Manager.objects.get(pk=pk)
+        user = User.objects.get(username=manager.user_txt)
+
+        permission = Permission.objects.get(name=pname)
+        user.user_permissions.add(permission)
+
+    messages.success(request, "La permission a bien été ajouté avec succès")
+    return redirect('users_perms', pk=pk)
+
