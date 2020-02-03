@@ -341,7 +341,6 @@ def users_perms_add(request, pk):
         return redirect('panel')
 
     if request.method == 'POST':
-
         pname = request.POST.get('pname')
 
         manager = Manager.objects.get(pk=pk)
@@ -353,3 +352,22 @@ def users_perms_add(request, pk):
     messages.success(request, "La permission a bien été ajouté avec succès")
     return redirect('users_perms', pk=pk)
 
+
+def groups_perms(request, name):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès interdit")
+        return redirect('panel')
+
+    group = Group.objects.get(name=name)
+    perms = group.permissions.all()
+
+    return render(request, 'back/groups_perms.html', {'perms': perms})
