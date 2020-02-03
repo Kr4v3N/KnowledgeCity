@@ -33,13 +33,13 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'manager_group_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'manager_perms_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
                          <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">Groupe :</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom du groupe" required>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la permission" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="" class="text-info">Valider :</label>
@@ -88,11 +88,11 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="{% url 'manager_group_delete' name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer le groupe {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'manager_perms_del' name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
-                </tbody>
+                </tbody>sion
                 {% endfor %}
             </table>
         </div>

@@ -8,6 +8,7 @@ from random import randint
 from category.models import Category
 from trending.models import Trending
 from .models import Manager
+from django.contrib.contenttypes.models import ContentType
 from news.models import News
 from subcategory.models import SubCategory
 from django.contrib.auth import authenticate, login, logout
@@ -217,3 +218,50 @@ def manager_perms(request):
     perms = Permission.objects.all()
 
     return render(request, 'back/manager_perms.html', {'perms': perms})
+
+
+def manager_perms_del(request, name):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
+    perms = Permission.objects.filter(name=name)
+    perms.delete()
+
+    messages.success(request, "La permission a bien été supprimé avec succès")
+    return redirect('manager_perms')
+
+
+def manager_perms_add(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès intedit")
+        return redirect('panel')
+
+    if request.method == 'POST':
+
+        name = request.POST.get('name')
+
+        content_type = ContentType.objects.get(app_label='main', model='main')
+        permission = Permission.objects.create(codename='test_perms', name='test', content_type=content_type)
+
+
+    messages.success(request, "La permission a bien été ajouté avec succès")
+    return redirect('manager_perms')
