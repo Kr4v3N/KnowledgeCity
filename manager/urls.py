@@ -17,7 +17,7 @@ urlpatterns = [
     path('panel/manager/group/delperms/<int:pk>/<str:name>', views.users_perms_del, name='users_perms_del'),
     path('panel/manager/group/addperms/<int:pk>', views.users_perms_add, name='users_perms_add'),
     path('panel/manager/group/addpermstogroup/<str:name>', views.groups_perms, name='groups_perms'),
-
+    path('panel/manager/group/delperms/<str:name>/<str:gname>', views.groups_perms_delete, name='groups_perms_delete'),
 ]
 
 

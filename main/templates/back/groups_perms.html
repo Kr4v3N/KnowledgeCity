@@ -18,7 +18,6 @@
     </ul>
     <!-- END Datatables Header -->
 
-
         <!-- Datatables Content -->
     <div class="block full">
 
@@ -40,7 +39,7 @@
                             <div class="col-md-6">
                                 <label for="" class="text-info">Groupe :</label>
                                 <select id="gname" name="gname" class="select-chosen" data-placeholder="Choisissez une permission..." style="width: 550px;">
-                                    {% for i in group %}
+                                    {% for i in perms %}
                                     <option value="{{ i.name }}">{{ i.name }}</option>
                                     {% endfor %}
                                 </select>
@@ -94,7 +93,7 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'manager_group_delete' name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'groups_perms_delete' gname=name name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

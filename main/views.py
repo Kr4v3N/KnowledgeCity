@@ -99,6 +99,11 @@ def user_register(request):
             messages.error(request, "Vous devez saisir un nom")
             return redirect('register')
 
+        if uname == "":
+            messages.error(request, "Vous devez saisir un nom d'utilisateur")
+            return redirect('register')
+
+
         if len(name) < 2:
             messages.error(request, "Votre nom doit comporter au moins 2 caractères")
             return redirect('register')
@@ -161,7 +166,7 @@ def site_settings(request):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "masteruser": perm = 1
+        if i.name == "master_user": perm = 1
 
     if perm == 0:
         messages.error(request, "Acccès intedit")
@@ -240,7 +245,7 @@ def about_settings(request):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "masteruser": perm = 1
+        if i.name == "master_user": perm = 1
 
     if perm == 0:
         messages.error(request, "Acccès intedit")
