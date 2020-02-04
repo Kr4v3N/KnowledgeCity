@@ -20,13 +20,13 @@ def manager_list(request):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     manager = Manager.objects.all()
 
@@ -39,13 +39,13 @@ def manager_delete(request, pk):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
 
@@ -66,13 +66,13 @@ def manager_group(request):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
+        if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès intedit")
+        messages.error(request, "Acccès interdit")
         return redirect('panel')
 
-    group = Group.objects.all().exclude(name="master_user")
+    group = Group.objects.all().exclude(name="masteruser")
 
     return render(request, 'back/manager_group.html', {'group': group})
 
@@ -85,7 +85,7 @@ def manager_group_add(request):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
+        if i.name == "masteruser": perm = 1
 
     if perm == 0:
         messages.error(request, "Acccès interdit")
@@ -112,7 +112,7 @@ def manager_group_delete(request, name):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
+        if i.name == "masteruser": perm = 1
 
     if perm == 0:
         messages.error(request, "Acccès interdit")
@@ -131,13 +131,13 @@ def users_groups(request, pk):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès intedit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
 
@@ -158,13 +158,13 @@ def add_users_to_groups(request, pk):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     if request.method == 'POST':
         gname = request.POST.get('gname')
@@ -184,13 +184,13 @@ def del_users_to_groups(request, pk, name):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     group = Group.objects.get(name=name)
     manager = Manager.objects.get(pk=pk)
@@ -207,13 +207,13 @@ def manager_perms(request):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     perms = Permission.objects.all()
 
@@ -226,13 +226,13 @@ def manager_perms_del(request, name):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     perms = Permission.objects.filter(name=name)
     perms.delete()
@@ -247,13 +247,13 @@ def manager_perms_add(request):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     if request.method == 'POST':
 
@@ -279,13 +279,13 @@ def users_perms(request, pk):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
 
@@ -308,13 +308,13 @@ def users_perms_del(request, pk, name):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
     user = User.objects.get(username=manager.user_txt)
@@ -332,13 +332,13 @@ def users_perms_add(request, pk):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     if request.method == 'POST':
         pname = request.POST.get('pname')
@@ -359,13 +359,13 @@ def groups_perms(request, name):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     group = Group.objects.get(name=name)
     perms = group.permissions.all()
@@ -382,13 +382,13 @@ def groups_perms_delete(request, gname, name):
         return redirect('login')
     # Login check end
 
-    perm = 0
-    for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
-
-    if perm == 0:
-        messages.error(request, "Acccès interdit")
-        return redirect('panel')
+    # perm = 0
+    # for i in request.user.groups.all():
+    #     if i.name == "masteruser": perm = 1
+    #
+    # if perm == 0:
+    #     messages.error(request, "Acccès interdit")
+    #     return redirect('panel')
 
     group = Group.objects.get(name=gname)
     perm = Permission.objects.get(name=name)
@@ -407,7 +407,7 @@ def groups_perms_add(request, name):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
+        if i.name == "masteruser": perm = 1
 
     if perm == 0:
         messages.error(request, "Acccès interdit")

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import validate_email
@@ -16,13 +16,13 @@ from django.contrib.auth import authenticate, login, logout
 
 def home(request):
     site = Main.objects.get(pk=3)
-    news = News.objects.all().order_by('-pk')
-    allNews = News.objects.all()
+    news = News.objects.filter(activated=1).order_by('-pk')
+    allNews = News.objects.filter(activated=1)
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
-    lastnews = News.objects.all().order_by('-pk')[:3]
-    popularynews = News.objects.all().order_by('-show')
-    popularynews_footer = News.objects.all().order_by('-show')[:4]
+    lastnews = News.objects.filter(activated=1).order_by('-pk')[:3]
+    popularynews = News.objects.filter(activated=1).order_by('-show')
+    popularynews_footer = News.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')[:5]
 
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
@@ -67,6 +67,15 @@ def panel(request):
         return redirect('login')
     # Login check end
 
+    perm = 0
+    perms = Permission.objects.filter(user=request.user)
+    for i in perms:
+        if i.codename == "master_user": perm = 1
+        # print(i.codename)
+        if perm == 0:
+            messages.error(request, "Accès interdit")
+            return redirect('change_pass')
+
     return render(request, 'back/admin_home.html')
 
 
@@ -102,7 +111,6 @@ def user_register(request):
         if uname == "":
             messages.error(request, "Vous devez saisir un nom d'utilisateur")
             return redirect('register')
-
 
         if len(name) < 2:
             messages.error(request, "Votre nom doit comporter au moins 2 caractères")
@@ -166,10 +174,10 @@ def site_settings(request):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
+        if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès intedit")
+        messages.error(request, "Acccès interdit")
         return redirect('panel')
 
     if request.method == 'POST':
@@ -245,10 +253,10 @@ def about_settings(request):
 
     perm = 0
     for i in request.user.groups.all():
-        if i.name == "master_user": perm = 1
+        if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès intedit")
+        messages.error(request, "Acccès interdit")
         return redirect('panel')
 
     if request.method == 'POST':

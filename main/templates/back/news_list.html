@@ -35,6 +35,7 @@
                         <th>Date & Heure</th>
                         <th>Catégorie</th>
                         <th>Auteur</th>
+                        <th>Status</th>
                         <th>Vues</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -46,6 +47,7 @@
                         <th>Dates & Heures</th>
                         <th>Catégories</th>
                         <th>Auteurs</th>
+                        <th>Status</th>
                         <th>Vues</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -60,11 +62,24 @@
                         <td>{{ new.date }} | {{ new.time }}</td>
                         <td>{{ new.category_name}}</td>
                         <td>{{ new.writer }}</td>
+                        {%  if new.activated == 0 %}
+                            <td>En attente</td>
+                        {% elif new.activated == 1%}
+                            <td>Confirmé</td>
+                        {% endif %}
                         <td>{{ new.show}}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'news_edit' pk=new.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="{% url 'news_delete' pk=new.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'news_edit' pk=new.pk %}" data-toggle="tooltip" title="Editer" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href="{% url 'news_delete' pk=new.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'news_publish' pk=new.pk %}"
+                                {%  if new.activated == 0 %}
+                                   data-toggle="tooltip" title="Publié" class="btn btn-xs btn-warning"><i class="fa fa-play"> Publié</i></a>
+                                {%  else %}
+                                    data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success"><i class="fa fa-anchor"> En ligne</i></a>
+                                {% endif %}
+
+
                             </div>
                         </td>
                     </tr>

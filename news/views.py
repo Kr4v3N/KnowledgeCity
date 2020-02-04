@@ -241,6 +241,8 @@ def news_edit(request, pk):
                     b.category_name = newsname
                     b.category_id = newsid
                     b.tag = tag
+                    b.activated = 0
+
                     b.save()
                     # messages.success(request, "Bravo, votre articles à bien été modifié")
                     # return redirect('news_list')
@@ -279,3 +281,16 @@ def news_edit(request, pk):
     }
 
     return render(request, 'back/news_edit.html', context)
+
+
+def news_publish(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    news = News.objects.get(pk=pk)
+    news.activated = 1
+    news.save()
+
+    return redirect('news_list')

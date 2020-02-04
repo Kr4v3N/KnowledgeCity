@@ -17,6 +17,7 @@ class News(models.Model):
     ocategory_id = models.IntegerField(default=0)
     show = models.IntegerField(default=0)
     tag = models.TextField(default="")
+    activated = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
