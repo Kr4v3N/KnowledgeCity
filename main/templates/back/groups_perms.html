@@ -32,17 +32,19 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'manager_group_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'groups_perms_add' name=name %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
                          <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">Groupe :</label>
-                                <select id="gname" name="gname" class="select-chosen" data-placeholder="Choisissez une permission..." style="width: 550px;">
-                                    {% for i in perms %}
+                                <select id="p_name" name="p_name" class="select-chosen" data-placeholder="Choisissez une permission..." style="width: 250px;">
+
+                                    {% for i in all_perms %}
                                     <option value="{{ i.name }}">{{ i.name }}</option>
                                     {% endfor %}
                                 </select>
+
                             </div>
 
                             <div class="col-md-6">
@@ -86,11 +88,10 @@
                 {% endif %}
                 </thead>
                 <tbody>
+
                 {% for gr in perms %}
                     <tr>
-
                         <td class="text-center">{{ gr.name }}</td>
-
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'groups_perms_delete' gname=name name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
@@ -98,6 +99,7 @@
                         </td>
                     </tr>
                 {% endfor %}
+
                 </tbody>
             </table>
         </div>

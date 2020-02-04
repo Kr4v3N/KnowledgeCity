@@ -370,7 +370,10 @@ def groups_perms(request, name):
     group = Group.objects.get(name=name)
     perms = group.permissions.all()
 
-    return render(request, 'back/groups_perms.html', {'perms': perms, 'name': name})
+    all_perms = Permission.objects.all()
+
+    return render(request, 'back/groups_perms.html',
+                  {'perms': perms, 'name': name, 'all_perms': all_perms})
 
 
 def groups_perms_delete(request, gname, name):
@@ -394,3 +397,29 @@ def groups_perms_delete(request, gname, name):
 
     messages.success(request, "La permission du groupe a bien été supprimé avec succès")
     return redirect('groups_perms', name=gname)
+
+
+def groups_perms_add(request, name):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "master_user": perm = 1
+
+    if perm == 0:
+        messages.error(request, "Acccès interdit")
+        return redirect('panel')
+
+    if request.method == 'POST':
+
+        p_name = request.POST.get('p_name')
+        group = Group.objects.get(name=name)
+        perm = Permission.objects.get(name=p_name)
+
+        group.permissions.add(perm)
+
+    messages.success(request, "La permission du groupe a bien été ajouté avec succès")
+    return redirect('groups_perms', name=name)
