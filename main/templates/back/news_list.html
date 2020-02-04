@@ -35,8 +35,8 @@
                         <th>Date & Heure</th>
                         <th>Catégorie</th>
                         <th>Auteur</th>
-                        <th>Status</th>
                         <th>Vues</th>
+                        <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
@@ -47,8 +47,8 @@
                         <th>Dates & Heures</th>
                         <th>Catégories</th>
                         <th>Auteurs</th>
-                        <th>Status</th>
                         <th>Vues</th>
+                        <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -62,12 +62,12 @@
                         <td>{{ new.date }} | {{ new.time }}</td>
                         <td>{{ new.category_name}}</td>
                         <td>{{ new.writer }}</td>
+                        <td>{{ new.show}}</td>
                         {%  if new.activated == 0 %}
                             <td>En attente</td>
                         {% elif new.activated == 1%}
                             <td>Confirmé</td>
                         {% endif %}
-                        <td>{{ new.show}}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'news_edit' pk=new.pk %}" data-toggle="tooltip" title="Editer" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
@@ -78,8 +78,6 @@
                                 {%  else %}
                                     data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success"><i class="fa fa-anchor"> En ligne</i></a>
                                 {% endif %}
-
-
                             </div>
                         </td>
                     </tr>

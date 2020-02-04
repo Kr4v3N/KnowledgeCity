@@ -59,7 +59,14 @@ def news_list(request):
         return redirect('login')
     # Login check end
 
-    news = News.objects.all()
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        news = News.objects.filter(writer=request.user)
+    elif perm == 1:
+        news = News.objects.all()
 
     return render(request, 'back/news_list.html', {'news': news})
 
@@ -124,7 +131,7 @@ def news_add(request):
                              date=today,
                              pic_name=filename,
                              pic_url=url,
-                             writer="-",
+                             writer=request.user,
                              category_name=newsname,
                              category_id=newsid,
                              show=0,
