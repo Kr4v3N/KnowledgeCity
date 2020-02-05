@@ -49,7 +49,7 @@ def contact_add(request):
         try:
             validate_email(request.POST.get("email"))
         except ValidationError:
-            messages.error(request, 'Entrez une adresse mail valide')
+            messages.error(request, 'Veuillez saisir une adresse mail valide !')
             return redirect('contact_add')
 
         b = ContactForm(name=name, email=email, msg=msg, date=today, time=time)
@@ -98,6 +98,6 @@ def contact_delete(request, pk):
 
     b = ContactForm.objects.filter(pk=pk)
     b.delete()
-    messages.success(request, ' Le message a été supprimé avec succès')
 
+    messages.success(request, ' Le message a été supprimé avec succès')
     return redirect('contact_show')

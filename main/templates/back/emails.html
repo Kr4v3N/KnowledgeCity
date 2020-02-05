@@ -8,7 +8,7 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Liste des emails<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                <i class="fa fa-table"></i>Liste des courriels<br><small>Vous pouvez ajouter, modifier et supprimer vos
                 données !</small>
             </h1>
         </div>
@@ -22,7 +22,7 @@
     <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
-            <h2><strong>Liste des emails :</strong></h2>
+            <h2><strong>Liste des courriels :</strong></h2>
         </div>
 
         <div class="table-responsive">
@@ -31,7 +31,7 @@
                 {% if emails|length <= 1 %}
                     <tr>
                         <th class="text-center">Identifiant</th>
-                        <th>Email</th>
+                        <th class="text-center">Email</th>
                         <th>Date d'inscription</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -50,13 +50,13 @@
                 {% for email in emails %}
                     <tr>
                         <td class="text-center">{{ email.pk }}</td>
-                        <td class="text-center">{{ email.txt }}</td>
+                        <td class="text-center">{{ email.email }}</td>
                         <td class="text-center">{{ email.date }} à {{ email.time }}</td>
                         <td class="text-center">
                             <div class="btn-group">
 
-                                <a href="#"
-                                   data-confirm="Etes-vous certain de vouloir supprimer l'adresse mail {{ email.txt }} ?"
+                                <a href="{% url 'news_emails_delete' pk=email.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer l'adresse mail {{ email.email }} ?"
                                    data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i
                                         class="fa fa-times"> Supprimer</i></a>
                             </div>

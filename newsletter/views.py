@@ -1,20 +1,10 @@
-from django.contrib.auth.models import User, Group, Permission
 from django.core.exceptions import ValidationError
-from django.core.files.storage import FileSystemStorage
 from django.core.validators import validate_email
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from random import randint
 import datetime
-from django.utils import timezone
 from django.db.models.functions import datetime
-from category.models import Category
-from trending.models import Trending
 from .models import Newsletter
-from django.contrib.contenttypes.models import ContentType
-from news.models import News
-from subcategory.models import SubCategory
-from django.contrib.auth import authenticate, login, logout
 
 
 def news_letter(request):
@@ -38,16 +28,23 @@ def news_letter(request):
     time = str(hour) + 'H' + str(minute)
 
     if request.method == 'POST':
-        txt = request.POST.get('register-email')
 
-        b = Newsletter(txt=txt,
-                       status=1,
-                       date=today,
-                       time=time,
-                       )
-        b.save()
+        email = request.POST.get('register-email')
 
-    messages.success(request, "Merci pour votre inscription")
+    try:
+        validate_email(request.POST.get("register-email"))
+    except ValidationError:
+        messages.error(request, 'Veuillez saisir une adresse mail valide !')
+        return redirect('home')
+
+    b = Newsletter(email=email,
+                   status=1,
+                   date=today,
+                   time=time,
+                   )
+    b.save()
+
+    messages.success(request, "Merci pour votre inscription :)")
     return redirect('home')
 
 
@@ -60,3 +57,16 @@ def news_emails(request):
     emails = Newsletter.objects.filter(status=1)
 
     return render(request, 'back/emails.html', {'emails': emails})
+
+
+def news_emails_delete(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    b = Newsletter.objects.get(pk=pk)
+    b.delete()
+
+    messages.success(request, "Le courriel a été supprimé avec succès")
+    return redirect('news_emails')
