@@ -431,6 +431,26 @@ Please override this block!
                             </a>
                         </div>
                     </div>
+                    <br>
+                    <!-- Sign Up Action -->
+                    <div class="site-block text-center">
+                        <form action="{% url 'news_letter' %}" method="post" class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="">
+<!--                                    <label class="sr-only" for="register-email">Votre mail ...</label>-->
+                                    <div class="input-group input-group-lg">
+                                        <input type="email" id="register-email" name="register-email" class="form-control" placeholder="Votre mail ...">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Inscrivez-vous</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Sign Up Action -->
+
                 </div>
 
                 <div class="col-sm-6 col-lg-4 p-b-20">
