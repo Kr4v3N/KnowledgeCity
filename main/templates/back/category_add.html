@@ -32,13 +32,15 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'category_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'category_add' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
-                         <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">Catégorie :</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la catégorie">
+                                <input type="text" id="name" name="name" class="form-control"
+                                       placeholder="Nom de la catégorie">
                             </div>
                             <div class="col-md-6">
                                 <label for="" class="text-info">Valider :</label>
@@ -66,6 +68,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

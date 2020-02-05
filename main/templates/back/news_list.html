@@ -8,7 +8,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Liste des articles<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Liste des articles<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
             </h1>
         </div>
     </div>
@@ -40,7 +41,7 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
-                  <tr>
+                    <tr>
                         <th class="text-center">Identifiants</th>
                         <th class="text-center">Images</th>
                         <th>Titres</th>
@@ -57,27 +58,34 @@
                 {% for new in news %}
                     <tr>
                         <td class="text-center">{{ new.pk }}</td>
-                        <td class="text-center"><img style="display: inline-block; width: 50px; height: 50px" src="{{ new.pic_url }}" alt="avatar" class="img-circle"></td>
+                        <td class="text-center"><img style="display: inline-block; width: 50px; height: 50px"
+                                                     src="{{ new.pic_url }}" alt="avatar" class="img-circle"></td>
                         <td>{{ new.name }}</td>
                         <td>{{ new.date }} | {{ new.time }}</td>
-                        <td>{{ new.category_name}}</td>
+                        <td>{{ new.category_name }}</td>
                         <td>{{ new.writer }}</td>
-                        <td>{{ new.show}}</td>
-                        {%  if new.activated == 0 %}
+                        <td>{{ new.show }}</td>
+                        {% if new.activated == 0 %}
                             <td>En attente</td>
-                        {% elif new.activated == 1%}
+                        {% elif new.activated == 1 %}
                             <td>Confirmé</td>
                         {% endif %}
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'news_edit' pk=new.pk %}" data-toggle="tooltip" title="Editer" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="{% url 'news_delete' pk=new.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?" data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'news_edit' pk=new.pk %}" data-toggle="tooltip" title="Editer"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href="{% url 'news_delete' pk=new.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer l'article {{ new.pk }} ?"
+                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
                                 <a href="{% url 'news_publish' pk=new.pk %}"
-                                {%  if new.activated == 0 %}
-                                   data-toggle="tooltip" title="Publié" class="btn btn-xs btn-warning"><i class="fa fa-play"> Publié</i></a>
-                                {%  else %}
-                                    data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success"><i class="fa fa-anchor"> En ligne</i></a>
-                                {% endif %}
+                                        {% if new.activated == 0 %}
+                                   data-toggle="tooltip" title="Publié" class="btn btn-xs btn-warning">
+                                                <i class="fa fa-play"> Publié</i></a>
+                                        {% else %}
+                                            data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
+                                            <i class="fa fa-anchor"> En ligne</i></a>
+                                        {% endif %}
                             </div>
                         </td>
                     </tr>
@@ -97,6 +105,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

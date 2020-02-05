@@ -8,7 +8,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                    <i class="fa fa-table"></i>Ajouter une permission à l'utilisateur<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Ajouter une permission à l'utilisateur<br><small>Vous pouvez ajouter,
+                modifier et supprimer vos données !</small>
             </h1>
         </div>
     </div>
@@ -19,7 +20,7 @@
     <!-- END Datatables Header -->
 
 
-        <!-- Datatables Content -->
+    <!-- Datatables Content -->
     <div class="block full">
 
         <div class="block-title">
@@ -33,15 +34,17 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'users_perms_add' pk=pk %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'users_perms_add' pk=pk %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
-                         <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">Permissions :</label>
-                                <select id="pname" name="pname" class="select-chosen" data-placeholder="Choisissez une permission..." style="width: 550px;">
+                                <select id="pname" name="pname" class="select-chosen"
+                                        data-placeholder="Choisissez une permission..." style="width: 550px;">
                                     {% for i in perms %}
-                                    <option value="{{ i.name }}">{{ i.name }}</option>
+                                        <option value="{{ i.name }}">{{ i.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -53,7 +56,7 @@
                         </div>
 
                     </form>
-{#                    <!-- END Basic Form Elements Content -->#}
+                    {#                    <!-- END Basic Form Elements Content -->#}
                 </div>
                 <!-- END Basic Form Elements Block -->
             </div>
@@ -80,7 +83,7 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
-                  <tr>
+                    <tr>
                         <th class="text-center">Noms</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -94,7 +97,10 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{%  url 'users_perms_del' pk=pk name=gr %}" data-confirm="Etes-vous certain de vouloir supprimer le permission {{ gr }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'users_perms_del' pk=pk name=gr %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer le permission {{ gr }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
@@ -115,6 +121,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

@@ -2,11 +2,11 @@
 
 {% load static %}
 
-{%  block head %}
-        <script src="{% static 'ckeditor/ckeditor.js' %}" ></script>
-      {#<script src="http://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>#}
+{% block head %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    {#<script src="http://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>#}
 
-{%  endblock %}
+{% endblock %}
 
 
 {% block content %}
@@ -15,7 +15,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Modifier un tendance<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Modifier un tendance<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
             </h1>
         </div>
     </div>
@@ -34,23 +35,25 @@
 
         <div class="table-responsive">
 
-                <div class="col-md-12">
-                        <!-- Basic Form Elements Block -->
-                    <div class="block">
-                        <!-- Basic Form Elements Content -->
-                        <form action="{% url 'trending_edit' pk=pk %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
-                            {% csrf_token %}
-                             <div class="form-group">
-                                <div class="col-md-10">
-                                    <input type="text" id="txt" name="txt" value="{{ mytxt }}" class="form-control" placeholder="Tendance actuelle"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-sm btn-primary"> Soumettre</button>
-                                </div>
-                             </div>
-                        </form>
-                    </div>
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'trending_edit' pk=pk %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="text" id="txt" name="txt" value="{{ mytxt }}" class="form-control"
+                                       placeholder="Tendance actuelle"/>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"> Soumettre</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
     <!-- END Datatables Content -->
@@ -61,5 +64,7 @@
 {% block javascript %}
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 {% endblock %}

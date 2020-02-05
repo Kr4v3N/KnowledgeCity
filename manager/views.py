@@ -22,10 +22,9 @@ def manager_list(request):
 
     # perm = 0
     # for i in request.user.groups.all():
-    #     if i.name == "masteruser": perm = 1
-    #
+    #     if i.name == "masteruser": perm = 1    
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     manager = Manager.objects.all()
@@ -42,9 +41,8 @@ def manager_delete(request, pk):
     # perm = 0
     # for i in request.user.groups.all():
     #     if i.name == "masteruser": perm = 1
-    #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
@@ -59,7 +57,7 @@ def manager_delete(request, pk):
 
 
 def manager_group(request):
-    # Login check start
+    # eeLogin check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
@@ -69,7 +67,7 @@ def manager_group(request):
         if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès interdit")
+        messages.error(request, "accès interdit")
         return redirect('panel')
 
     group = Group.objects.all().exclude(name="masteruser")
@@ -88,7 +86,7 @@ def manager_group_add(request):
         if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès interdit")
+        messages.error(request, "accès interdit")
         return redirect('panel')
 
     if request.method == 'POST':
@@ -115,7 +113,7 @@ def manager_group_delete(request, name):
         if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès interdit")
+        messages.error(request, "accès interdit")
         return redirect('panel')
 
     b = Group.objects.filter(name=name)
@@ -136,7 +134,7 @@ def users_groups(request, pk):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
@@ -163,7 +161,7 @@ def add_users_to_groups(request, pk):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     if request.method == 'POST':
@@ -189,7 +187,7 @@ def del_users_to_groups(request, pk, name):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     group = Group.objects.get(name=name)
@@ -212,7 +210,7 @@ def manager_perms(request):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     perms = Permission.objects.all()
@@ -231,7 +229,7 @@ def manager_perms_del(request, name):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     perms = Permission.objects.filter(name=name)
@@ -252,7 +250,7 @@ def manager_perms_add(request):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     if request.method == 'POST':
@@ -278,13 +276,13 @@ def users_perms(request, pk):
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
-
+    
     # perm = 0
     # for i in request.user.groups.all():
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
@@ -313,7 +311,7 @@ def users_perms_del(request, pk, name):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "Accès interdit")
     #     return redirect('panel')
 
     manager = Manager.objects.get(pk=pk)
@@ -331,13 +329,12 @@ def users_perms_add(request, pk):
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
-
     # perm = 0
     # for i in request.user.groups.all():
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "Accès interdit")
     #     return redirect('panel')
 
     if request.method == 'POST':
@@ -364,7 +361,7 @@ def groups_perms(request, name):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     group = Group.objects.get(name=name)
@@ -387,7 +384,7 @@ def groups_perms_delete(request, gname, name):
     #     if i.name == "masteruser": perm = 1
     #
     # if perm == 0:
-    #     messages.error(request, "Acccès interdit")
+    #     messages.error(request, "accès interdit")
     #     return redirect('panel')
 
     group = Group.objects.get(name=gname)
@@ -410,11 +407,10 @@ def groups_perms_add(request, name):
         if i.name == "masteruser": perm = 1
 
     if perm == 0:
-        messages.error(request, "Acccès interdit")
+        messages.error(request, "accès interdit")
         return redirect('panel')
 
     if request.method == 'POST':
-
         p_name = request.POST.get('p_name')
         group = Group.objects.get(name=name)
         perm = Permission.objects.get(name=p_name)

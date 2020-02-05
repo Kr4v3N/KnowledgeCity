@@ -8,7 +8,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Liste des permissions<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Liste des permissions<br><small>Vous pouvez ajouter, modifier et supprimer
+                vos données !</small>
             </h1>
         </div>
     </div>
@@ -19,7 +20,7 @@
     <!-- END Datatables Header -->
 
 
-        <!-- Datatables Content -->
+    <!-- Datatables Content -->
     <div class="block full">
 
         <div class="block-title">
@@ -33,17 +34,20 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'manager_perms_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'manager_perms_add' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
-                         <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-4">
                                 <label for="" class="text-info">Groupe :</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la permission" required>
+                                <input type="text" id="name" name="name" class="form-control"
+                                       placeholder="Nom de la permission" required>
                             </div>
-                             <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label for="" class="text-info">Groupe :</label>
-                                <input type="text" id="cname" name="cname" class="form-control" placeholder="Code name de la permission" required>
+                                <input type="text" id="cname" name="cname" class="form-control"
+                                       placeholder="Code name de la permission" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="text-info">Valider :</label>
@@ -77,7 +81,7 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
-                  <tr>
+                    <tr>
                         <th class="text-center">Noms</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -91,11 +95,14 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'manager_perms_del' name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'manager_perms_del' name=gr.name %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
-                </tbody>
+                    </tbody>
                 {% endfor %}
             </table>
         </div>
@@ -111,6 +118,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

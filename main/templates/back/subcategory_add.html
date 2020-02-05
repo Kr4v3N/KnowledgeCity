@@ -8,7 +8,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Ajouter une sous-catégorie<br><small>Vous pouvez ajouter une sous-catégorie</small>
+                <i class="fa fa-table"></i>Ajouter une sous-catégorie<br><small>Vous pouvez ajouter une
+                sous-catégorie</small>
             </h1>
         </div>
     </div>
@@ -32,21 +33,24 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'subcategory_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'subcategory_add' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
-                         <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">Sous-catégorie :</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la sous-catégorie">
+                                <input type="text" id="name" name="name" class="form-control"
+                                       placeholder="Nom de la sous-catégorie">
                             </div>
 
                             <div class="col-md-6">
-                            <label for="" class="text-info">Catégorie :</label>
-                                <select id="category" name="category" class="select-chosen" data-placeholder="Choisissez une catégorie..." style="width: 500px;">
+                                <label for="" class="text-info">Catégorie :</label>
+                                <select id="category" name="category" class="select-chosen"
+                                        data-placeholder="Choisissez une catégorie..." style="width: 500px;">
 
                                     {% for cat in category %}
-                                    <option value="{{ cat.pk }}">{{ cat.name }}</option>
+                                        <option value="{{ cat.pk }}">{{ cat.name }}</option>
                                     {% endfor %}
 
                                 </select>
@@ -79,6 +83,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

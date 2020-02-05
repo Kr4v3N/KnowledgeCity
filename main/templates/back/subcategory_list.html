@@ -8,7 +8,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Liste des sous-catégories<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Liste des sous-catégories<br><small>Vous pouvez ajouter, modifier et
+                supprimer vos données !</small>
             </h1>
         </div>
     </div>
@@ -53,8 +54,12 @@
                         <td class="">{{ subcat.category_name }}</td>
                         <td class="">
                             <div class="btn-group">
-                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href="" data-confirm="Etes-vous certain de vouloir supprimer la sous categorie {{ subcat.category_name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href=""
+                                   data-confirm="Etes-vous certain de vouloir supprimer la sous categorie {{ subcat.category_name }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
@@ -74,6 +79,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

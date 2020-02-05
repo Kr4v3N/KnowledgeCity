@@ -71,10 +71,10 @@ def panel(request):
     perms = Permission.objects.filter(user=request.user)
     for i in perms:
         if i.codename == "master_user": perm = 1
-        # print(i.codename)
-        if perm == 0:
-            messages.error(request, "Accès interdit")
-            return redirect('change_pass')
+    # print(i.codename)
+    if perm == 0:
+        messages.error(request, "Accès interdit")
+        return redirect('change_pass')
 
     return render(request, 'back/admin_home.html')
 

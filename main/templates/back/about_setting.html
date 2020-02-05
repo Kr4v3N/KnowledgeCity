@@ -2,9 +2,9 @@
 
 {% load static %}
 
-{%  block head %}
-        <script src="{% static '/ckeditor/ckeditor.js' %}" ></script>
-{%  endblock %}
+{% block head %}
+    <script src="{% static '/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 
@@ -12,7 +12,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Éditer la page À propos<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Éditer la page À propos<br><small>Vous pouvez ajouter, modifier et supprimer
+                vos données !</small>
             </h1>
         </div>
     </div>
@@ -31,43 +32,45 @@
 
         <div class="table-responsive">
 
-{#            <div class="row">#}
+            {#            <div class="row">#}
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'about_settings' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
                             <div class="col-md-12">
-                                <!-- Basic Form Elements Block -->
-                                <div class="block">
-
-                                    <!-- Basic Form Elements Content -->
-                                    <form action="{%  url 'about_settings' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <textarea type="text" id="txt" name="txt" cols="30" rows="50" class="form-control" placeholder="Body text ">{{ about_page }}</textarea>
-                                            </div>
-                                        </div>
-                                        <script>
-                                            CKEDITOR.replace( 'txt', {
-                                                language: 'fr',
-                                                uiColor: '#9AB8F3',
-                                                height: 400
-                                            });
-                                        </script>
+                                <textarea type="text" id="txt" name="txt" cols="30" rows="50" class="form-control"
+                                          placeholder="Body text ">{{ about_page }}</textarea>
+                            </div>
+                        </div>
+                        <script>
+                            CKEDITOR.replace('txt', {
+                                language: 'fr',
+                                uiColor: '#9AB8F3',
+                                height: 400
+                            });
+                        </script>
 
 
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
-                                            </div>
-                                        </div>
-
-
-                                    </form>
-                                    <!-- END Basic Form Elements Content -->
-                                </div>
-                                <!-- END Basic Form Elements Block -->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
                             </div>
                         </div>
 
+
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
         </div>
+
+    </div>
 
     </div>
     <!-- END Datatables Content -->
@@ -81,6 +84,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

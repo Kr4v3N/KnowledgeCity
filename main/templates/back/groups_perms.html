@@ -8,7 +8,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                    <i class="fa fa-table"></i>Ajouter des permissions au groupe<br><small>Vous pouvez ajouter, modifier et supprimer vos données !</small>
+                <i class="fa fa-table"></i>Ajouter des permissions au groupe<br><small>Vous pouvez ajouter, modifier et
+                supprimer vos données !</small>
             </h1>
         </div>
     </div>
@@ -18,7 +19,7 @@
     </ul>
     <!-- END Datatables Header -->
 
-        <!-- Datatables Content -->
+    <!-- Datatables Content -->
     <div class="block full">
 
         <div class="block-title">
@@ -32,16 +33,18 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'groups_perms_add' name=name %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form action="{% url 'groups_perms_add' name=name %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
-                         <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">Groupe :</label>
-                                <select id="p_name" name="p_name" class="select-chosen" data-placeholder="Choisissez une permission..." style="width: 250px;">
+                                <select id="p_name" name="p_name" class="select-chosen"
+                                        data-placeholder="Choisissez une permission..." style="width: 250px;">
 
                                     {% for i in all_perms %}
-                                    <option value="{{ i.name }}">{{ i.name }}</option>
+                                        <option value="{{ i.name }}">{{ i.name }}</option>
                                     {% endfor %}
                                 </select>
 
@@ -54,7 +57,7 @@
                         </div>
 
                     </form>
-{#                    <!-- END Basic Form Elements Content -->#}
+                    {#                    <!-- END Basic Form Elements Content -->#}
                 </div>
                 <!-- END Basic Form Elements Block -->
             </div>
@@ -81,7 +84,7 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
-                  <tr>
+                    <tr>
                         <th class="text-center">Noms</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -94,7 +97,10 @@
                         <td class="text-center">{{ gr.name }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'groups_perms_delete' gname=name name=gr.name %}" data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'groups_perms_delete' gname=name name=gr.name %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer la permission {{ gr.name }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
@@ -116,6 +122,8 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 
 {% endblock %}

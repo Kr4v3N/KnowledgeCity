@@ -2,11 +2,11 @@
 
 {% load static %}
 
-{%  block head %}
-        <script src="{% static 'ckeditor/ckeditor.js' %}" ></script>
-      {#<script src="http://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>#}
+{% block head %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    {#<script src="http://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>#}
 
-{%  endblock %}
+{% endblock %}
 
 
 {% block content %}
@@ -15,7 +15,8 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Changer votre mot de passe<br><small>Vous pouvez  modifier  votre mot de passe !</small>
+                <i class="fa fa-table"></i>Changer votre mot de passe<br><small>Vous pouvez modifier votre mot de passe
+                !</small>
             </h1>
         </div>
     </div>
@@ -34,33 +35,37 @@
 
         <div class="table-responsive">
 
-                <div class="col-md-12">
-                        <!-- Basic Form Elements Block -->
-                    <div class="block">
-                        <!-- Basic Form Elements Content -->
-                        <form action="{% url 'change_pass' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
-                            {% csrf_token %}
-                             <div class="form-group">
-                                <div class="col-md-6">
-                                    <input type="password" id="old_pass" name="old_pass" class="form-control" placeholder="Ancien mot de passe"/>
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'change_pass' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="password" id="old_pass" name="old_pass" class="form-control"
+                                       placeholder="Ancien mot de passe"/>
 
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="password" id="new_pass" name="new_pass" class="form-control" placeholder="Nouveau mot de passe"/>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" id="new_pass" name="new_pass" class="form-control"
+                                       placeholder="Nouveau mot de passe"/>
 
-                                </div>
-                             </div>
-                             <div class="form-group">
-                                <div class="col-md-6">
-                                     <button type="text" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="password" id="new_pass_confirm" name="new_pass_confirm" class="form-control" placeholder="Confirmer le nouveau mot de passe"/>
-                                </div>
-                             </div>
-                        </form>
-                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <button type="text" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" id="new_pass_confirm" name="new_pass_confirm"
+                                       class="form-control" placeholder="Confirmer le nouveau mot de passe"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
     <!-- END Datatables Content -->
@@ -71,5 +76,7 @@
 {% block javascript %}
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
 {% endblock %}

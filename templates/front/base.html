@@ -5,51 +5,54 @@
 <html lang="fr">
 <head>
 
-	{% block title %}
+    {% block title %}
 
-		Please override this block!
+    Please override this block!
 
-	{% endblock %}
+    {% endblock %}
 
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="{% static 'front/images/icons/favicon.png' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/bootstrap/css/bootstrap.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/fonts/iconic/css/material-design-iconic-font.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/css-hamburgers/hamburgers.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/animsition/css/animsition.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/css/util.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'front/css/main.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'front/images/icons/favicon.png' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'front/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'front/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'front/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'front/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'front/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'front/vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'front/css/util.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'front/css/main.css' %}">
     <title> Knowledge City </title>
-<!--===============================================================================================-->
+    <!--===============================================================================================-->
 </head>
 <body class="animsition">
 
-	<!-- Header -->
-	<header>
-		<!-- Header desktop -->
-		<div class="container-menu-desktop">
-			<div class="topbar">
-				<div class="content-topbar h-100 p-rl-30">
+<!-- Header -->
+<header>
+    <!-- Header desktop -->
+    <div class="container-menu-desktop">
+        <div class="topbar">
+            <div class="content-topbar h-100 p-rl-30">
 
-					<div class="align-self-stretch size-w-0 pos-relative m-r-30">
-						<div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">
+                <div class="align-self-stretch size-w-0 pos-relative m-r-30">
+                    <div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">
 							<span class="text-uppercase cl0 p-r-8">
 								Tendances actuelles :
 							</span>
 
-							<span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
+                        <span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown"
+                              data-out="fadeOutDown">
 								{% for trending in trending %}
 								<span class="dis-inline-block slide100-txt-item animated visible-false">
 									{{ trending.txt }}
@@ -57,243 +60,254 @@
 								{% endfor %}
 
 							</span>
-						</div>
-					</div>
+                    </div>
+                </div>
 
 
-					<div class="flex-wr-e-c">
-						<div class="left-topbar">
+                <div class="flex-wr-e-c">
+                    <div class="left-topbar">
 							<span class="left-topbar-item flex-wr-s-c">
 								<span>
 									Lyon, France
 								</span>
 
-								<img class="m-b-1 m-rl-8" src="{% static 'front/images/icons/icon-night.png' %}" alt="IMG">
+								<img class="m-b-1 m-rl-8" src="{% static 'front/images/icons/icon-night.png' %}"
+                                     alt="IMG">
 
 								<span>
 									Latitude: 45.75 Longitude: 4.85
 								</span>
 							</span>
 
-							<a href="/about" class="left-topbar-item">
-								À propos
-							</a>
+                        <a href="/about" class="left-topbar-item">
+                            À propos
+                        </a>
 
-							<a href="/contact" class="left-topbar-item">
-								Nous contacter
-							</a>
+                        <a href="/contact" class="left-topbar-item">
+                            Nous contacter
+                        </a>
 
-							<a href="login" class="left-topbar-item">
-								S'inscrire / S'identifier
-							</a>
+                        {% if user.is_authenticated %}
+                        <a href="logout" class="left-topbar-item">
+                            Se déconnecter
+                        </a>
+                        {% else %}
+                        <a href="login" class="left-topbar-item">
+                            S'inscrire / S'identifier
+                        </a>
+                        {% endif %}
 
-							<a href="#" class="left-topbar-item"></a>
-						</div>
+                        <a href="#" class="left-topbar-item"></a>
+                    </div>
 
-						<div class="right-topbar p-l-18">
-							<a href="{{ site.facebook }}">
-								<span class="fab fa-facebook-f"></span>
-							</a>
+                    <div class="right-topbar p-l-18">
+                        <a href="{{ site.facebook }}">
+                            <span class="fab fa-facebook-f"></span>
+                        </a>
 
-							<a href="{{ site.twitter }}">
-								<span class="fab fa-twitter"></span>
-							</a>
+                        <a href="{{ site.twitter }}">
+                            <span class="fab fa-twitter"></span>
+                        </a>
 
-							<a href="{{ site.linkedin }}">
-								<span class="fab fa-linkedin"></span>
-							</a>
+                        <a href="{{ site.linkedin }}">
+                            <span class="fab fa-linkedin"></span>
+                        </a>
 
-							<a href="{{ site.github }}">
-								<span class="fab fa-github"></span>
-							</a>
+                        <a href="{{ site.github }}">
+                            <span class="fab fa-github"></span>
+                        </a>
 
-							<a href="{{ site.facebook }}">
-								<span class="fab fa-youtube"></span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
+                        <a href="{{ site.facebook }}">
+                            <span class="fab fa-youtube"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<!-- Header Mobile -->
-			<div class="wrap-header-mobile">
-				<!-- Logo mobile -->
-				<div class="logo-mobile">
-					<a href="/"><img src="{{ site.pic_url_footer }}" alt="IMG-LOGO"></a>
-				</div>
+        <!-- Header Mobile -->
+        <div class="wrap-header-mobile">
+            <!-- Logo mobile -->
+            <div class="logo-mobile">
+                <a href="/"><img src="{{ site.pic_url_footer }}" alt="IMG-LOGO"></a>
+            </div>
 
-				<!-- Button show menu -->
-				<div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
+            <!-- Button show menu -->
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
 					<span class="hamburger-box">
 						<span class="hamburger-inner"></span>
 					</span>
-				</div>
-			</div>
+            </div>
+        </div>
 
-			<!-- Menu Mobile -->
-			<div class="menu-mobile">
-				<ul class="topbar-mobile">
-					<li class="left-topbar">
+        <!-- Menu Mobile -->
+        <div class="menu-mobile">
+            <ul class="topbar-mobile">
+                <li class="left-topbar">
 						<span class="left-topbar-item flex-wr-s-c">
 
 							<img class="m-b-1 m-rl-8" src="{{ site.pic_url_footer }}" alt="IMG">
 
 						</span>
-					</li>
+                </li>
 
-					<li class="left-topbar">
-						<a href="/about" class="left-topbar-item">
-							À propos
-						</a>
+                <li class="left-topbar">
+                    <a href="/about" class="left-topbar-item">
+                        À propos
+                    </a>
 
-						<a href="/contact" class="left-topbar-item">
-							Nous contacter
-						</a>
+                    <a href="/contact" class="left-topbar-item">
+                        Nous contacter
+                    </a>
 
-						<a href="login" class="left-topbar-item">
-							S'inscrire / S'identifier
-						</a>
+                    <a href="login" class="left-topbar-item">
+                        S'inscrire / S'identifier
+                    </a>
 
-					</li>
+                </li>
 
-					<li class="right-topbar">
-						<a href="{{ site.facebook }}">
-							<span class="fab fa-facebook-f"></span>
-						</a>
+                <li class="right-topbar">
+                    <a href="{{ site.facebook }}">
+                        <span class="fab fa-facebook-f"></span>
+                    </a>
 
-						<a href="{{ site.twitter }}">
-							<span class="fab fa-twitter"></span>
-						</a>
+                    <a href="{{ site.twitter }}">
+                        <span class="fab fa-twitter"></span>
+                    </a>
 
-						<a href="{{ site.linkedin }}">
-							<span class="fab fa-linkedin"></span>
-						</a>
+                    <a href="{{ site.linkedin }}">
+                        <span class="fab fa-linkedin"></span>
+                    </a>
 
-						<a href="{{ site.github }}">
-							<span class="fab fa-github"></span>
-						</a>
+                    <a href="{{ site.github }}">
+                        <span class="fab fa-github"></span>
+                    </a>
 
-						<a href="{{ site.youtube }}">
-							<span class="fab fa-youtube"></span>
-						</a>
-					</li>
-				</ul>
+                    <a href="{{ site.youtube }}">
+                        <span class="fab fa-youtube"></span>
+                    </a>
+                </li>
+            </ul>
 
-				<ul class="main-menu-m">
-					<li>
-						<a href="/">Accueil</a>
-<!--						<ul class="sub-menu-m">-->
-<!--							<li><a href="/">Homepage v1</a></li>-->
-<!--							<li><a href="home-02.html">Homepage v2</a></li>-->
-<!--							<li><a href="home-03.html">Homepage v3</a></li>-->
-<!--						</ul>-->
+            <ul class="main-menu-m">
+                <li>
+                    <a href="/">Accueil</a>
+                    <!--						<ul class="sub-menu-m">-->
+                    <!--							<li><a href="/">Homepage v1</a></li>-->
+                    <!--							<li><a href="home-02.html">Homepage v2</a></li>-->
+                    <!--							<li><a href="home-03.html">Homepage v3</a></li>-->
+                    <!--						</ul>-->
 
-<!--						<span class="arrow-main-menu-m">-->
-<!--							<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-<!--						</span>-->
-					</li>
+                    <!--						<span class="arrow-main-menu-m">-->
+                    <!--							<i class="fa fa-angle-right" aria-hidden="true"></i>-->
+                    <!--						</span>-->
+                </li>
 
-					<li>
-						<a href="category-01.html">News</a>
-					</li>
+                <li>
+                    <a href="category-01.html">News</a>
+                </li>
 
-					<li>
-						<a href="category-02.html">Entertainment </a>
-					</li>
+                <li>
+                    <a href="category-02.html">Entertainment </a>
+                </li>
 
-					<li>
-						<a href="category-01.html">Business</a>
-					</li>
+                <li>
+                    <a href="category-01.html">Business</a>
+                </li>
 
-					<li>
-						<a href="category-02.html">Travel</a>
-					</li>
+                <li>
+                    <a href="category-02.html">Travel</a>
+                </li>
 
-					<li>
-						<a href="category-01.html">Life Style</a>
-					</li>
+                <li>
+                    <a href="category-01.html">Life Style</a>
+                </li>
 
-					<li>
-						<a href="category-02.html">Video</a>
-					</li>
+                <li>
+                    <a href="category-02.html">Video</a>
+                </li>
 
-					<li>
-						<a href="#">Features</a>
-						<ul class="sub-menu-m">
-							<li><a href="category-01.html">Category Page v1</a></li>
-							<li><a href="category-02.html">Category Page v2</a></li>
-							<li><a href="blog-grid.html">Blog Grid Sidebar</a></li>
-							<li><a href="blog-list-01.html">Blog List Sidebar v1</a></li>
-							<li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
-							<li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
-							<li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
-							<li><a href="/about">À propos</a></li>
-							<li><a href="/contact">Contact Us</a></li>
-						</ul>
+                <li>
+                    <a href="#">Features</a>
+                    <ul class="sub-menu-m">
+                        <li><a href="category-01.html">Category Page v1</a></li>
+                        <li><a href="category-02.html">Category Page v2</a></li>
+                        <li><a href="blog-grid.html">Blog Grid Sidebar</a></li>
+                        <li><a href="blog-list-01.html">Blog List Sidebar v1</a></li>
+                        <li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
+                        <li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
+                        <li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
+                        <li><a href="/about">À propos</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
 
-						<span class="arrow-main-menu-m">
+                    <span class="arrow-main-menu-m">
 							<i class="fa fa-angle-right" aria-hidden="true"></i>
 						</span>
-					</li>
-				</ul>
-			</div>
+                </li>
+            </ul>
+        </div>
 
-			<!--  -->
-			<div class="wrap-logo no-banner container">
-				<!-- Logo desktop -->
-				<div class="logo">
-					<a href="/"><img src="{{ site.pic_url }}" alt="LOGO"></a>
-				</div>
-			</div>
+        <!--  -->
+        <div class="wrap-logo no-banner container">
+            <!-- Logo desktop -->
+            <div class="logo">
+                <a href="/"><img src="{{ site.pic_url }}" alt="LOGO"></a>
+            </div>
+        </div>
 
-			<!--  -->
-			<div class="wrap-main-nav">
-				<div class="main-nav">
-					<!-- Menu desktop -->
-					<nav class="menu-desktop">
-						<a class="logo-stick" href="/">
-							<img src="{{ site.pic_url }}" alt="LOGO">
-						</a>
+        <!--  -->
+        <div class="wrap-main-nav">
+            <div class="main-nav">
+                <!-- Menu desktop -->
+                <nav class="menu-desktop">
+                    <a class="logo-stick" href="/">
+                        <img src="{{ site.pic_url }}" alt="LOGO">
+                    </a>
 
-						<ul class="main-menu justify-content-center">
-							<li class="main-menu-active">
-								<a href="/">Accueil</a>
-							</li>
-                            {% for gg in category %}
-							{% if gg.count != 0 %}
-							<li class="mega-menu-item">
-								<a href="#">{{ gg.name }}</a>
+                    <ul class="main-menu justify-content-center">
+                        <li class="main-menu-active">
+                            <a href="/">Accueil</a>
+                        </li>
+                        {% for gg in category %}
+                        {% if gg.count != 0 %}
+                        <li class="mega-menu-item">
+                            <a href="#">{{ gg.name }}</a>
 
-								<div class="sub-mega-menu">
-									<div class="nav flex-column nav-pills" role="tablist">
-										<a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
-										{% for subcat in subcat %}
-										{% if subcat.category_id == gg.pk %}
-										<a class="nav-link" data-toggle="pill" href="#{{ subcat.pk }}" role="tab">{{ subcat.name }}</a>
-										{% endif %}
-										{% endfor %}
-									</div>
-									<div class="tab-content">
-										<div class="tab-pane show active" id="news-0" role="tabpanel">
-											<div class="row">
+                            <div class="sub-mega-menu">
+                                <div class="nav flex-column nav-pills" role="tablist">
+                                    <a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
+                                    {% for subcat in subcat %}
+                                    {% if subcat.category_id == gg.pk %}
+                                    <a class="nav-link" data-toggle="pill" href="#{{ subcat.pk }}" role="tab">{{
+                                        subcat.name }}</a>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane show active" id="news-0" role="tabpanel">
+                                        <div class="row">
 
-												{% for hh in allNews %}
-												{% if hh.ocategory_id == gg.pk %}
-													<div class="col-3">
-													<!-- Item post -->
-													<div><a href="{% url 'news_detail' pk=hh.pk %}" class="wrap-pic-w hov1 trans-03">
-														<img src="{{ hh.pic_url }}" alt="IMG">
-														</a>
+                                            {% for hh in allNews %}
+                                            {% if hh.ocategory_id == gg.pk %}
+                                            <div class="col-3">
+                                                <!-- Item post -->
+                                                <div><a href="{% url 'news_detail' pk=hh.pk %}"
+                                                        class="wrap-pic-w hov1 trans-03">
+                                                    <img src="{{ hh.pic_url }}" alt="IMG">
+                                                </a>
 
-														<div class="p-t-10">
-															<h5 class="p-b-5">
-																<a href="{% url 'news_detail' pk=hh.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-																	{{ hh.name }}
-																</a>
-															</h5>
+                                                    <div class="p-t-10">
+                                                        <h5 class="p-b-5">
+                                                            <a href="{% url 'news_detail' pk=hh.pk %}"
+                                                               class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                {{ hh.name }}
+                                                            </a>
+                                                        </h5>
 
-															<span class="cl8">
-																<a href="{% url 'news_detail' pk=hh.pk %}" class="f1-s-6 cl8 hov-cl10 trans-03">
+                                                        <span class="cl8">
+																<a href="{% url 'news_detail' pk=hh.pk %}"
+                                                                   class="f1-s-6 cl8 hov-cl10 trans-03">
 																	{{ hh.category_name }}
 																</a>
 
@@ -305,34 +319,36 @@
 																	{{ hh.date }}
 																</span>
 															</span>
-														</div>
-													</div>
-												</div>
-												{% endif %}
-												{% endfor %}
-											</div>
-										</div>
-										{% for subcat2 in subcat %}
-										{% if subcat2.category_id == gg.pk %}
-										<div class="tab-pane" id="{{ subcat2.pk }}" role="tabpanel">
-											<div class="row">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% for subcat2 in subcat %}
+                                    {% if subcat2.category_id == gg.pk %}
+                                    <div class="tab-pane" id="{{ subcat2.pk }}" role="tabpanel">
+                                        <div class="row">
 
-												{% for mm in allNews %}
-												{% if mm.category_id == subcat2.pk %}
-												<div class="col-3">
-												<!-- Item post -->
-												<div>
-													<a href="{% url 'news_detail' pk=mm.pk %}" class="wrap-pic-w hov1 trans-03">
-														<img src="{{ mm.pic_url }}" alt="IMG">
-													</a>
-													<div class="p-t-10">
-														<h5 class="p-b-5">
-															<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
-																{{ mm.name }}
-															</a>
-														</h5>
-														<span class="cl8">
-															<a href="{% url 'news_detail' pk=mm.pk %}" class="f1-s-6 cl8 hov-cl10 trans-03">
+                                            {% for mm in allNews %}
+                                            {% if mm.category_id == subcat2.pk %}
+                                            <div class="col-3">
+                                                <!-- Item post -->
+                                                <div>
+                                                    <a href="{% url 'news_detail' pk=mm.pk %}"
+                                                       class="wrap-pic-w hov1 trans-03">
+                                                        <img src="{{ mm.pic_url }}" alt="IMG">
+                                                    </a>
+                                                    <div class="p-t-10">
+                                                        <h5 class="p-b-5">
+                                                            <a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                {{ mm.name }}
+                                                            </a>
+                                                        </h5>
+                                                        <span class="cl8">
+															<a href="{% url 'news_detail' pk=mm.pk %}"
+                                                               class="f1-s-6 cl8 hov-cl10 trans-03">
 																{{ mm.category_name }}
 															</a>
 															<span class="f1-s-3 m-rl-3">
@@ -342,189 +358,191 @@
 																{{ mm.date }}
 															</span>
 														</span>
-													</div>
-												</div>
-												</div>
-												{% endif %}
-												{% endfor %}
-											</div>
-										</div>
-										{% endif %}
-										{% endfor %}
-									</div>
-								</div>
-							</li>
-							{% endif %}
-							{% endfor %}
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
 
-	{% include 'back/messages.html' %}
+{% include 'back/messages.html' %}
 
-    {% block content %}
+{% block content %}
 
-    	Please override this block!
+Please override this block!
 
-    {% endblock %}
+{% endblock %}
 
 
-	<!-- Footer -->
-	<footer>
-		<div class="bg2 p-t-40 p-b-25">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 p-b-20">
-						<div class="size-h-3 flex-s-c">
-							<a href="/">
-								<img class="max-s-full" src="{{ site.pic_url_footer }}" alt="LOGO">
-							</a>
-						</div>
+<!-- Footer -->
+<footer>
+    <div class="bg2 p-t-40 p-b-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 p-b-20">
+                    <div class="size-h-3 flex-s-c">
+                        <a href="/">
+                            <img class="max-s-full" src="{{ site.pic_url_footer }}" alt="LOGO">
+                        </a>
+                    </div>
 
-						<div>
-							<p class="f1-s-1 cl11 p-b-16">
-								{{ site.about }}
-							</p>
+                    <div>
+                        <p class="f1-s-1 cl11 p-b-16">
+                            {{ site.about }}
+                        </p>
 
-							<p class="f1-s-1 cl11 p-b-16">
-								Des questions? Appelez-nous au {{ site.phone }}
-							</p>
+                        <p class="f1-s-1 cl11 p-b-16">
+                            Des questions? Appelez-nous au {{ site.phone }}
+                        </p>
 
-							<div class="p-t-15">
-								<a href="{{ site.facebook }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-facebook-f"></span>
-								</a>
+                        <div class="p-t-15">
+                            <a href="{{ site.facebook }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                                <span class="fab fa-facebook-f"></span>
+                            </a>
 
-								<a href="{{ site.twitter }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-twitter"></span>
-								</a>
+                            <a href="{{ site.twitter }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                                <span class="fab fa-twitter"></span>
+                            </a>
 
-								<a href="{{ site.linkedin }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-linkedin"></span>
-								</a>
+                            <a href="{{ site.linkedin }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                                <span class="fab fa-linkedin"></span>
+                            </a>
 
-								<a href="{{ site.github }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-github"></span>
-								</a>
+                            <a href="{{ site.github }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                                <span class="fab fa-github"></span>
+                            </a>
 
-								<a href="{{ site.youtube }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-youtube"></span>
-								</a>
-							</div>
-						</div>
-					</div>
+                            <a href="{{ site.youtube }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                                <span class="fab fa-youtube"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-					<div class="col-sm-6 col-lg-4 p-b-20">
-						<div class="size-h-3 flex-s-c">
-							<h5 class="f1-m-7 cl0">
-								Les postes les plus populaires
-							</h5>
-						</div>
+                <div class="col-sm-6 col-lg-4 p-b-20">
+                    <div class="size-h-3 flex-s-c">
+                        <h5 class="f1-m-7 cl0">
+                            Les postes les plus populaires
+                        </h5>
+                    </div>
 
-						<ul>
-							{% for pop in popularynews_footer %}
-							<li class="flex-wr-sb-s p-b-20">
-								<a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-4 wrap-pic-w hov1 trans-03">
-									<img src="{{ pop.pic_url}}" alt="IMG">
-								</a>
+                    <ul>
+                        {% for pop in popularynews_footer %}
+                        <li class="flex-wr-sb-s p-b-20">
+                            <a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-4 wrap-pic-w hov1 trans-03">
+                                <img src="{{ pop.pic_url}}" alt="IMG">
+                            </a>
 
-								<div class="size-w-5">
-									<h6 class="p-b-5">
-										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-											{{ pop.name}}
-										</a>
-									</h6>
+                            <div class="size-w-5">
+                                <h6 class="p-b-5">
+                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
+                                        {{ pop.name}}
+                                    </a>
+                                </h6>
 
-									<span class="f1-s-3 cl6">
+                                <span class="f1-s-3 cl6">
 										{{ pop.date }}
 									</span>
-								</div>
-							</li>
-							{% endfor %}
+                            </div>
+                        </li>
+                        {% endfor %}
 
 
-						</ul>
-					</div>
+                    </ul>
+                </div>
 
-					<div class="col-sm-6 col-lg-4 p-b-20">
-						<div class="size-h-3 flex-s-c">
-							<h5 class="f1-m-7 cl0">
-								Catégories :
-							</h5>
-						</div>
-						<ul class="m-t--12">
+                <div class="col-sm-6 col-lg-4 p-b-20">
+                    <div class="size-h-3 flex-s-c">
+                        <h5 class="f1-m-7 cl0">
+                            Catégories :
+                        </h5>
+                    </div>
+                    <ul class="m-t--12">
 
-							{% for cat in category %}
-							{%	if cat.count != 0 %}
-							<li class="how-bor1 p-rl-5 p-tb-10">
-								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-									{{ cat.name }} ({{ cat.count }})
-								</a>
-							</li>
-							{% endif %}
-							{% endfor %}
+                        {% for cat in category %}
+                        {% if cat.count != 0 %}
+                        <li class="how-bor1 p-rl-5 p-tb-10">
+                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                {{ cat.name }} ({{ cat.count }})
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
 
-						</ul>
+                    </ul>
 
-					</div>
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<div class="bg11">
-			<div class="container size-h-4 flex-c-c p-tb-15">
+    <div class="bg11">
+        <div class="container size-h-4 flex-c-c p-tb-15">
 				<span class="f1-s-1 cl0 txt-center">
 					Copyright © 2020
 
 					<a href="#" class="f1-s-1 cl10 hov-link1">
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy; All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by
-						<a href="https://colorlib.com" target="_blank">Colorlib</a> and <a href="{{ site.link_footer }}" target="_blank">Kr4v3n</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy; All rights reserved | This template is made with <i class="fa fa-heart"
+                                                                                             aria-hidden="true"></i> by
+						<a href="https://colorlib.com" target="_blank">Colorlib</a> and <a href="{{ site.link_footer }}"
+                                                                                           target="_blank">Kr4v3n</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</span>
-			</div>
-		</div>
-	</footer>
+        </div>
+    </div>
+</footer>
 
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
+<!-- Back to top -->
+<div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top">
 			<span class="fas fa-angle-up"></span>
 		</span>
-	</div>
+</div>
 
-	<!-- Modal Video 01-->
-	<div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document" data-dismiss="modal">
-			<div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+<!-- Modal Video 01-->
+<div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document" data-dismiss="modal">
+        <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
 
-			<div class="wrap-video-mo-01">
-				<div class="video-mo-01">
-					<iframe src="https://www.youtube.com/embed/wJnBTPUQS5A?rel=0" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="wrap-video-mo-01">
+            <div class="video-mo-01">
+                <iframe src="https://www.youtube.com/embed/wJnBTPUQS5A?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--===============================================================================================-->
-	<script src="{% static 'front/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'front/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'front/vendor/animsition/js/animsition.min.js' %}"></script>
+<script src="{% static 'front/vendor/animsition/js/animsition.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'front/vendor/bootstrap/js/popper.js' %}"></script>
-	<script src="{% static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'front/vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'front/js/main.js' %}"></script>
-	<script>
-        setTimeout(function(){
-            $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+<script src="{% static 'front/js/main.js' %}"></script>
+<script>
+    setTimeout(function () {
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
             $(this).remove();
-                });
-            }, 5000)
-	</script>
+        });
+    }, 5000)
+</script>
 
 
 </body>

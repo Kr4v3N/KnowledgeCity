@@ -175,6 +175,17 @@ def news_delete(request, pk):
         return redirect('login')
     # Login check end
 
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        a = News.objects.get(pk=pk).writer
+        # print(a, request.user)
+        if str(a) != str(request.user):
+            messages.error(request, "Vous n'avez pas l'autorisation de supprimer cet article")
+            return redirect('news_list')
+
     try:
         b = News.objects.get(pk=pk)
         fs = FileSystemStorage()
@@ -205,6 +216,16 @@ def news_edit(request, pk):
     if len(News.objects.filter(pk=pk)) == 0:
         messages.error(request, "Article non trouvée")
         return redirect('news_list')
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        a = News.objects.get(pk=pk).writer
+        if str(a) != str(request.user):
+            messages.error(request, "Vous n'avez pas l'autorisation d'editer cet article")
+            return redirect('news_list')
 
     news = News.objects.get(pk=pk)
     cat = SubCategory.objects.all()

@@ -3,74 +3,79 @@
 {% load static %}
 
 {% block title %}
-	<title> {{ site.name }} | Accueil </title>
+    <title> {{ site.name }} | Accueil </title>
 {% endblock %}}
 
 {% block content %}
-	<!-- Feature post -->
-<section class="bg0">
-            <div class="row m-rl-0 justify-content-center">
+    <!-- Feature post -->
+    <section class="bg0">
+        <div class="row m-rl-0 justify-content-center">
 
-                {% for lastnew in lastnews %}
+            {% for lastnew in lastnews %}
                 <div class="col-md-4 p-rl-1 p-b-2">
-                    <div class="bg-img1 size-a-11 how1 pos-relative" style="background-image: url({{ lastnew.pic_url }});">
+                    <div class="bg-img1 size-a-11 how1 pos-relative"
+                         style="background-image: url({{ lastnew.pic_url }});">
                         <a href="{% url 'news_detail' pk=lastnew.pk %}" class="dis-block how1-child1 trans-03"></a>
 
                         <div class="flex-col-e-s s-full p-rl-25 p-tb-18">
-                            <a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                            <a href="#"
+                               class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
                                 {{ lastnew.category_name }}
                             </a>
 
                             <h3 class="how1-child2 m-t-14 m-b-10">
-                                <a href="{% url 'news_detail' pk=lastnew.pk %}" class="f1-l-1 cl0 hov-cl10 trans-03 respon1">
+                                <a href="{% url 'news_detail' pk=lastnew.pk %}"
+                                   class="f1-l-1 cl0 hov-cl10 trans-03 respon1">
                                     {{ lastnew.name }}
                                 </a>
                             </h3>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+            {% endfor %}
 
         </div>
-</section>
+    </section>
 
-	<!-- Post -->
+    <!-- Post -->
 
-	<section class="post bg0 p-t-85">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-10 col-lg-12">
-					<div class="p-r-10 p-rl-0-sr991 p-b-20">
+    <section class="post bg0 p-t-85">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-12">
+                    <div class="p-r-10 p-rl-0-sr991 p-b-20">
 
                         {% for newscat in category %}
-                        {% if newscat.count != 0 %}
-                        <!-- Life Style  -->
-						<div class="p-b-25 m-r--10 m-r-0-sr991">
-							<div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
-								<h3 class="f1-m-2 cl17 tab01-title">
-									{{ newscat.name}}
-								</h3>
-							</div>
+                            {% if newscat.count != 0 %}
+                                <!-- Life Style  -->
+                                <div class="p-b-25 m-r--10 m-r-0-sr991">
+                                    <div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
+                                        <h3 class="f1-m-2 cl17 tab01-title">
+                                            {{ newscat.name }}
+                                        </h3>
+                                    </div>
 
-							<div class="row p-t-35">
-								<div class="col-sm-6 p-r-25 p-r-15-sr991">
-                                    {% for ab in news %}
-                                    {% if newscat.pk ==  ab.ocategory_id %}
-									<!-- Item post -->
-									<div class="flex-wr-sb-s m-b-30">
-										<a href="{% url 'news_detail' pk=ab.pk %}" class="size-w-1 wrap-pic-w hov1 trans-03">
-											<img src="{{ ab.pic_url }}" alt="IMG">
-										</a>
+                                    <div class="row p-t-35">
+                                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                                            {% for ab in news %}
+                                                {% if newscat.pk ==  ab.ocategory_id %}
+                                                    <!-- Item post -->
+                                                    <div class="flex-wr-sb-s m-b-30">
+                                                        <a href="{% url 'news_detail' pk=ab.pk %}"
+                                                           class="size-w-1 wrap-pic-w hov1 trans-03">
+                                                            <img src="{{ ab.pic_url }}" alt="IMG">
+                                                        </a>
 
-										<div class="size-w-2">
-											<h5 class="p-b-5">
-												<a href="{% url 'news_detail' pk=ab.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-													{{ ab.name }}
-												</a>
-											</h5>
-											<span class="cl8">
+                                                        <div class="size-w-2">
+                                                            <h5 class="p-b-5">
+                                                                <a href="{% url 'news_detail' pk=ab.pk %}"
+                                                                   class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                    {{ ab.name }}
+                                                                </a>
+                                                            </h5>
+                                                            <span class="cl8">
 												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-													{{ ab.category_name}}
+													{{ ab.category_name }}
 												</a>
 
 												<span class="f1-s-3 m-rl-3">
@@ -78,62 +83,64 @@
 												</span>
 
 												<span class="f1-s-3">
-													{{ ab.date}} | {{  ab.time }}
+													{{ ab.date }} | {{ ab.time }}
 												</span>
 											</span>
-										</div>
-									</div>
-                                    {% endif %}
-                                    {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
 
-{#									<!-- Item post -->#}
-{#									<div class="flex-wr-sb-s m-b-30">#}
-{#										<a href="blog-detail-02.html" class="size-w-1 wrap-pic-w hov1 trans-03">#}
-{#											<img src="{% static 'front/images/post-26.jpg' %}" alt="IMG">#}
-{#										</a>#}
-{##}
-{#										<div class="size-w-2">#}
-{#											<h5 class="p-b-5">#}
-{#												<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">#}
-{#													Donec metus orci, malesuada et lectus vitae#}
-{#												</a>#}
-{#											</h5>#}
-{##}
-{#											<span class="cl8">#}
-{#												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">#}
-{#													Flights#}
-{#												</a>#}
-{##}
-{#												<span class="f1-s-3 m-rl-3">#}
-{#													-#}
-{#												</span>#}
-{##}
-{#												<span class="f1-s-3">#}
-{#													Feb 16#}
-{#												</span>#}
-{#											</span>#}
-{#										</div>#}
-{#									</div>#}
-								</div>
+                                            {#									<!-- Item post -->#}
+                                            {#									<div class="flex-wr-sb-s m-b-30">#}
+                                            {#										<a href="blog-detail-02.html" class="size-w-1 wrap-pic-w hov1 trans-03">#}
+                                            {#											<img src="{% static 'front/images/post-26.jpg' %}" alt="IMG">#}
+                                            {#										</a>#}
+                                            {##}
+                                            {#										<div class="size-w-2">#}
+                                            {#											<h5 class="p-b-5">#}
+                                            {#												<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">#}
+                                            {#													Donec metus orci, malesuada et lectus vitae#}
+                                            {#												</a>#}
+                                            {#											</h5>#}
+                                            {##}
+                                            {#											<span class="cl8">#}
+                                            {#												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">#}
+                                            {#													Flights#}
+                                            {#												</a>#}
+                                            {##}
+                                            {#												<span class="f1-s-3 m-rl-3">#}
+                                            {#													-#}
+                                            {#												</span>#}
+                                            {##}
+                                            {#												<span class="f1-s-3">#}
+                                            {#													Feb 16#}
+                                            {#												</span>#}
+                                            {#											</span>#}
+                                            {#										</div>#}
+                                            {#									</div>#}
+                                        </div>
 
-								<div class="col-sm-6 p-r-25 p-r-15-sr991">
-									<!-- Item post -->
-                                    {% for populary in popularynews %}
-                                        {% if populary.ocategory_id == newscat.pk %}
-                                            {% if populary.show != 0 %}
-                                            <div class="flex-wr-sb-s m-b-30">
-                                                <a href="{% url 'news_detail' pk=populary.pk %}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                    <img src="{{ populary.pic_url }}" alt="IMG">
-                                                </a>
+                                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                                            <!-- Item post -->
+                                            {% for populary in popularynews %}
+                                                {% if populary.ocategory_id == newscat.pk %}
+                                                    {% if populary.show != 0 %}
+                                                        <div class="flex-wr-sb-s m-b-30">
+                                                            <a href="{% url 'news_detail' pk=populary.pk %}"
+                                                               class="size-w-1 wrap-pic-w hov1 trans-03">
+                                                                <img src="{{ populary.pic_url }}" alt="IMG">
+                                                            </a>
 
-                                                <div class="size-w-2">
-                                                    <h5 class="p-b-5">
-                                                        <a href="{% url 'news_detail' pk=populary.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                            {{ populary.name }}
-                                                        </a>
-                                                    </h5>
+                                                            <div class="size-w-2">
+                                                                <h5 class="p-b-5">
+                                                                    <a href="{% url 'news_detail' pk=populary.pk %}"
+                                                                       class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                        {{ populary.name }}
+                                                                    </a>
+                                                                </h5>
 
-                                                    <span class="cl8">
+                                                                <span class="cl8">
                                                         <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
                                                             {{ populary.category_name }}
                                                         </a>
@@ -143,52 +150,52 @@
                                                         </span>
 
                                                         <span class="f1-s-3">
-                                                            {{  populary.date }}
+                                                            {{ populary.date }}
                                                         </span>
                                                     </span>
-                                                </div>
-                                            </div>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-								</div>
-							</div>
-						</div>
-                        {% endif %}
-                        {%  endfor %}
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<!-- Latest news -->
-	<section class="bg0 p-t-60 p-b-40">
-		<div class="container">
-			<div class="how2 how2-cl4 flex-s-c">
-				<h3 class="f1-m-2 cl3 tab01-title">
-					Les  dernières news
-				</h3>
-			</div>
+    <!-- Latest news -->
+    <section class="bg0 p-t-60 p-b-40">
+        <div class="container">
+            <div class="how2 how2-cl4 flex-s-c">
+                <h3 class="f1-m-2 cl3 tab01-title">
+                    Les dernières news
+                </h3>
+            </div>
 
-			<div class="row p-t-35">
-				{% for new in news %}
-				<div class="col-sm-6 col-md-4">
-					<!-- Item latest -->
-					<div class="m-b-45">
-						<a href="{% url 'news_detail' pk=new.pk %}" class="wrap-pic-w hov1 trans-03">
-							<img style="display: inline-block; height: 200px" src="{{ new.pic_url }}" alt="IMG">
-						</a>
+            <div class="row p-t-35">
+                {% for new in news %}
+                    <div class="col-sm-6 col-md-4">
+                        <!-- Item latest -->
+                        <div class="m-b-45">
+                            <a href="{% url 'news_detail' pk=new.pk %}" class="wrap-pic-w hov1 trans-03">
+                                <img style="display: inline-block; height: 200px" src="{{ new.pic_url }}" alt="IMG">
+                            </a>
 
-						<div class="p-t-16">
-							<h5 class="p-b-5">
-								<a href="{% url 'news_detail' pk=new.pk %}" class="f1-m-3 cl2 hov-cl10 trans-03">
-									 {{ new.name }}
-								</a>
-							</h5>
-							<p>{{ new.short_txt|safe }}</p>
-                            <br>
-							<span class="cl8">
+                            <div class="p-t-16">
+                                <h5 class="p-b-5">
+                                    <a href="{% url 'news_detail' pk=new.pk %}" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                        {{ new.name }}
+                                    </a>
+                                </h5>
+                                <p>{{ new.short_txt|safe }}</p>
+                                <br>
+                                <span class="cl8">
 								<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
 									par {{ new.writer }}
 								</a>
@@ -201,12 +208,12 @@
 									Le {{ new.date }}
 								</span>
 							</span>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-	</section>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
 {% endblock content %}
