@@ -1,3 +1,5 @@
+import random
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db.models.functions import datetime
@@ -96,6 +98,16 @@ def news_add(request):
     today = str(day) + '/' + str(month) + '/' + str(year)
     time = str(hour) + 'H' + str(minute)
 
+    date = str(year) + str(month) + str(day)
+    randint = str(random.randint(1000, 9999))
+    rand = date + randint
+    rand = int(rand)
+
+    while len(News.objects.filter(rand=rand)) != 0:
+        randint = str(random.randint(100, 999))
+        rand = date + randint
+        rand = int(rand)
+
     cat = SubCategory.objects.all()
 
     if request.method == 'POST':
@@ -138,6 +150,7 @@ def news_add(request):
                              time=time,
                              ocategory_id=ocategory_id,
                              tag=tag,
+                             rand=rand,
                              )
 
                     b.save()

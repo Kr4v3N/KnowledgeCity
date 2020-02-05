@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.models import User, Group, Permission
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
@@ -72,11 +74,11 @@ def panel(request):
     for i in perms:
         if i.codename == "master_user": perm = 1
     # print(i.codename)
-    if perm == 0:
-        messages.error(request, "Accès interdit")
-        return redirect('change_pass')
+    # if perm == 0:
+    #     messages.error(request, "Accès interdit")
+    #     return redirect('change_pass')
 
-    return render(request, 'back/admin_home.html')
+    return render(request, 'back/admin_home.html', {'rand': rand})
 
 
 def user_login(request):
