@@ -14,6 +14,7 @@ urlpatterns = [
     path('', include('trending.urls')),
     path('', include('manager.urls')),
     path('', include('newsletter.urls')),
+    path('', include('comment.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

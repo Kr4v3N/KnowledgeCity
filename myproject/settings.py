@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'trending',
     'manager',
     'newsletter',
+    'django.contrib.humanize',
+    'comment',
 ]
 
 MIDDLEWARE = [

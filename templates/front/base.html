@@ -276,11 +276,10 @@
 
                             <div class="sub-mega-menu">
                                 <div class="nav flex-column nav-pills" role="tablist">
-                                    <a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
-                                    {% for subcat in subcat %}
-                                    {% if subcat.category_id == gg.pk %}
-                                    <a class="nav-link" data-toggle="pill" href="#{{ subcat.pk }}" role="tab">{{
-                                        subcat.name }}</a>
+                                    <a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">Tout</a>
+                                    {% for sub in subcat %}
+                                    {% if sub.category_id == gg.pk %}
+                                    <a class="nav-link" data-toggle="pill" href="#{{ sub.pk }}" role="tab">{{ sub.name }}</a>
                                     {% endif %}
                                     {% endfor %}
                                 </div>
@@ -378,7 +377,6 @@
         </div>
     </div>
 </header>
-
 {% include 'back/messages.html' %}
 
 {% block content %}
@@ -386,7 +384,6 @@
 Please override this block!
 
 {% endblock %}
-
 
 <!-- Footer -->
 <footer>

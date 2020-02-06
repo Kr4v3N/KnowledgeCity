@@ -1,4 +1,5 @@
 import random
+import string
 
 from django.contrib.auth.models import User, Group, Permission
 from django.core.exceptions import ValidationError
@@ -22,8 +23,9 @@ def home(request):
     allNews = News.objects.filter(activated=1)
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
-    lastnews = News.objects.filter(activated=1).order_by('-pk')[:3]
+    lastnews = News.objects.filter(activated=1).order_by('-pk')[:4]
     popularynews = News.objects.filter(activated=1).order_by('-show')
+    popularynews1 = News.objects.filter(activated=1).order_by('-show')[:1]
     popularynews_footer = News.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')[:5]
 
@@ -37,6 +39,7 @@ def home(request):
                                          'subcat': subcat,
                                          'lastnews': lastnews,
                                          'popularynews': popularynews,
+                                         'popularynews1': popularynews1,
                                          'popularynews_footer': popularynews_footer,
                                          'trending': trending
                                          })
@@ -76,7 +79,18 @@ def panel(request):
     # print(i.codename)
     # if perm == 0:
     #     messages.error(request, "Accès interdit")
-    #     return redirect('change_pass')
+    # return redirect('change_pass')
+    '''
+    rand = ""
+    specialchars = ['!', '@', '$', '%', '&', '^', ')', '=', '(', '-', ')', 'ç', '/', 'µ', '*', '#']
+    for i in range(20):
+        rand = rand + random.choice(string.ascii_letters)
+        rand += random.choice(specialchars)
+        rand += str(random.randint(8, 10))
+    '''
+
+    count = News.objects.count()
+    rand = News.objects.all()[random.randint(0, count-1)]
 
     return render(request, 'back/admin_home.html', {'rand': rand})
 

@@ -1,6 +1,7 @@
 {% extends 'back/base.html' %}
 
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 
@@ -68,4 +69,6 @@
         </div>
     </div>
     <!-- END Mini Top Stats Row -->
+        {{ rand|intword }}
+
 {% endblock %}

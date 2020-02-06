@@ -13,10 +13,10 @@ import datetime
 
 
 def news_detail(request, pk):
-    # Login check start
-    if not request.user.is_authenticated:
-        return redirect('login')
-    # Login check end
+    # # Login check start
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+    # # Login check end
 
     site = Main.objects.get(pk=3)
     news = News.objects.filter(pk=pk)
