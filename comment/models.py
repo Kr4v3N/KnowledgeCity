@@ -12,12 +12,12 @@ class Comment(models.Model):
     news_id = models.IntegerField()
     date = models.CharField(max_length=12)
     time = models.CharField(max_length=10)
-    created = models.DateTimeField(default=timezone.now)
     status = models.IntegerField(default=0)
+    created = models.DateTimeField(default=timezone.now)
 
     class Meta:
         verbose_name = 'Commentaire'
         verbose_name_plural = 'Commentaires'
 
     def __str__(self):
-        return self.name
+        return '{} - {}'.format(self.name, self.content[:20])

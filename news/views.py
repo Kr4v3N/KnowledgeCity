@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db.models.functions import datetime
 from django.core.files.storage import FileSystemStorage
+
+from comment.models import Comment
 from trending.models import Trending
 from .models import News
 from main.models import Main
@@ -36,6 +38,9 @@ def news_detail(request, word):
         print("Can't add show")
 
     code = News.objects.get(name=word).pk
+    comment = Comment.objects.filter(news_id=code, status=1).order_by('-pk')
+    comment_count = len(comment)
+
 
     context = {
         'news': news,
@@ -49,6 +54,8 @@ def news_detail(request, word):
         'tag': tag,
         'trending': trending,
         'code': code,
+        'comment': comment,
+        'comment_count': comment_count,
     }
 
     return render(request, 'front/news_detail.html', context)

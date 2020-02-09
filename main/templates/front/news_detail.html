@@ -129,20 +129,47 @@
 						</div>
 
 						<!-- Leave a comment -->
-						<div>
-							<h4 class="f1-l-4 cl3 p-b-12">
-								Laissez un commentaire
-							</h4>
+                        <div>
 
-							<p class="f1-s-13 cl8 p-b-40">
-								Votre adresse email ne sera pas divulgué. <br> Les champs requis sont indiqués par un asterix.
-							</p>
+                        {% if comment_count == 1 %}
+							<div class="how2 how2-cl4 flex-s-c m-b-30">
+								<h1 class="f1-m-3 cl3 tab01-title">
+									Commentaire :
+								</h1>
+                            <br>
+                            </div>
+                            {% elif comment_count != 0 %}
+                            	<div class="how2 how2-cl4 flex-s-c m-b-30">
+								<h1 class="f1-m-3 cl3 tab01-title">
+									Commentaires :
+								</h1>
+                            <br>
+                            </div>
+                        {% endif %}
+
+                            {%  for cm in comment %}
+                            <h4 class="f1-m-1 cl3 tab01-title">{{ cm.name  }}</h4>
+                                <h5>Posté le {{ cm.date }} à {{ cm.time }}</h5>
+							    <p class="f1-s-13 cl8 p-b-40">{{ cm.content }}</p>
+                            <hr>
+                            {% endfor %}
+
+                        </div>
+                        <br>
+
+						<div>
+                            <div class="">
+								<h3 class="f1-m-3 cl3 tab01-title">
+									Laissez un commentaire :
+								</h3>
+                            </div>
+                            <br>
 
                             {% if user.is_authenticated %}
 
 							<form action="{% url 'comment_add' pk=code %}" method="POST">
                             {% csrf_token %}
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..." required></textarea>
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rédiger votre commentaire..." required></textarea>
 
 								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
 							</form>
@@ -151,13 +178,13 @@
 
                             <form action="{% url 'comment_add' pk=code %}" method="POST">
                                 {% csrf_token %}
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..." required></textarea>
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rédiger votre commentaire..." required></textarea>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom" required>
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom*" required>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email" required>
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*" required>
 
-{#								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Site web">#}
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Site web">
 
 								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Poster votre commentaire</button>
 							</form>
@@ -170,6 +197,7 @@
 				<!-- Sidebar -->
 				<div class="col-md-10 col-lg-4 p-b-30">
 					<div class="p-l-10 p-rl-0-sr991 p-t-70">
+
 						<!-- Category -->
 						<div class="p-b-60">
 							<div class="how2 how2-cl4 flex-s-c">
@@ -191,6 +219,67 @@
                                 {% endfor %}
 
 							</ul>
+						</div>
+
+						<!-- Popular Posts -->
+						<div class="p-b-30">
+							<div class="how2 how2-cl4 flex-s-c">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Les articles les plus populaires
+								</h3>
+							</div>
+
+							<ul class="p-t-35">
+                                {%  for pop in popularynews %}
+                                    {% if pop.ocategory_id == i.ocategory_id %}
+                                        <li class="flex-wr-sb-s p-b-30">
+                                            <a href="{% url 'news_detail' word=pop.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                                <img src="{{ pop.pic_url }}" alt="IMG">
+                                            </a>
+
+                                            <div class="size-w-11">
+                                                <h6 class="p-b-4">
+                                                    <a href="{% url 'news_detail' word=pop.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                        {{ pop.name }}
+                                                    </a>
+                                                </h6>
+
+                                                <span class="cl8 txt-center p-b-24">
+                                                    <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+                                                        {{ pop.category_name }}
+                                                    </a>
+
+                                                    <span class="f1-s-3 m-rl-3">
+                                                        -
+                                                    </span>
+
+                                                    <span class="f1-s-3">
+                                                        {{ pop.date }}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+							</ul>
+						</div>
+
+						<!-- Tag -->
+						<div>
+							<div class="how2 how2-cl4 flex-s-c m-b-30">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Tags
+								</h3>
+							</div>
+
+							<div class="flex-wr-s-s m-rl--5">
+                                {% for tagname in tag  %}
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									{{ tagname }}
+								</a>
+                                {%  endfor %}
+
+                            </div>
 						</div>
 
 						<!-- Archive -->
@@ -298,67 +387,6 @@
 									</a>
 								</li>
 							</ul>
-						</div>
-
-						<!-- Popular Posts -->
-						<div class="p-b-30">
-							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Les articles les plus populaires
-								</h3>
-							</div>
-
-							<ul class="p-t-35">
-                                {%  for pop in popularynews %}
-                                    {% if pop.ocategory_id == i.ocategory_id %}
-                                        <li class="flex-wr-sb-s p-b-30">
-                                            <a href="{% url 'news_detail' word=pop.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                                <img src="{{ pop.pic_url }}" alt="IMG">
-                                            </a>
-
-                                            <div class="size-w-11">
-                                                <h6 class="p-b-4">
-                                                    <a href="{% url 'news_detail' word=pop.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                        {{ pop.name }}
-                                                    </a>
-                                                </h6>
-
-                                                <span class="cl8 txt-center p-b-24">
-                                                    <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-                                                        {{ pop.category_name }}
-                                                    </a>
-
-                                                    <span class="f1-s-3 m-rl-3">
-                                                        -
-                                                    </span>
-
-                                                    <span class="f1-s-3">
-                                                        {{ pop.date }}
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-							</ul>
-						</div>
-
-						<!-- Tag -->
-						<div>
-							<div class="how2 how2-cl4 flex-s-c m-b-30">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Tags
-								</h3>
-							</div>
-
-							<div class="flex-wr-s-s m-rl--5">
-                                {% for tagname in tag  %}
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									{{ tagname }}
-								</a>
-                                {%  endfor %}
-
-                            </div>
 						</div>
 					</div>
 				</div>
