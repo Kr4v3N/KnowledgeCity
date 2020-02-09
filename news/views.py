@@ -12,32 +12,30 @@ from subcategory.models import SubCategory
 import datetime
 
 
-def news_detail(request, pk):
-    # # Login check start
-    # if not request.user.is_authenticated:
-    #     return redirect('login')
-    # # Login check end
+def news_detail(request, word):
 
     site = Main.objects.get(pk=3)
-    news = News.objects.filter(pk=pk)
+    news = News.objects.filter(name=word)
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
     lastnews = News.objects.all().order_by('-pk')[:3]
     allNews = News.objects.all()
     popularynews = News.objects.all().order_by('-show')
-    popularynews_footer = News.objects.all().order_by('-show')[:4]
+    popularynews_footer = News.objects.all().order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')[:5]
 
-    tagname = News.objects.get(pk=pk).tag
+    tagname = News.objects.get(name=word).tag
     tag = tagname.split(',')
 
     try:
-        mynews = News.objects.get(pk=pk)
+        mynews = News.objects.get(name=word)
         mynews.show = mynews.show + 1
         mynews.save()
 
     except:
         print("Can't add show")
+
+    code = News.objects.get(name=word).pk
 
     context = {
         'news': news,
@@ -49,7 +47,8 @@ def news_detail(request, pk):
         'popularynews': popularynews,
         'popularynews_footer': popularynews_footer,
         'tag': tag,
-        'trending': trending
+        'trending': trending,
+        'code': code,
     }
 
     return render(request, 'front/news_detail.html', context)

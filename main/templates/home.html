@@ -15,7 +15,7 @@
                 <div class="col-md-4 p-rl-1 p-b-2">
                     <div class="bg-img1 size-a-11 how1 pos-relative"
                          style="background-image: url({{ lastnew.pic_url }});">
-                        <a href="{% url 'news_detail' pk=lastnew.pk %}" class="dis-block how1-child1 trans-03"></a>
+                        <a href="{% url 'news_detail' word=lastnew.name %}" class="dis-block how1-child1 trans-03"></a>
 
                         <div class="flex-col-e-s s-full p-rl-25 p-tb-18">
                             <a href="#"
@@ -24,7 +24,7 @@
                             </a>
 
                             <h3 class="how1-child2 m-t-14 m-b-10">
-                                <a href="{% url 'news_detail' pk=lastnew.pk %}"
+                                <a href="{% url 'news_detail' word=lastnew.name %}"
                                    class="f1-l-1 cl0 hov-cl10 trans-03 respon1">
                                     {{ lastnew.name }}
                                 </a>
@@ -61,14 +61,14 @@
                                                 {% if newscat.pk ==  ab.ocategory_id %}
                                                     <!-- Item post -->
                                                     <div class="flex-wr-sb-s m-b-30">
-                                                        <a href="{% url 'news_detail' pk=ab.pk %}"
+                                                        <a href="{% url 'news_detail' word=ab.name %}"
                                                            class="size-w-1 wrap-pic-w hov1 trans-03">
                                                             <img src="{{ ab.pic_url }}" alt="IMG">
                                                         </a>
 
                                                         <div class="size-w-2">
                                                             <h5 class="p-b-5">
-                                                                <a href="{% url 'news_detail' pk=ab.pk %}"
+                                                                <a href="{% url 'news_detail' word=ab.name %}"
                                                                    class="f1-s-5 cl3 hov-cl10 trans-03">
                                                                     {{ ab.name }}
                                                                 </a>
@@ -127,14 +127,14 @@
                                                 {% if populary.ocategory_id == newscat.pk %}
                                                     {% if populary.show != 0 %}
                                                         <div class="flex-wr-sb-s m-b-30">
-                                                            <a href="{% url 'news_detail' pk=populary.pk %}"
+                                                            <a href="{% url 'news_detail' word=populary.name %}"
                                                                class="size-w-1 wrap-pic-w hov1 trans-03">
                                                                 <img src="{{ populary.pic_url }}" alt="IMG">
                                                             </a>
 
                                                             <div class="size-w-2">
                                                                 <h5 class="p-b-5">
-                                                                    <a href="{% url 'news_detail' pk=populary.pk %}"
+                                                                    <a href="{% url 'news_detail' word=populary.name %}"
                                                                        class="f1-s-5 cl3 hov-cl10 trans-03">
                                                                         {{ populary.name }}
                                                                     </a>
@@ -179,25 +179,26 @@
             </div>
 
             <div class="row p-t-35">
-                {% for new in news %}
+
+                {% for i in news %}
                     <div class="col-sm-6 col-md-4">
                         <!-- Item latest -->
                         <div class="m-b-45">
-                            <a href="{% url 'news_detail' pk=new.pk %}" class="wrap-pic-w hov1 trans-03">
-                                <img style="display: inline-block; height: 200px" src="{{ new.pic_url }}" alt="IMG">
+                            <a href="{% url 'news_detail' word=i.name %}" class="wrap-pic-w hov1 trans-03">
+                                <img style="display: inline-block; height: 200px" src="{{ i.pic_url }}" alt="IMG">
                             </a>
 
                             <div class="p-t-16">
                                 <h5 class="p-b-5">
-                                    <a href="{% url 'news_detail' pk=new.pk %}" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                        {{ new.name }}
+                                    <a href="{% url 'news_detail' word=i.name %}" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                        {{ i.name }}
                                     </a>
                                 </h5>
-                                <p>{{ new.short_txt|safe }}</p>
+                                <p>{{ i.short_txt|safe }}</p>
                                 <br>
                                 <span class="cl8">
 								<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-									par {{ new.writer }}
+									par {{ i.writer }}
 								</a>
 
 								<span class="f1-s-3 m-rl-3">
@@ -205,7 +206,7 @@
 								</span>
 
 								<span class="f1-s-3">
-									Le {{ new.date }}
+									Le {{ i.date }}
 								</span>
 							</span>
                             </div>

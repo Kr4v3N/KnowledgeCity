@@ -10,7 +10,7 @@
 
 {% block content %}
 
-    {% for new in news %}
+    {% for i in news %}
 
 	<!-- Breadcrumb -->
 	<div class="container">
@@ -21,7 +21,7 @@
 				<a href="/" class="breadcrumb-item f1-s-3 cl9">News</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
-                    {{ new.name }}
+                    {{ i.name }}
                 </span>
 			</div>
 
@@ -44,28 +44,28 @@
 						<div class="p-b-70">
 
 							<a href="#" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-								{{ new.category_name }}
+								{{ i.category_name }}
 							</a>
 
 							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-								{{ new.name }}
+								{{ i.name }}
 							</h3>
 
 							<div class="flex-wr-s-s p-b-40">
 								<span class="f1-s-3 cl8 m-r-15">
 									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										par {{ new.writer }} root
+										par {{ i.writer }} root
 									</a>
 
 									<span class="m-rl-3">-</span>
 
 									<span>
-										Le {{ new.date }}
+										Le {{ i.date }}
 									</span>
 								</span>
 
 								<span class="f1-s-3 cl8 m-r-15">
-									{{ new.show }} Vues
+									{{ i.show }} Vues
 								</span>
 
 								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
@@ -74,11 +74,11 @@
 							</div>
 
 							<div class="wrap-pic-max-w p-b-30">
-								<img src="{{ new.pic_url }}" alt="IMG">
+								<img src="{{ i.pic_url }}" alt="IMG">
 							</div>
 
 							<p align="justify" class="f1-s-11 cl6 p-b-25">
-                                {{ new.body_txt|safe }}
+                                {{ i.body_txt|safe }}
 							</p>
 
 
@@ -139,29 +139,29 @@
 							</p>
 
                             {% if user.is_authenticated %}
-							<form action="#" method="post">
-                            {% csrf_token %}
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..."></textarea>
 
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Soumettre votre commentaire
-								</button>
+							<form action="{% url 'comment_add' pk=code %}" method="POST">
+                            {% csrf_token %}
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..." required></textarea>
+
+								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
 							</form>
+
                             {% else %}
 
-                            <form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..."></textarea>
+                            <form action="{% url 'comment_add' pk=code %}" method="POST">
+                                {% csrf_token %}
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Commentaire..." required></textarea>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom*">
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom" required>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email" required>
 
 {#								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Site web">#}
 
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Poster votre commentaire
-								</button>
+								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Poster votre commentaire</button>
 							</form>
+
                             {% endif %}
 						</div>
 					</div>
@@ -310,15 +310,15 @@
 
 							<ul class="p-t-35">
                                 {%  for pop in popularynews %}
-                                    {% if pop.ocategory_id == new.ocategory_id %}
+                                    {% if pop.ocategory_id == i.ocategory_id %}
                                         <li class="flex-wr-sb-s p-b-30">
-                                            <a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                            <a href="{% url 'news_detail' word=pop.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
                                                 <img src="{{ pop.pic_url }}" alt="IMG">
                                             </a>
 
                                             <div class="size-w-11">
                                                 <h6 class="p-b-4">
-                                                    <a href="{% url 'news_detail' pk=pop.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    <a href="{% url 'news_detail' word=pop.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                                         {{ pop.name }}
                                                     </a>
                                                 </h6>

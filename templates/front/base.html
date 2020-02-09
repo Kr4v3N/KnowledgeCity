@@ -291,21 +291,21 @@
                                             {% if hh.ocategory_id == gg.pk %}
                                             <div class="col-3">
                                                 <!-- Item post -->
-                                                <div><a href="{% url 'news_detail' pk=hh.pk %}"
+                                                <div><a href="{% url 'news_detail' word=hh.name %}"
                                                         class="wrap-pic-w hov1 trans-03">
                                                     <img src="{{ hh.pic_url }}" alt="IMG">
                                                 </a>
 
                                                     <div class="p-t-10">
                                                         <h5 class="p-b-5">
-                                                            <a href="{% url 'news_detail' pk=hh.pk %}"
+                                                            <a href="{% url 'news_detail' word=hh.name %}"
                                                                class="f1-s-5 cl3 hov-cl10 trans-03">
                                                                 {{ hh.name }}
                                                             </a>
                                                         </h5>
 
                                                         <span class="cl8">
-																<a href="{% url 'news_detail' pk=hh.pk %}"
+																<a href="{% url 'news_detail' word=hh.name %}"
                                                                    class="f1-s-6 cl8 hov-cl10 trans-03">
 																	{{ hh.category_name }}
 																</a>
@@ -335,7 +335,7 @@
                                             <div class="col-3">
                                                 <!-- Item post -->
                                                 <div>
-                                                    <a href="{% url 'news_detail' pk=mm.pk %}"
+                                                    <a href="{% url 'news_detail' word=mm.name %}"
                                                        class="wrap-pic-w hov1 trans-03">
                                                         <img src="{{ mm.pic_url }}" alt="IMG">
                                                     </a>
@@ -346,7 +346,7 @@
                                                             </a>
                                                         </h5>
                                                         <span class="cl8">
-															<a href="{% url 'news_detail' pk=mm.pk %}"
+															<a href="{% url 'news_detail' word=mm.name %}"
                                                                class="f1-s-6 cl8 hov-cl10 trans-03">
 																{{ mm.category_name }}
 															</a>
@@ -460,7 +460,7 @@ Please override this block!
                     <ul>
                         {% for pop in popularynews_footer %}
                         <li class="flex-wr-sb-s p-b-20">
-                            <a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-4 wrap-pic-w hov1 trans-03">
+                            <a href="{% url 'news_detail' word=pop.name %}" class="size-w-4 wrap-pic-w hov1 trans-03">
                                 <img src="{{ pop.pic_url}}" alt="IMG">
                             </a>
 

@@ -3,5 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path(r'^comment/add/news/(?P<pk>\d+)$', views.comment_add, name='comment_add'),
+    path('comment/add/news/<int:pk>', views.comment_add, name='comment_add'),
+    path('panel/comments/list/', views.comment_list, name='comments_list'),
+    path('panel/comment/delete/<int:pk>', views.comment_delete, name='comment_delete'),
 ]
