@@ -35,6 +35,7 @@
                         <th>Date & Heure</th>
                         <th>Email</th>
                         <th>Commentaire</th>
+                        <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
@@ -43,7 +44,8 @@
                         <th>Auteurs</th>
                         <th>Dates & Heures</th>
                         <th>Emails</th>
-                        <th>commentaires</th>
+                        <th>Commentaires</th>
+                        <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -56,14 +58,28 @@
                         <td>{{ cc.date }} à {{ cc.time }}</td>
                         <td>{{ cc.email }}</td>
                         <td>{{ cc.content }}</td>
+                        {% if cc.status == 0 %}
+                            <td>En attente</td>
+                        {% elif cc.status == 1 %}
+                            <td>Confimé</td>
+                        {% endif %}
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="" data-toggle="tooltip" title="Editer"
-                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
                                 <a href="{% url 'comment_delete' pk=cc.pk %}"
                                    data-confirm="Etes-vous certain de vouloir supprimer le commentaire de  {{ cc.name }} ?"
                                    data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i
                                         class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'comment_confirme' pk=cc.pk %}"
+                                    {% if cc.status == 0 %}
+                                   data-toggle="tooltip" title="Confirmation" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-play"> Confirmé</i>
+                                </a>
+                                <a href="{% url 'comment_confirme' pk=cc.pk %}"
+                                    {% elif cc.status == 1 %}
+                                    data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
+                                        <i class="fa fa-anchor"> En ligne</i>
+                                </a>
+                                    {% endif %}
                             </div>
                         </td>
                     </tr>

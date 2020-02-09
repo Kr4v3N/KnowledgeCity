@@ -80,10 +80,10 @@
                                         class="fa fa-times"> Supprimer</i></a>
                                 <a href="{% url 'news_publish' pk=new.pk %}"
                                         {% if new.activated == 0 %}
-                                   data-toggle="tooltip" title="Publié" class="btn btn-xs btn-warning">
+                                   data-toggle="tooltip" title="Publié" class="btn btn-xs btn-primary">
                                                 <i class="fa fa-play"> Publié</i></a>
                                         {% else %}
-                                            data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
+                                <a href="{% url 'news_publish' pk=new.pk %}" data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
                                             <i class="fa fa-anchor"> En ligne</i></a>
                                         {% endif %}
                             </div>

@@ -88,3 +88,26 @@ def comment_delete(request, pk):
 
     messages.success(request, 'Le commentaire a été supprimé avec succès')
     return redirect('comments_list')
+
+
+def comment_confirme(request, pk):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    perm = 0
+    for i in request.user.groups.all():
+        if i.name == "masteruser": perm = 1
+
+    if perm == 0:
+        a = News.objects.get(pk=pk).writer
+        if str(a) != str(request.user):
+            messages.error(request, "Accès refusé")
+            return redirect('news_list')
+
+    comment = Comment.objects.get(pk=pk)
+    comment.status = 1
+    comment.save()
+
+    return redirect('comments_list')
