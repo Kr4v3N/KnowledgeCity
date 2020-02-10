@@ -1,6 +1,9 @@
+from django.shortcuts import render
 
 from .models import Blacklist
 
 
-def comment_add(request, pk):
-    pass
+def black_list(request):
+
+
+    return render(request, 'back/blacklist.html')

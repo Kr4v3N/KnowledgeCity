@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    # path('comment/add/news/<int:pk>', views.comment_add, name='comment_add'),
+    path('blacklist', views.black_list, name='black_list'),
 ]
