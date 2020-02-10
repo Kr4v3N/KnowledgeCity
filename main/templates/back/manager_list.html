@@ -34,6 +34,7 @@
                         <th>Nom</th>
                         <th>email</th>
                         <th>Nom d'utilisateur</th>
+                        <th>IP</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
@@ -42,6 +43,7 @@
                         <th>Noms</th>
                         <th>emails</th>
                         <th>Noms des utilisateurs</th>
+                        <th>IP</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -53,6 +55,7 @@
                         <td>{{ mn.name }}</td>
                         <td>{{ mn.email }}</td>
                         <td>{{ mn.user_txt }}</td>
+                        <td>{{ mn.ip }}</td>
 
                         <td class="text-center">
                             <div class="btn-group">

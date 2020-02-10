@@ -32,7 +32,7 @@ def comment_add(request, pk):
 
         if request.user.is_authenticated:
 
-            manager = Manager.objects.get()
+            manager = Manager.objects.get(user_txt=request.user)
             b = Comment(name=manager.name,
                         email=manager.email,
                         content=content,
@@ -97,7 +97,7 @@ def comment_confirme(request, pk):
     # Login check end
 
     perm = 0
-    for i in request.user.groups.all():
+    for i in request.user.groups.all(user_txt=request.user):
         if i.name == "masteruser": perm = 1
 
     if perm == 0:

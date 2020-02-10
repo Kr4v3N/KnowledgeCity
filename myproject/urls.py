@@ -15,6 +15,7 @@ urlpatterns = [
     path('', include('manager.urls')),
     path('', include('newsletter.urls')),
     path('', include('comment.urls')),
+    path('', include('blacklist.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
