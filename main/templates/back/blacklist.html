@@ -33,14 +33,14 @@
                 <div class="block">
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'category_add' %}" method="post" enctype="multipart/form-data"
+                    <form action="{% url 'ip_add' %}" method="post" enctype="multipart/form-data"
                           class="form-horizontal form-bordered">
                         {% csrf_token %}
                         {% csrf_token %}
                         <div class="form-group">
                             <div class="col-md-6">
                                 <label for="" class="text-info">IP :</label>
-                                <input type="text" id="name" name="name" class="form-control"
+                                <input type="text" id="ip" name="ip" class="form-control"
                                        placeholder="IP" required>
                             </div>
                             <div class="col-md-6">
@@ -71,32 +71,30 @@
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
 
                 <thead>
-                {% if subcategory|length <= 1 %}
+                {% if ip|length <= 1 %}
                     <tr>
-                        <th>Identifiant</th>
-                        <th>IP</th>
-                        <th>Actions</th>
+                        <th class="text-center">Identifiant</th>
+                        <th class="text-center">IP</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
                     <tr>
-                        <th>Identifiants</th>
-                        <th>IPs</th>
-                        <th>Actions</th>
+                        <th class="text-center">Identifiants</th>
+                        <th class="text-center">IPs</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
                 </thead>
 
                 <tbody>
-                {% for subcat in subcategory %}
+                {% for cc in ip %}
                     <tr>
-                        <td class="">{{ subcat.pk }}</td>
-                        <td class="">{{ subcat.name }}</td>
-                        <td class="">
+                        <td class="text-center">{{ cc.pk }}</td>
+                        <td class="text-center">{{ cc.ip }}</td>
+                        <td class="text-center">
                             <div class="btn-group">
-                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
-                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
-                                <a href=""
-                                   data-confirm="Etes-vous certain de vouloir supprimer la sous categorie {{ subcat.category_name }} ?"
+                            <a href="{% url 'ip_delete' pk=cc.pk %}"
+                            data-confirm="Etes-vous certain de vouloir supprimer l'IP {{ cc.ip }} ?"
                                    data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
                                         class="fa fa-times"> Supprimer</i></a>
                             </div>

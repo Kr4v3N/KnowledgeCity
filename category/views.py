@@ -1,4 +1,7 @@
+import csv
+
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Category
 
@@ -44,3 +47,13 @@ def category_add(request):
             return redirect('category_list')
 
     return render(request, 'back/category_add.html')
+
+
+def export_cat_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="category.csv'
+
+    writer = csv.writer(response)
+    writer.writerow(['test1', 'test2', 'test3'])
+
+    return response

@@ -46,21 +46,21 @@
             <div class="content-topbar h-100 p-rl-30">
 
                 <div class="align-self-stretch size-w-0 pos-relative m-r-30">
-                    <div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">
-							<span class="text-uppercase cl0 p-r-8">
-								Tendances actuelles :
-							</span>
+<!--                    <div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">-->
+<!--							<span class="text-uppercase cl0 p-r-8">-->
+<!--								Tendances actuelles :-->
+<!--							</span>-->
 
-                        <span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown"
-                              data-out="fadeOutDown">
-								{% for trending in trending %}
-								<span class="dis-inline-block slide100-txt-item animated visible-false">
-									{{ trending.txt }}
-								</span>
-								{% endfor %}
+<!--                        <span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown"-->
+<!--                              data-out="fadeOutDown">-->
+<!--								{% for trending in trending %}-->
+<!--								<span class="dis-inline-block slide100-txt-item animated visible-false">-->
+<!--									{{ trending.txt }}-->
+<!--								</span>-->
+<!--								{% endfor %}-->
 
-							</span>
-                    </div>
+<!--							</span>-->
+<!--                    </div>-->
                 </div>
 
 
@@ -88,11 +88,11 @@
                         </a>
 
                         {% if user.is_authenticated %}
-                        <a href="logout" class="left-topbar-item">
+                        <a href="/logout" class="left-topbar-item">
                             Se déconnecter
                         </a>
                         {% else %}
-                        <a href="login" class="left-topbar-item">
+                        <a href="/login" class="left-topbar-item">
                             S'inscrire / S'identifier
                         </a>
                         {% endif %}
@@ -252,8 +252,12 @@
         <div class="wrap-logo no-banner container">
             <!-- Logo desktop -->
             <div class="logo">
-                <a href="/"><img src="{{ site.pic_url }}" alt="LOGO"></a>
+                <a href="/"><img src="{{ site.pic_url }}" style="margin-right: 150px;;" alt="LOGO"></a>
             </div>
+            <!-- Banner -->
+				<div class="banner-header">
+					<a href="#"><img src="{% static 'front/images/banner.jpg' %}" alt="IMG"></a>
+				</div>
         </div>
 
         <!--  -->

@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
 
@@ -8,6 +10,7 @@ from news.models import News
 
 
 def comment_add(request, pk):
+
     if request.method == 'POST':
         now = datetime.datetime.now()
         year = now.year
@@ -31,8 +34,8 @@ def comment_add(request, pk):
         content = request.POST.get('msg')
 
         if request.user.is_authenticated:
-
             manager = Manager.objects.get(user_txt=request.user)
+
             b = Comment(name=manager.name,
                         email=manager.email,
                         content=content,
@@ -90,7 +93,7 @@ def comment_delete(request, pk):
     return redirect('comments_list')
 
 
-def comment_confirme(request, pk):
+def comment_confirm(request, pk):
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

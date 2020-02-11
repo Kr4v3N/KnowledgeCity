@@ -64,13 +64,13 @@
 							<ul class="p-t-35">
                                 {% for pop in popularynews %}
                                     <li class="flex-wr-sb-s p-b-30">
-                                        <a href="{% url 'news_detail' pk=pop.pk %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                        <a href="{% url 'news_detail' word=pop.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
                                             <img src="{{ pop.pic_url }}" alt="IMG">
                                         </a>
 
                                         <div class="size-w-11">
                                             <h6 class="p-b-4">
-                                                <a href="{% url 'news_detail' pk=pop.pk %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                <a href="{% url 'news_detail' word=pop.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                                     {{ pop.name}}
                                                 </a>
                                             </h6>

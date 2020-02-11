@@ -6,5 +6,5 @@ urlpatterns = [
     path('comment/add/news/<int:pk>', views.comment_add, name='comment_add'),
     path('panel/comments/list/', views.comment_list, name='comments_list'),
     path('panel/comment/delete/<int:pk>', views.comment_delete, name='comment_delete'),
-    path('panel/comment/confirme/<int:pk>', views.comment_confirme, name='comment_confirme'),
+    path('panel/comment/confirm/<int:pk>', views.comment_confirm, name='comment_confirm'),
 ]

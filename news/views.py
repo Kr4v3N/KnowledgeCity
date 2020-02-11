@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db.models.functions import datetime
 from django.core.files.storage import FileSystemStorage
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from comment.models import Comment
 from trending.models import Trending
 from .models import News
@@ -15,7 +15,6 @@ import datetime
 
 
 def news_detail(request, word):
-
     site = Main.objects.get(pk=3)
     news = News.objects.filter(name=word)
     category = Category.objects.all()
@@ -40,7 +39,6 @@ def news_detail(request, word):
     code = News.objects.get(name=word).pk
     comment = Comment.objects.filter(news_id=code, status=1).order_by('-pk')
     comment_count = len(comment)
-
 
     context = {
         'news': news,
@@ -74,7 +72,17 @@ def news_list(request):
     if perm == 0:
         news = News.objects.filter(writer=request.user)
     elif perm == 1:
-        news = News.objects.all()
+        newss = News.objects.all()
+        paginator = Paginator(newss, 5)
+        page = request.GET.get('page')
+
+        try:
+            news = paginator.page(page)
+        except EmptyPage:
+            news = paginator.page(paginator.num_pages)
+
+        except PageNotAnInteger:
+            news = paginator.page(1)
 
     return render(request, 'back/news_list.html', {'news': news})
 

@@ -69,12 +69,12 @@
                                    data-confirm="Etes-vous certain de vouloir supprimer le commentaire de  {{ cc.name }} ?"
                                    data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i
                                         class="fa fa-times"> Supprimer</i></a>
-                                <a href="{% url 'comment_confirme' pk=cc.pk %}"
+                                <a href="{% url 'comment_confirm' pk=cc.pk %}"
                                     {% if cc.status == 0 %}
                                    data-toggle="tooltip" title="Confirmation" class="btn btn-xs btn-primary">
                                         <i class="fa fa-play"> Confirmé</i>
                                 </a>
-                                <a href="{% url 'comment_confirme' pk=cc.pk %}"
+                                <a href="{% url 'comment_confirm' pk=cc.pk %}"
                                     {% elif cc.status == 1 %}
                                     data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
                                         <i class="fa fa-anchor"> En ligne</i>

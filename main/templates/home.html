@@ -8,37 +8,175 @@
 
 {% block content %}
     <!-- Feature post -->
-    <section class="bg0">
-        <div class="row m-rl-0 justify-content-center">
+{#    <section class="bg0">#}
+{#        <div class="row m-rl-0 justify-content-center">#}
+{##}
+{#            {% for lastnew in lastnews %}#}
+{#                <div class="col-md-4 p-rl-1 p-b-2">#}
+{#                    <div class="bg-img1 size-a-11 how1 pos-relative"#}
+{#                         style="background-image: url({{ lastnew.pic_url }});">#}
+{#                        <a href="{% url 'news_detail' word=lastnew.name %}" class="dis-block how1-child1 trans-03"></a>#}
+{##}
+{#                        <div class="flex-col-e-s s-full p-rl-25 p-tb-18">#}
+{#                            <a href="#"#}
+{#                               class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">#}
+{#                                {{ lastnew.category_name }}#}
+{#                            </a>#}
+{##}
+{#                            <h3 class="how1-child2 m-t-14 m-b-10">#}
+{#                                <a href="{% url 'news_detail' word=lastnew.name %}"#}
+{#                                   class="f1-l-1 cl0 hov-cl10 trans-03 respon1">#}
+{#                                    {{ lastnew.name }}#}
+{#                                </a>#}
+{#                            </h3>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{##}
+{#        </div>#}
+{#    </section>#}
 
-            {% for lastnew in lastnews %}
-                <div class="col-md-4 p-rl-1 p-b-2">
-                    <div class="bg-img1 size-a-11 how1 pos-relative"
-                         style="background-image: url({{ lastnew.pic_url }});">
-                        <a href="{% url 'news_detail' word=lastnew.name %}" class="dis-block how1-child1 trans-03"></a>
+    <!-- Headline -->
+	<div class="container">
+		<div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
+			<div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
+				<span class="text-uppercase cl2 p-r-8">
+					Tendances actuelles:
+				</span>
 
-                        <div class="flex-col-e-s s-full p-rl-25 p-tb-18">
-                            <a href="#"
-                               class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                {{ lastnew.category_name }}
-                            </a>
+				<span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
+					{% for trending in trending %}
+                        <span class="dis-inline-block slide100-txt-item animated visible-false">
+                        <a href="{{ trending.link }}">{{ trending.txt|truncatechars:70 }}</a>
+                        </span>
+                    {% endfor %}
+				</span>
+			</div>
 
-                            <h3 class="how1-child2 m-t-14 m-b-10">
-                                <a href="{% url 'news_detail' word=lastnew.name %}"
-                                   class="f1-l-1 cl0 hov-cl10 trans-03 respon1">
-                                    {{ lastnew.name }}
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
+				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Rechercher">
+				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 
-        </div>
-    </section>
+    <!-- Feature post -->
+	<section class="bg0">
+		<div class="container">
+			<div class="row m-rl--1">
+
+                {% for ln in lastnews2 %}
+                {% if forloop.counter == 1 %}
+				<div class="col-md-6 p-rl-1 p-b-2">
+					<div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
+						<a href="{% url 'news_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
+
+						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
+							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+								{{ln.category_name}}
+							</a>
+
+							<h3 class="how1-child2 m-t-14 m-b-10">
+								<a href="{% url 'news_detail' word=ln.name %}" class="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
+									{{ln.name}}
+								</a>
+							</h3>
+
+							<span class="how1-child2">
+								<span class="f1-s-4 cl11">
+									{{ ln.writer }}
+								</span>
+
+								<span class="f1-s-3 cl11 m-rl-3">
+									-
+								</span>
+
+								<span class="f1-s-3 cl11">
+									{{ ln.date }} à {{ ln.time }}
+								</span>
+							</span>
+						</div>
+					</div>
+				</div>
+                {% endif %}
+                {% endfor %}
+
+				<div class="col-md-6 p-rl-1">
+					<div class="row m-rl--1">
+
+                        {% for ln in lastnews2 %}
+                        {% if forloop.counter == 2 %}
+						<div class="col-12 p-rl-1 p-b-2">
+							<div class="bg-img1 size-a-4 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
+								<a href="{% url 'news_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
+
+								<div class="flex-col-e-s s-full p-rl-25 p-tb-24">
+									<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                                    {{ln.category_name}}
+									</a>
+									<h3 class="how1-child2 m-t-14">
+                                        <a href="{% url 'news_detail' word=ln.name %}" class="how-txt1 size-a-7 f1-l-2 cl0 hov-cl10 trans-03">
+                                        {{ln.name}}
+                                        </a>
+									</h3>
+								</div>
+							</div>
+						</div>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% for ln in lastnews2 %}
+                        {% if forloop.counter == 3 %}
+						<div class="col-sm-6 p-rl-1 p-b-2">
+							<div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
+								<a href="{% url 'news_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
+
+								<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
+									<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+										 {{ln.category_name}}
+									</a>
+
+									<h3 class="how1-child2 m-t-14">
+										<a href="{% url 'news_detail' word=ln.name %}" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+											{{ln.name}}
+										</a>
+									</h3>
+								</div>
+							</div>
+						</div>
+
+                        {% endif %}
+
+                        {% if forloop.counter == 4 %}
+						<div class="col-sm-6 p-rl-1 p-b-2">
+							<div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
+								<a href="{% url 'news_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
+
+								<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
+									<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+										 {{ln.category_name}}
+									</a>
+
+									<h3 class="how1-child2 m-t-14">
+										<a href="{% url 'news_detail' word=ln.name %}" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+											{{ln.name}}
+										</a>
+									</h3>
+								</div>
+							</div>
+						</div>
+                        {% endif %}
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
     <!-- Post -->
-
     <section class="post bg0 p-t-85">
         <div class="container">
             <div class="row justify-content-center">
@@ -47,7 +185,7 @@
 
                         {% for newscat in category %}
                             {% if newscat.count != 0 %}
-                                <!-- Life Style  -->
+                                <!-- Categories  -->
                                 <div class="p-b-25 m-r--10 m-r-0-sr991">
                                     <div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
                                         <h3 class="f1-m-2 cl17 tab01-title">
@@ -58,7 +196,7 @@
                                     <div class="row p-t-35">
                                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                                             {% for ab in news %}
-                                                {% if newscat.pk ==  ab.ocategory_id %}
+                                                {% if newscat.pk == ab.ocategory_id %}
                                                     <!-- Item post -->
                                                     <div class="flex-wr-sb-s m-b-30">
                                                         <a href="{% url 'news_detail' word=ab.name %}"
@@ -90,37 +228,7 @@
                                                     </div>
                                                 {% endif %}
                                             {% endfor %}
-
-                                            {#									<!-- Item post -->#}
-                                            {#									<div class="flex-wr-sb-s m-b-30">#}
-                                            {#										<a href="blog-detail-02.html" class="size-w-1 wrap-pic-w hov1 trans-03">#}
-                                            {#											<img src="{% static 'front/images/post-26.jpg' %}" alt="IMG">#}
-                                            {#										</a>#}
-                                            {##}
-                                            {#										<div class="size-w-2">#}
-                                            {#											<h5 class="p-b-5">#}
-                                            {#												<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">#}
-                                            {#													Donec metus orci, malesuada et lectus vitae#}
-                                            {#												</a>#}
-                                            {#											</h5>#}
-                                            {##}
-                                            {#											<span class="cl8">#}
-                                            {#												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">#}
-                                            {#													Flights#}
-                                            {#												</a>#}
-                                            {##}
-                                            {#												<span class="f1-s-3 m-rl-3">#}
-                                            {#													-#}
-                                            {#												</span>#}
-                                            {##}
-                                            {#												<span class="f1-s-3">#}
-                                            {#													Feb 16#}
-                                            {#												</span>#}
-                                            {#											</span>#}
-                                            {#										</div>#}
-                                            {#									</div>#}
                                         </div>
-
                                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                                             <!-- Item post -->
                                             {% for populary in popularynews %}
@@ -169,12 +277,22 @@
         </div>
     </section>
 
+    <!-- Banner -->
+	<div class="container">
+		<div class="flex-c-c">
+			<a href="#">
+				<img class="max-w-full" src="{% static 'front/images/Banner11.jpg'%}" alt="IMG">
+			</a>
+		</div>
+	</div>
+
+
     <!-- Latest news -->
     <section class="bg0 p-t-60 p-b-40">
         <div class="container">
             <div class="how2 how2-cl4 flex-s-c">
                 <h3 class="f1-m-2 cl3 tab01-title">
-                    Les dernières news
+                    Les dernier articles
                 </h3>
             </div>
 
