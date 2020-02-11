@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'newsletter',
     'django.contrib.humanize',
     'comment',
-    'blacklist'
+    'blacklist',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -184,6 +185,11 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+CRONJOBS = [
+
+    ('*/10 * * * *', 'main.cron.add_ip_job', '>> /scheduled_job.log'),
+]
 
 try:
     from myproject.local_settings import *

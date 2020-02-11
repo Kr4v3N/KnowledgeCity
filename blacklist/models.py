@@ -7,6 +7,8 @@ from news.models import News
 
 class Blacklist(models.Model):
     ip = models.CharField(max_length=120)
+    date = models.CharField(max_length=12)
+    time = models.CharField(max_length=12, default="00:00")
 
     class Meta:
         verbose_name = 'Blacklist'

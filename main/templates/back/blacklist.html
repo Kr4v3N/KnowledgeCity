@@ -74,12 +74,14 @@
                 {% if ip|length <= 1 %}
                     <tr>
                         <th class="text-center">Identifiant</th>
+                        <th class="text-center">Date</th>
                         <th class="text-center">IP</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
                     <tr>
                         <th class="text-center">Identifiants</th>
+                        <th class="text-center">Dates</th>
                         <th class="text-center">IPs</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -90,6 +92,7 @@
                 {% for cc in ip %}
                     <tr>
                         <td class="text-center">{{ cc.pk }}</td>
+                        <td class="text-center">{{ cc.date }} à {{ cc.time }}</td>
                         <td class="text-center">{{ cc.ip }}</td>
                         <td class="text-center">
                             <div class="btn-group">

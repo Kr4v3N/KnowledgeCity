@@ -8,6 +8,9 @@ from django.core.validators import validate_email
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from random import randint
+from ip2geotools.databases.noncommercial import DbIpCity
+from ipware import get_client_ip
+
 from category.models import Category
 from manager.models import Manager
 from trending.models import Trending
@@ -92,7 +95,7 @@ def panel(request):
     '''
 
     count = News.objects.count()
-    rand = News.objects.all()[random.randint(0, count-1)]
+    rand = News.objects.all()[random.randint(0, count - 1)]
 
     return render(request, 'back/admin_home.html', {'rand': rand})
 
@@ -113,6 +116,7 @@ def user_login(request):
 
 
 def user_register(request):
+    global country
     if request.method == 'POST':
         name = request.POST.get('name')
         uname = request.POST.get('uname')
@@ -171,8 +175,27 @@ def user_register(request):
             return redirect('register')
 
         if len(User.objects.filter(username=uname)) == 0 and len(User.objects.filter(email=email)) == 0:
+
+            ip, is_routable = get_client_ip(request)
+
+            if ip is None:
+
+                ip = "0.0.0.0"
+
+                try:
+                    response = DbIpCity.get(ip, api_key='free')
+                    country = response.country + " | " + response.city
+                except:
+                    country = "Unknown"
+
             user = User.objects.create_user(username=uname, email=email, password=password)
-            b = Manager(name=name, user_txt=uname, email=email)
+            b = Manager(name=name,
+                        user_txt=uname,
+                        email=email,
+                        ip=ip,
+                        # country=country,
+                        # TODO A tester en prod
+                        )
             b.save()
 
     return render(request, 'front/login.html')
