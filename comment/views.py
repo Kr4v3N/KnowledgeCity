@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
-
 from comment.models import Comment
 from manager.models import Manager
 from news.models import News
@@ -34,7 +33,8 @@ def comment_add(request, pk):
         content = request.POST.get('msg')
 
         if request.user.is_authenticated:
-            manager = Manager.objects.get(user_txt=request.user)
+
+            manager = Manager.objects.get()
 
             b = Comment(name=manager.name,
                         email=manager.email,
@@ -45,8 +45,37 @@ def comment_add(request, pk):
                         )
             b.save()
         else:
+
+            newsname1 = News.objects.get(pk=pk).name
+
             name = request.POST.get('name')
             email = request.POST.get('email')
+
+            if name == "":
+                messages.error(request, "Vous devez saisir un nom d'utilisateur")
+                return redirect('news_detail', word=newsname1)
+
+            if len(name) < 3:
+                messages.error(request, "Le nom doit comporter au moins 3 caractères")
+                return redirect('news_detail', word=newsname1)
+
+            if email == "":
+                messages.error(request, "Vous devez saisir une adresse mail")
+                return redirect('news_detail', word=newsname1)
+
+            try:
+                validate_email(request.POST.get("email"))
+            except ValidationError:
+                messages.error(request, 'Entrez une adresse mail valide')
+                return redirect('news_detail', word=newsname1)
+
+            if content == "":
+                messages.error(request, "Vous devez saisir un commentaire")
+                return redirect('news_detail', word=newsname1)
+
+            if len(content) < 10:
+                messages.error(request, "Le commentaire doit comporter au moins 10 caractères")
+                return redirect('news_detail', word=newsname1)
 
             b = Comment(name=name,
                         email=email,
@@ -59,7 +88,7 @@ def comment_add(request, pk):
 
     newsname = News.objects.get(pk=pk).name
 
-    messages.success(request, "Votre message a été soumis avec succès")
+    messages.success(request, "Votre commentaire a été soumis avec succès")
     return redirect('news_detail', word=newsname)
 
 
@@ -98,16 +127,6 @@ def comment_confirm(request, pk):
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
-
-    perm = 0
-    for i in request.user.groups.all(user_txt=request.user):
-        if i.name == "masteruser": perm = 1
-
-    if perm == 0:
-        a = News.objects.get(pk=pk).writer
-        if str(a) != str(request.user):
-            messages.error(request, "Accès refusé")
-            return redirect('news_list')
 
     comment = Comment.objects.get(pk=pk)
     comment.status = 1

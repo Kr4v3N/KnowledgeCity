@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'comment',
     'blacklist',
     'django_crontab',
+    'qr_code',
 ]
 
 MIDDLEWARE = [
@@ -188,7 +189,7 @@ MESSAGE_TAGS = {
 
 CRONJOBS = [
 
-    ('*/10 * * * *', 'main.cron.add_ip_job', '>> /scheduled_job.log'),
+    ('*/10 * * * *', 'main.cron.ip_job', '>> home/chena/Bureau/scheduled_job.log 2>&1'),
 ]
 
 try:

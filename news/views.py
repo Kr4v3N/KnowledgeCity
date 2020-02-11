@@ -40,6 +40,8 @@ def news_detail(request, word):
     comment = Comment.objects.filter(news_id=code, status=1).order_by('-pk')
     comment_count = len(comment)
 
+    link = "/urls/" + str(News.objects.get(name=word).rand)
+
     context = {
         'news': news,
         'allNews': allNews,
@@ -54,6 +56,7 @@ def news_detail(request, word):
         'code': code,
         'comment': comment,
         'comment_count': comment_count,
+        'link': link,
     }
 
     return render(request, 'front/news_detail.html', context)

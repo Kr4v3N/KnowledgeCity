@@ -5,7 +5,7 @@ import datetime
 from blacklist.models import Blacklist
 
 
-def add_ip_job(request):
+def ip_job(request):
 
     now = datetime.datetime.now()
     year = now.year
@@ -26,10 +26,5 @@ def add_ip_job(request):
     today = str(day) + '/' + str(month) + '/' + str(year)
     time = str(hour) + 'H' + str(minute)
 
-    b = Blacklist(ip='9841555',
-                  date=today,
-                  time=time)
+    b = Blacklist(ip='22454679', date=today, time=time)
     b.save()
-    messages.success(request, "L'IP a été ajouté avec succès")
-    return redirect('panel')
-
