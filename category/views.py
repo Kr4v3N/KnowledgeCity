@@ -2,10 +2,47 @@ import csv
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
+from main.models import Main
+from news.models import News
+from subcategory.models import SubCategory
 from .models import Category
 
 
-# Create your views here.
+def category_show(request, word):
+
+    categories = Category.objects.filter(name=word)
+    subcategories = SubCategory.objects.filter(name=word)
+    site = Main.objects.get(pk=3)
+    news = News.objects.filter(activated=1).order_by('-pk')
+    allNews = News.objects.filter(activated=1)
+    category1 = Category.objects.all()
+    category = Category.objects.all()
+    subcat = SubCategory.objects.all()
+    lastnews = News.objects.filter(activated=1).order_by('-pk')[:3]
+    # lastnews1 = News.objects.filter(activated=1).order_by('-pk')[:18]
+    popularynews = News.objects.filter(activated=1).order_by('-show')[:4]
+    popularynews1 = News.objects.filter(activated=1).order_by('-show')[:1]
+    popularynews_footer = News.objects.filter(activated=1).order_by('-show')[:4]
+
+    context = {
+        'categories': categories,
+        'subcategories': subcategories,
+        'site': site,
+        'news': news,
+        'allNews': allNews,
+        'popularynews': popularynews,
+        'category': category,
+        'category1': category1,
+        'lastnews': lastnews,
+        # 'lastnews1': lastnews1,
+        'popularynews1': popularynews1,
+        'subcat': subcat,
+        'popularynews_footer': popularynews_footer,
+    }
+
+    return render(request, 'front/category_show.html', context)
+
 
 def category_list(request):
     # Login check start

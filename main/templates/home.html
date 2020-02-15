@@ -177,105 +177,305 @@
 	</section>
 
     <!-- Post -->
-    <section class="post bg0 p-t-85">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-12">
-                    <div class="p-r-10 p-rl-0-sr991 p-b-20">
+{#    <section class="post bg0 p-t-85">#}
+{#        <div class="container">#}
+{#            <div class="row justify-content-center">#}
+{#                <div class="col-md-10 col-lg-12">#}
+{#                    <div class="p-r-10 p-rl-0-sr991 p-b-20">#}
+{##}
+{#                        {% for newscat in category %}#}
+{#                            {% if newscat.count != 0 %}#}
+{#                                <!-- Categories  -->#}
+{#                                <div class="p-b-25 m-r--10 m-r-0-sr991">#}
+{#                                    <div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">#}
+{#                                        <h3 class="f1-m-2 cl17 tab01-title">#}
+{#                                            {{ newscat.name }}#}
+{#                                        </h3>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="row p-t-35">#}
+{##}
+{#                                        <div class="col-sm-6 p-r-25 p-r-15-sr991">#}
+{#                                            {% for ab in news %}#}
+{#                                                {% if newscat.pk == ab.ocategory_id %}#}
+{#                                                    <!-- Item post -->#}
+{#                                                    <div class="flex-wr-sb-s m-b-30">#}
+{#                                                        <a href="{% url 'news_detail' word=ab.name %}"#}
+{#                                                           class="size-w-1 wrap-pic-max-s w hov1 trans-03">#}
+{#                                                            <img src="{{ ab.pic_url }}" alt="IMG">#}
+{#                                                        </a>#}
+{##}
+{#                                                        <div class="size-w-2">#}
+{#                                                            <h5 class="p-b-5">#}
+{#                                                                <a href="{% url 'news_detail' word=ab.name %}"#}
+{#                                                                   class="f1-s-5 cl3 hov-cl10 trans-03">#}
+{#                                                                    {{ ab.name }}#}
+{#                                                                </a>#}
+{#                                                            </h5>#}
+{#                                                            <span class="cl8">#}
+{#												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">#}
+{#													{{ ab.category_name }}#}
+{#												</a>#}
+{##}
+{#												<span class="f1-s-3 m-rl-3">#}
+{#													-#}
+{#												</span>#}
+{##}
+{#												<span class="f1-s-3">#}
+{#													{{ ab.date }} | {{ ab.time }}#}
+{#												</span>#}
+{#											</span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                {% endif %}#}
+{#                                            {% endfor %}#}
+{#                                        </div>#}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
 
-                        {% for newscat in category %}
+
+	<!-- Post -->
+	<section class="bg0 p-t-70">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="p-b-20">
+
+						<div class="row">
+                            {% for newscat in category %}
                             {% if newscat.count != 0 %}
-                                <!-- Categories  -->
-                                <div class="p-b-25 m-r--10 m-r-0-sr991">
-                                    <div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
-                                        <h3 class="f1-m-2 cl17 tab01-title">
-                                            {{ newscat.name }}
+							    <!-- Categories -->
+                                <div class="col-sm-6 p-r-25 p-r-15-sr991 p-b-25">
+                                    <div class="how2 how2-cl2 flex-sb-c m-b-35">
+                                        <h3 class="f1-m-2 cl13 tab01-title">
+                                            {{ newscat.name}}
                                         </h3>
+
+                                        <a href="{% url 'category_show' word=newscat.name %}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                            Voir tout
+                                            <i class="fs-12 m-l-5 fa fa-caret-right"></i>
+                                        </a>
                                     </div>
 
-                                    <div class="row p-t-35">
-                                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                                            {% for ab in news %}
-                                                {% if newscat.pk == ab.ocategory_id %}
-                                                    <!-- Item post -->
-                                                    <div class="flex-wr-sb-s m-b-30">
-                                                        <a href="{% url 'news_detail' word=ab.name %}"
-                                                           class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                            <img src="{{ ab.pic_url }}" alt="IMG">
-                                                        </a>
+                                    {% for ab in lastnews1 %}
+                                    {% if newscat.pk == ab.ocategory_id %}
 
-                                                        <div class="size-w-2">
-                                                            <h5 class="p-b-5">
-                                                                <a href="{% url 'news_detail' word=ab.name %}"
-                                                                   class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                    {{ ab.name }}
-                                                                </a>
-                                                            </h5>
-                                                            <span class="cl8">
-												<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-													{{ ab.category_name }}
-												</a>
+                                    <!-- Item post -->
+                                        <div class="flex-wr-sb-s m-b-30">
+                                        <a href="{% url 'news_detail' word=ab.name %}" class="size-w-1 wrap-pic-w hov1 trans-03">
+                                            <img src="{{ ab.pic_url }}" alt="IMG">
+                                        </a>
 
-												<span class="f1-s-3 m-rl-3">
-													-
-												</span>
+                                        <div class="size-w-2">
+                                            <h5 class="p-b-5">
+                                                <a href="{% url 'news_detail' word=ab.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                  {{ forloop.counter }} | {{ ab.name}}
+                                                </a>
+                                            </h5>
 
-												<span class="f1-s-3">
-													{{ ab.date }} | {{ ab.time }}
-												</span>
-											</span>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                                            <!-- Item post -->
-                                            {% for populary in popularynews %}
-                                                {% if populary.ocategory_id == newscat.pk %}
-                                                    {% if populary.show != 0 %}
-                                                        <div class="flex-wr-sb-s m-b-30">
-                                                            <a href="{% url 'news_detail' word=populary.name %}"
-                                                               class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                                <img src="{{ populary.pic_url }}" alt="IMG">
-                                                            </a>
+                                            <span class="cl8">
+                                                <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+                                                    {{ ab.category_name}}
+                                                </a>
 
-                                                            <div class="size-w-2">
-                                                                <h5 class="p-b-5">
-                                                                    <a href="{% url 'news_detail' word=populary.name %}"
-                                                                       class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                        {{ populary.name }}
-                                                                    </a>
-                                                                </h5>
+                                                <span class="f1-s-3 m-rl-3">
+                                                    {{  ab.writer }}
+                                                </span>
 
-                                                                <span class="cl8">
-                                                        <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-                                                            {{ populary.category_name }}
-                                                        </a>
-
-                                                        <span class="f1-s-3 m-rl-3">
-                                                            -
-                                                        </span>
-
-                                                        <span class="f1-s-3">
-                                                            {{ populary.date }}
-                                                        </span>
-                                                    </span>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endfor %}
+                                                <span class="f1-s-3">
+                                                    {{ ab.date}}
+                                                </span>
+                                            </span>
                                         </div>
                                     </div>
+                                    {% endif %}
+                                    {% endfor %}
+
                                 </div>
                             {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                            {% endfor %}
+
+						</div>
+
+						</div>
+				</div>
+
+				<div class="col-md-10 col-lg-4">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+
+                        <!-- Category -->
+						<div class="p-b-30">
+							<div class="how2 how2-cl4 flex-s-c">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Catégories
+								</h3>
+							</div>
+
+							<ul class="p-t-35">
+                                {% for p in category %}
+                                    {%  if p.count != 0 %}
+
+								<li class="how-bor3 p-rl-4">
+									<a href="{% url 'category_show' word=p.name %}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+										{{ p.name }} ({{ p.count }})
+									</a>
+								</li>
+                                    {%  endif %}
+                                {% endfor %}
+
+							</ul>
+						</div>
+
+
+						<!-- Popular Posts -->
+						<div class="p-b-30">
+							<div class="how2 how2-cl4 flex-s-c">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Les articles les plus populaires
+								</h3>
+							</div>
+
+							<ul class="p-t-35">
+                                {%  for pop in popularynews %}
+                                        <li class="flex-wr-sb-s p-b-30">
+                                            <a href="{% url 'news_detail' word=pop.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                                <img src="{{ pop.pic_url }}" alt="IMG">
+                                            </a>
+
+                                            <div class="size-w-11">
+                                                <h6 class="p-b-4">
+                                                    <a href="{% url 'news_detail' word=pop.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                        {{ pop.name }}
+                                                    </a>
+                                                </h6>
+
+                                                <span class="cl8 txt-center p-b-24">
+                                                    <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+                                                        {{ pop.category_name }}
+                                                    </a>
+
+                                                    <span class="f1-s-3 m-rl-3">
+                                                        -
+                                                    </span>
+
+                                                    <span class="f1-s-3">
+                                                        {{ pop.date }}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                {% endfor %}
+							</ul>
+						</div>
+
+						<!-- PUB -->
+{#						<div class="flex-c-s p-t-8 p-b-65">#}
+{#							<a href="#">#}
+{#								<img class="max-w-full" src="{% static 'front/images/banner-02.jpg' %}" alt="IMG">#}
+{#							</a>#}
+{#						</div>#}
+
+{#						<!-- Video -->#}
+{#						<div class="p-b-30">#}
+{#							<div class="how2 how2-cl4 flex-s-c m-b-35">#}
+{#								<h3 class="f1-m-2 cl3 tab01-title">#}
+{#									Vidéo en vedette#}
+{#								</h3>#}
+{#							</div>#}
+{##}
+{#							<div>#}
+{#								<div class="wrap-pic-w pos-relative">#}
+{#									<img src="{% static 'front/images/video-01.jpg' %}" alt="IMG">#}
+{##}
+{#									<button class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03" data-toggle="modal" data-target="#modal-video-01">#}
+{#										<span class="fab fa-youtube"></span>#}
+{#									</button>#}
+{#								</div>#}
+{##}
+{#								<div class="p-tb-16 p-rl-25 bg3">#}
+{#									<h5 class="p-b-5">#}
+{#										<a href="#" class="f1-m-3 cl0 hov-cl10 trans-03">#}
+{#											Music lorem ipsum dolor sit amet consectetur#}
+{#										</a>#}
+{#									</h5>#}
+{##}
+{#									<span class="cl15">#}
+{#										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">#}
+{#											by John Alvarado#}
+{#										</a>#}
+{##}
+{#										<span class="f1-s-3 m-rl-3">#}
+{#											-#}
+{#										</span>#}
+{##}
+{#										<span class="f1-s-3">#}
+{#											Feb 18#}
+{#										</span>#}
+{#									</span>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+
+						<!-- Subscribe -->
+                        <div class="how2 how2-cl4 flex-s-c m-b-30">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Souscrire
+								</h3>
+                        </div>
+
+						<div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
+							<h5 class="f1-m-5 cl0 p-b-10">
+                                Recevez tous les derniers contenus par mail plusieurs fois par mois.
+							</h5>
+
+                            <p class="f1-s-1 cl0 p-b-25">J’accepte de recevoir cette newsletter et je comprends
+                            que je peux me désabonner facilement à tout moment.</p>
+
+							<p class="f1-s-1 cl0 p-b-25">
+								Votre email ne sera jamais partagé et restera anonyme.
+							</p>
+
+							<form action="{% url 'news_letter' %}" method="post" class="size-a-9 pos-relative">
+								{% csrf_token %}
+                                <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" id="register-email" name="register-email" placeholder="Votre email">
+
+								<button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
+									<i class="fa fa-arrow-right"></i>
+								</button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Banner -->
 	<div class="container">

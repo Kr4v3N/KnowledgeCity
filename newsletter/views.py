@@ -44,7 +44,7 @@ def news_letter(request):
                    )
     b.save()
 
-    messages.success(request, "Merci pour votre inscription :)")
+    messages.success(request, "Merci pour votre abonnement :)")
     return redirect('home')
 
 

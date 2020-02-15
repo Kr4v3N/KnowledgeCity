@@ -20,7 +20,7 @@
 			<div class="f2-s-1 p-r-30 m-tb-6">
 				<a href="/" class="breadcrumb-item f1-s-3 cl9">Accueil</a>
 
-				<a href="/" class="breadcrumb-item f1-s-3 cl9">News</a>
+				<a href="/" class="breadcrumb-item f1-s-3 cl9">Articles</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
                     {{ i.name }}
@@ -46,11 +46,11 @@
 						<div class="p-b-70">
 
 							<a href="#" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-								{{ i.category_name }}
+								Sous- catégories : {{ i.category_name }}
 							</a>
 
 							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-								{{ i.name }}
+								{{ i.name|capfirst }}
 							</h3>
 
 							<div class="flex-wr-s-s p-b-40">
@@ -104,34 +104,6 @@
 								</div>
 							</div>
 
-							<!-- Share -->
-							<div class="flex-s-s">
-								<span class="f1-s-12 cl5 p-t-1 m-r-15">
-									Partager:
-								</span>
-
-								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-facebook-f m-r-7"></i>
-										Facebook
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-twitter m-r-7"></i>
-										Twitter
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-google-plus-g m-r-7"></i>
-										Google+
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-pinterest-p m-r-7"></i>
-										Pinterest
-									</a>
-								</div>
-							</div>
 						</div>
 
 						<!-- Leave a comment -->
@@ -216,7 +188,7 @@
                                     {%  if p.count != 0 %}
 
 								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="{% url 'category_show' word=p.name %}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										{{ p.name }} ({{ p.count }})
 									</a>
 								</li>
@@ -286,7 +258,7 @@
 
                             </div>
 						</div>
-
+                        </div>
                         <!-- QR Code -->
                         <div class="p-b-30">
 							<div class="how2 how2-cl4 flex-s-c">

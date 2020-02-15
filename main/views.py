@@ -27,17 +27,19 @@ def home(request):
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
     lastnews = News.objects.filter(activated=1).order_by('-pk')[:3]
-    popularynews = News.objects.filter(activated=1).order_by('-show')
+    lastnews1 = News.objects.filter(activated=1).order_by('-pk')[:18]
+    popularynews = News.objects.filter(activated=1).order_by('-show')[:4]
     popularynews1 = News.objects.filter(activated=1).order_by('-show')[:1]
     popularynews_footer = News.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')[:5]
     lastnews2 = News.objects.filter(activated=1).order_by('-pk')[:4]
 
-    # random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
-    # print(random_object)
+    random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
+    print(random_object)
 
     return render(request, 'home.html', {'site': site,
                                          'news': news,
+                                         'lastnews1': lastnews1,
                                          'allNews': allNews,
                                          'category': category,
                                          'subcat': subcat,

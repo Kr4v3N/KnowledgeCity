@@ -281,6 +281,9 @@
                             <div class="sub-mega-menu">
                                 <div class="nav flex-column nav-pills" role="tablist">
                                     <a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">Tout</a>
+
+                                    <!-- TODO Corriger disfonctionnement de "TOUT" -->
+
                                     {% for sub in subcat %}
                                     {% if sub.category_id == gg.pk %}
                                     <a class="nav-link" data-toggle="pill" href="#{{ sub.pk }}" role="tab">{{ sub.name }}</a>
@@ -434,22 +437,22 @@ Please override this block!
                     </div>
                     <br>
                     <!-- Sign Up Action -->
-                    <div class="site-block text-center">
-                        <form action="{% url 'news_letter' %}" method="post" class="form-horizontal">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <div class="">
-<!--                                    <label class="sr-only" for="register-email">Votre mail ...</label>-->
-                                    <div class="input-group input-group-lg">
-                                        <input type="txt" id="register-email" name="register-email" class="form-control" placeholder="Votre mail ...">
-                                        <div class="input-group-btn">
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Inscrivez-vous</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+<!--                    <div class="site-block text-center">-->
+<!--                        <form action="{% url 'news_letter' %}" method="post" class="form-horizontal">-->
+<!--                            {% csrf_token %}-->
+<!--                            <div class="form-group">-->
+<!--                                <div class="">-->
+<!--&lt;!&ndash;                                    <label class="sr-only" for="register-email">Votre mail ...</label>&ndash;&gt;-->
+<!--                                    <div class="input-group input-group-lg">-->
+<!--                                        <input type="txt" id="register-email" name="register-email" class="form-control" placeholder="Votre mail ...">-->
+<!--                                        <div class="input-group-btn">-->
+<!--                                            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Inscrivez-vous</button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
                     <!-- END Sign Up Action -->
 
                 </div>
@@ -481,8 +484,6 @@ Please override this block!
                             </div>
                         </li>
                         {% endfor %}
-
-
                     </ul>
                 </div>
 
@@ -497,7 +498,7 @@ Please override this block!
                         {% for cat in category %}
                         {% if cat.count != 0 %}
                         <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                            <a href="{% url 'category_show' word=cat.name %}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
                                 {{ cat.name }} ({{ cat.count }})
                             </a>
                         </li>
