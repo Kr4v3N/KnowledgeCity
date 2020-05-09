@@ -22,6 +22,7 @@ var/
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
+share/man/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -143,10 +144,3 @@ __ pycache __
 /node_modules/
 /node_modules/jquery/
 
-
-bin/*
-pyvenv.cfg
-/lib/*
-/lib64/*
-/bin/*
-/share/*
