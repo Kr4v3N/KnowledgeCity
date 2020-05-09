@@ -142,3 +142,11 @@ __ pycache __
 /media/
 /node_modules/
 /node_modules/jquery/
+
+
+bin/*
+pyvenv.cfg
+/lib/*
+/lib64/*
+/bin/*
+/share/*
