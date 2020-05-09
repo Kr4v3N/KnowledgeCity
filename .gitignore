@@ -14,8 +14,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/*
-lib64/*
+lib/
+lib64/
 parts/
 sdist/
 var/
@@ -144,8 +144,9 @@ __ pycache __
 /node_modules/jquery/
 
 
+bin/*
 pyvenv.cfg
-/lib/**
-/lib64/**
-/share/**
-/lib64/
+/lib/*
+/lib64/*
+/bin/*
+/share/*
