@@ -1,0 +1,110 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des catégories<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Exporter</li>
+        <li><a href="/panel/category/list">données</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Exporter la liste des catégories:</strong></h2>
+        </div>
+        <div class="table-responsive">
+             <a href="{% url 'export_cat_csv' %}" data-toggle="tooltip" title="Exporter fichier csv"
+                                   class="btn btn-xs btn-default"><i class="fa fa-download" style="margin-right: 50px;"> CSV</i></a>
+
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Importer une liste de catégories:</strong></h2>
+        </div>
+        <form action="{% url 'import_cat_csv' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <input type="file" name="csv_file" id="csv_file">
+            <br>
+            <button type="submit">Importer</button>
+        </div>
+        </form>
+    </div>
+    <!-- END Datatables Content -->
+
+        <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des news :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                {% if category|length <= 1 %}
+                    <tr>
+                        <th class=>Identifiant</th>
+                        <th>Titre</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th class=>Identifiants</th>
+                        <th>Titres</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% for cat in category %}
+                    <tr>
+                        <td>{{ cat.pk }}</td>
+                        <td>{{ cat.name }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href=""
+                                   data-confirm="Etes-vous certain de vouloir supprimer la catégorie {{ cat.name }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}

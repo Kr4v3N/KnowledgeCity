@@ -1,0 +1,135 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    {#<script src="http://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>#}
+
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Rédiger un article<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Article</li>
+        <li><a href="/panel/news/list">Rédiger</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+
+        <div class="block-title">
+            <h2><strong>Rédiger un article :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+
+            {#            <div class="row">#}
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'news_add' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Titre de l'article :</label>
+                                <input type="text" id="newstitle" name="newstitle" class="form-control"
+                                       placeholder="Titre de la news">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Catégories :</label>
+                                <select id="newscategory" name="newscategory" class="select-chosen"
+                                        data-placeholder="Choisissez une catégorie..." style="width: 250px;">
+
+                                    {% for cat in category %}
+                                        <option value="{{ cat.pk }}">{{ cat.category_name }} | {{ cat.name }}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="" class="text-info">Texte d'introduction :</label>
+                                <textarea type="text" id="newstxtshort" name="newstxtshort" cols="30" rows="5"
+                                          class="form-control" placeholder="Short text "></textarea>
+                            </div>
+                        </div>
+                        <script>
+                            CKEDITOR.replace('newstxtshort', {
+                                uiColor: '#9AB8F3',
+                            });
+                        </script>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="" class="text-info">Texte principal :</label>
+                                <textarea id="newstxt" name="newstxt" cols="30" rows="10" class="form-control"
+                                          placeholder="Body text "></textarea>
+                            </div>
+                        </div>
+                        <script>
+                            CKEDITOR.replace('newstxt', {
+                                uiColor: '#9AB8F3',
+                                height: 400
+                            });
+                        </script>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Image :</label>
+                                <input type="file" id="myfile" name="myfile" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Tags :</label>
+                                <textarea type="text" id="tag" name="tag" cols="30" rows="5" class="form-control"
+                                          placeholder="Tags"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}

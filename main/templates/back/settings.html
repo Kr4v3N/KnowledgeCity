@@ -1,0 +1,165 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Paramètres<br><small>Vous pouvez ajouter, modifier et supprimer vos données
+                !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Site</li>
+        <li><a href="/panel/setting">Paramètres</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+
+        <div class="block-title">
+            <h2><strong>Paramètres du site :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+
+            {#            <div class="row">#}
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'site_settings' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Nom du site :</label>
+                                <input type="text" id="name" name="name" value="{{ site.name }}" class="form-control"
+                                       placeholder="Nom du site">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Numéro de téléphone :</label>
+                                <input type="text" id="phone" name="phone" value="{{ site.phone }}" class="form-control"
+                                       placeholder="Numéro de téléphone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Facebook :</label>
+                                <input type="text" id="facebook" name="facebook" value="{{ site.facebook }}"
+                                       class="form-control" placeholder="Facebook">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">LinkedIn :</label>
+                                <input type="text" id="linkedin" name="linkedin" value="{{ site.linkedin }}"
+                                       class="form-control" placeholder="LinkedIn">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Twitter :</label>
+                                <input type="text" id="twitter" name="twitter" value="{{ site.twitter }}"
+                                       class="form-control" placeholder="Twitter">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Youtube :</label>
+                                <input type="text" id="youtube" name="youtube" value="{{ site.youtube }}"
+                                       class="form-control" placeholder="Youtube">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Lien du footer :</label>
+                                <input type="text" id="link" name="link" value="{{ site.link_footer }}"
+                                       class="form-control" placeholder="Lien du footer">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-info">Github :</label>
+                                <input type="text" id="github" name="github" value="{{ site.github }}"
+                                       class="form-control" placeholder="Youtube">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="" class="text-info">À propos du pied de page :</label>
+                                <textarea type="text" id="about" name="about" cols="30" rows="5" class="form-control"
+                                          placeholder="À propos">{{ site.about }}</textarea>
+                            </div>
+                        </div>
+                        <script>
+                            CKEDITOR.replace('about', {
+                                uiColor: '#9AB8F3',
+                            });
+                        </script>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for=""> <span class="text-primary">Logo entête :</span></label>
+                                <input type="file" id="myfile" name="myfile" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <img style="display: inline-block; width: 240px; height: 200px; background-color: whitesmoke;"
+                                     src="{{ site.pic_url }}" alt="logo_header">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for=""><span class="text-info">Logo pied de page :</span></label>
+                                <input type="file" id="myfile2" name="myfile2" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <img style="display: inline-block; width: 240px; height: 200px; background-color: darkgrey;"
+                                     src="{{ site.pic_url_footer }}" alt="Logo_footer">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-primary col-md-12"> Soumettre</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}

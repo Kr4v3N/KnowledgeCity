@@ -1,0 +1,106 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des commentaires<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Commentaires</li>
+        <li><a href="/panel/comment/list">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des commentaires :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                {% if comments|length <= 1 %}
+                    <tr>
+                        <th class="text-center">Identifiant</th>
+                        <th>Auteur</th>
+                        <th>Date & Heure</th>
+                        <th>Email</th>
+                        <th>Commentaire</th>
+                        <th>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th class="text-center">Identifiants</th>
+                        <th>Auteurs</th>
+                        <th>Dates & Heures</th>
+                        <th>Emails</th>
+                        <th>Commentaires</th>
+                        <th>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% for cc in comments %}
+                    <tr>
+                        <td class="text-center">{{ cc.pk }}</td>
+                        <td>{{ cc.name }}</td>
+                        <td>{{ cc.date }} à {{ cc.time }}</td>
+                        <td>{{ cc.email }}</td>
+                        <td>{{ cc.content }}</td>
+                        {% if cc.status == 0 %}
+                            <td>En attente</td>
+                        {% elif cc.status == 1 %}
+                            <td>Confimé</td>
+                        {% endif %}
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{% url 'comment_delete' pk=cc.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer le commentaire de  {{ cc.name }} ?"
+                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'comment_confirm' pk=cc.pk %}"
+                                    {% if cc.status == 0 %}
+                                   data-toggle="tooltip" title="Confirmation" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-play"> Confirmé</i>
+                                </a>
+                                <a href="{% url 'comment_confirm' pk=cc.pk %}"
+                                    {% elif cc.status == 1 %}
+                                    data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
+                                        <i class="fa fa-anchor"> En ligne</i>
+                                </a>
+                                    {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}

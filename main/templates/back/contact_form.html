@@ -1,0 +1,90 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des contactes<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>contactes</li>
+        <li><a href="/panel/contact/form">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des contactes :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                {% if msg|length <= 1 %}
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Date</th>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Message</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th>Identifiants</th>
+                        <th>Dates</th>
+                        <th>Noms</th>
+                        <th>Adresses</th>
+                        <th>Messages</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% for msg in msg %}
+                    <tr>
+                        <td>{{ msg.pk }}</td>
+                        <td>{{ msg.date }} à {{ msg.time }}</td>
+                        <td>{{ msg.name }}</td>
+                        <td>{{ msg.email }}</td>
+                        <td>{{ msg.msg }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="#" data-toggle="tooltip" title="answer"
+                                   class="btn btn-xs btn-default">Répondre</a>
+                                <a href="{% url 'contact_delete' pk=msg.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer le massage ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}

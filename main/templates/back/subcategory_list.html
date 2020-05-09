@@ -1,0 +1,86 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des sous-catégories<br><small>Vous pouvez ajouter, modifier et
+                supprimer vos données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Sous-catégorie</li>
+        <li><a href="/panel/subcategory/list">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des sous-catégories :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                <thead>
+                {% if subcategory|length <= 1 %}
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Actions</th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th>Identifiants</th>
+                        <th>Noms</th>
+                        <th>Catégories</th>
+                        <th>Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+
+                <tbody>
+                {% for subcat in subcategory %}
+                    <tr>
+                        <td class="">{{ subcat.pk }}</td>
+                        <td class="">{{ subcat.name }}</td>
+                        <td class="">{{ subcat.category_name }}</td>
+                        <td class="">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
+                                <a href=""
+                                   data-confirm="Etes-vous certain de vouloir supprimer la sous categorie {{ subcat.category_name }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}

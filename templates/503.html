@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="fr">
+<head>
+    <title> Bientôt accessible </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'maintenance/images/icons/favicon.ico' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'maintenance/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'maintenance/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'maintenance/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'maintenance/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'maintenance/css/main.css' %}">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+<!--  -->
+<div class="simpleslide100">
+    <div class="simpleslide100-item bg-img1"
+         style="background-image: url('{% static 'maintenance/images/bg01.jpg' %}');"></div>
+    <div class="simpleslide100-item bg-img1"
+         style="background-image: url('{% static 'maintenance/images/bg02.jpg' %}');"></div>
+    <div class="simpleslide100-item bg-img1"
+         style="background-image: url('{% static 'maintenance/images/bg03.jpg' %}');"></div>
+</div>
+
+<div class="size1 overlay1">
+    <!--  -->
+    <div id="demo" class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
+        <h3 class="l1-txt1 txt-center p-b-25">
+            Bientôt accessible
+        </h3>
+        <p class="m2-txt1 txt-center p-b-48">
+            Le site est actuellement en cours de construction.
+        </p>
+
+        <div class="flex-w flex-c-m cd100 p-b-33">
+            <div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+                <span class="l2-txt1 p-b-9" id="days"></span>
+                <span class="s2-txt1">Jours</span>
+            </div>
+
+            <div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+                <span class="l2-txt1 p-b-9" id="hours"></span>
+                <span class="s2-txt1">Heures</span>
+            </div>
+
+            <div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+                <span class="l2-txt1 p-b-9" id="minutes"></span>
+                <span class="s2-txt1">Minutes</span>
+            </div>
+
+            <div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
+                <span class="l2-txt1 p-b-9" id="seconds"></span>
+                <span class="s2-txt1">Secondes</span>
+            </div>
+        </div>
+
+        <form class="w-full flex-w flex-c-m validate-form">
+        </form>
+    </div>
+</div>
+
+
+<!--===============================================================================================-->
+<script src="{% static 'maintenance/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'maintenance/vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'maintenance/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'maintenance/vendor/countdowntime/countdowntime1.js' %}"></script>
+<script src="{% static 'maintenance/vendor/tilt/tilt.jquery.min.js' %}"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="{% static 'maintenance/js/slider.js' %}"></script>
+
+</body>
+</html>
+
+

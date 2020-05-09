@@ -1,0 +1,85 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des courriels<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Emails</li>
+        <li><a href="/panel/emailsletter/emails">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des courriels :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                {% if emails|length <= 1 %}
+                    <tr>
+                        <th class="text-center">Identifiant</th>
+                        <th class="text-center">Email</th>
+                        <th>Date d'inscription</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th class="text-center">Identifiants</th>
+
+                        <th class="text-center">Emails</th>
+                        <th class="text-center">Dates d'inscription</th>
+
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% for email in emails %}
+                    <tr>
+                        <td class="text-center">{{ email.pk }}</td>
+                        <td class="text-center">{{ email.email }}</td>
+                        <td class="text-center">{{ email.date }} à {{ email.time }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+
+                                <a href="{% url 'news_emails_delete' pk=email.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer l'adresse mail {{ email.email }} ?"
+                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+
+{% endblock %}
