@@ -10,7 +10,7 @@ cryptography==3.3.2
 cssselect==1.1.0
 decorator==4.4.2
 dicttoxml==1.7.4
-Django==3.1.6
+Django==3.1.8
 django-crontab==0.7.1
 django-ipware==2.1.0
 django-maintenance-mode==0.14.0
